@@ -7,4 +7,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'front';
+  design_image: string = '/assets/img/maquette_image_gauche.PNG';
 }
