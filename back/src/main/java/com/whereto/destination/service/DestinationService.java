@@ -24,9 +24,17 @@ public class DestinationService {
     }
 
    
-    public List<Destination> getTopDestinations(UserSelections userSelections, int limit) {
-        // TODO Implement logic here to fetch top destinations based on user selections
-        return destinationRepository.findTopDestinations(userSelections, limit);
+      public List<Destination> getTopDestinations(UserSelections userSelections, int limit) {
+        // Extract user selections
+        String season = userSelections.getSeason();
+        String budget = userSelections.getBudget();
+        String weather = userSelections.getWeather();
+        String activity = userSelections.getActivity();
+        String document = userSelections.getDocument();
+
+        // Fetch top destinations based on user selections
+        return destinationRepository.findTopDestinationsBySeasonAndBudgetAndWeatherAndActivityAndDocument(
+                season, budget, weather, activity, document, PageRequest.of(0, limit));
     }
    
 }

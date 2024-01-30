@@ -13,9 +13,12 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 @Repository
-public interface DestinationRepository extends JpaRepository< Destination , long>{
+public interface DestinationRepository extends JpaRepository< Destination , Long>{
 
     List<Destination> findTopDestinationsBySeasonAndBudgetAndWeatherAndActivityAndDocument(
         Season season, Budget budget, Weather weather, Activity activity, Document document, Pageable pageable);
+
+    List<Destination> findTopDestinationsBySeasonAndBudgetAndWeatherAndActivityAndDocument(
+        String season, String budget, String weather, String activity, String document, Pageable pageable);
     
 }
