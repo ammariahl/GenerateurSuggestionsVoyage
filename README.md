@@ -1,2 +1,1 @@
-# GenerateurSuggestionsVoyage
-Projet d'un générateur de suggestions de voyage
+Projet de site web générant des suggestions de voyage en se basant principalement sur un formulaire à remplir par l'utilisateur.
