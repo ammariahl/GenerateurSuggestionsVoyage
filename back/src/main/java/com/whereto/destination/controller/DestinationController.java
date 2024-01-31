@@ -8,7 +8,7 @@ import com.whereto.destination.dto.UserSelections;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import whereto.destination.repository.DestinationRepository;
+import com.whereto.destination.repository.DestinationRepository;
 
 import java.util.List;
 

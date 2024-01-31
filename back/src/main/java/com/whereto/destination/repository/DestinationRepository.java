@@ -4,7 +4,6 @@ package com.whereto.destination.repository;
 import com.whereto.destination.entity.Destination;
 import com.whereto.destination.entity.Season;
 import com.whereto.destination.entity.Budget;
-import com.whereto.destination.entity.Weather;
 import com.whereto.destination.entity.Activity;
 import com.whereto.destination.entity.Document;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,12 +12,12 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 @Repository
-public interface DestinationRepository extends JpaRepository< Destination , Long>{
+public interface DestinationRepository extends JpaRepository<Destination , Long>{
+//lets user this is we work with JPA entities 
+    // List<Destination> findTopDestinationsBySeasonAndBudgetAndWeatherAndActivityAndDocument(
+    //     Season season, Budget budget, Activity activity, Document document, Pageable pageable);
 
     List<Destination> findTopDestinationsBySeasonAndBudgetAndWeatherAndActivityAndDocument(
-        Season season, Budget budget, Weather weather, Activity activity, Document document, Pageable pageable);
-
-    List<Destination> findTopDestinationsBySeasonAndBudgetAndWeatherAndActivityAndDocument(
-        String season, String budget, String weather, String activity, String document, Pageable pageable);
+        String Season, String budget, String activity, String document, Pageable pageable);
     
 }

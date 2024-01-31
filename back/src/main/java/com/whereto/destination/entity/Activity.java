@@ -1,7 +1,7 @@
 package com.whereto.destination.entity;
 
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,7 +17,7 @@ public class Activity {
     private boolean group;
     private boolean family;
 
-    @OneToMany(mappedBy = "activity")
+    @ManyToMany(mappedBy = "activity")
     private List<Destination> destinations;
    
 

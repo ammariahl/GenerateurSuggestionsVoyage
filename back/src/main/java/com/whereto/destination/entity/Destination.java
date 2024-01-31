@@ -1,7 +1,7 @@
 package com.whereto.destination.entity;
 
 
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.GeneratedValue;
@@ -20,23 +20,19 @@ public class Destination {
     private String descriptionShort;
     private String descriptionLong;
 
-    @ManyToOne
+    @ManyToMany
     @JoinColumn(name = "season_id")
     private Season season;
 
-    @ManyToOne
+    @ManyToMany
     @JoinColumn(name = "budget_id")
     private Budget budget;
 
-    @ManyToOne
-    @JoinColumn(name = "whether_id")
-    private Weather weather;
-
-    @ManyToOne
+    @ManyToMany
     @JoinColumn(name = "activity_id")
     private Activity activity;
 
-    @ManyToOne
+    @ManyToMany
     @JoinColumn(name = "document_id")
     private Document document;
 
@@ -99,16 +95,9 @@ public class Destination {
     }
 
     public void setBudget(Budget budget) {
-        this.budget = budget;
-    }
+        this.budget = budget;    }
 
-    public Weather getWeather() {
-        return weather;
-    }
 
-    public void setWeather(Weather weather) {
-        this.weather = weather;
-    }
 
     public Activity getActivity() {
         return activity;

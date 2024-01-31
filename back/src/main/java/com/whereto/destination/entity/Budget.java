@@ -1,7 +1,7 @@
 package com.whereto.destination.entity;
 
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,7 +17,7 @@ public class Budget {
     private boolean bigBudget;
     private boolean unlimited;
 
-    @OneToMany(mappedBy = "budget")
+    @ManyToMany(mappedBy = "budget")
     private List<Destination> destinations;
 
    public Budget() {

@@ -2,7 +2,7 @@ package com.whereto.destination.entity;
 
 
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,7 +18,7 @@ public class Document {
     private boolean visaUe;
     private boolean passportMde;
 
-    @OneToMany(mappedBy = "document")
+    @ManyToMany(mappedBy = "document")
     private List<Destination> destinations;
    
 

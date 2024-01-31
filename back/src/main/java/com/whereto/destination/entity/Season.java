@@ -1,7 +1,7 @@
 package com.whereto.destination.entity;
 
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,12 +12,9 @@ public class Season {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private boolean printemps;
-    private boolean automn;
-    private boolean hiver;
-    private boolean ete;
+    private String climat;
 
-    @OneToMany(mappedBy = "season")
+    @ManyToMany(mappedBy = "season")
     private List<Destination> destinations;
 
    
@@ -34,37 +31,15 @@ public class Season {
         this.id = id;
     }
 
-    public boolean isPrintemps() {
-        return printemps;
+    public String getClimat() {
+        return climat;
     }
 
-    public void setPrintemps(boolean printemps) {
-        this.printemps = printemps;
+    public void setClimet(String climat) {
+        this.climat = climat;
     }
 
-    public boolean isAutomn() {
-        return automn;
-    }
-
-    public void setAutomn(boolean automn) {
-        this.automn = automn;
-    }
-
-    public boolean isHiver() {
-        return hiver;
-    }
-
-    public void setHiver(boolean hiver) {
-        this.hiver = hiver;
-    }
-
-    public boolean isEte() {
-        return ete;
-    }
-
-    public void setEte(boolean ete) {
-        this.ete = ete;
-    }
+    
 
     public List<Destination> getDestinations() {
         return destinations;
