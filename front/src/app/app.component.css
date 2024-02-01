@@ -1,6 +1,4 @@
 .container {
-  width: 100%;
-  height: 100%;
   display: flex;
   margin-bottom: auto;
   margin-top: auto;
@@ -9,11 +7,25 @@
 .design_image {
   flex: 30%;
 }
-img {
+
+.fixed_part {
+  position: fixed;
+}
+
+.design_image img {
   width: 100%;
   height: 100%;
 }
 
-.content {
+.logo_image img {
+  top: 5%;
+  left: 3%;
+  position: absolute;
+  width: 20%;
+  height: 5%;
+  cursor: pointer;
+}
+
+.content_box {
   flex: 70%;
 }

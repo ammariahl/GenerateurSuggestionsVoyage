@@ -1,10 +1,11 @@
 <div class="destination-cards">
   <h1 class="suggestion-title">Choisissez votre destination idéale :</h1>
 
-  <span *ngIf="!isViewAll">
+  <div *ngIf="!isViewAll">
     <div
       class="distination-card"
       *ngFor="let destination of destinationCard | slice : 0 : 3"
+      (click)="showDestinationCard()"
     >
       <div class="destination-left">
         <img [src]="destination.image" />
@@ -20,11 +21,10 @@
           <p class="destination-brief-description">
             {{ destination.briefDescription }}
           </p>
-          <button class="discover-button" (click)="viewAll()">Découvrir</button>
         </div>
       </div>
     </div>
-  </span>
+  </div>
 
   <span *ngIf="isViewAll">
     <div class="distination-card" *ngFor="let destination of destinationCard">

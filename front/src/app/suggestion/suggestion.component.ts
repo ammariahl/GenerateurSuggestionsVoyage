@@ -71,4 +71,6 @@ export class SuggestionComponent {
       this.isViewAll = true;
     }
   }
+
+  showDestinationCard(): void {}
 }

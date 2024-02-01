@@ -20,6 +20,14 @@
   margin-left: 13%;
   height: 10%;
   width: 75%;
+  overflow-clip-margin: content-box;
+  overflow: clip;
+}
+
+.distination-card:hover {
+  -moz-transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 .destination-left {
@@ -56,17 +64,8 @@ img {
   color: gray;
 }
 
-.discover-button {
-  background-color: lightcoral;
-  color: white;
-  padding: 1%;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
 .view-all-button {
-  background-color: lightskyblue;
+  background-color: #68c8be;
   color: white;
   padding: 1%;
   border: none;
@@ -74,4 +73,10 @@ img {
   cursor: pointer;
   float: right;
   margin: 2%;
+}
+
+.view-all-button:hover {
+  -moz-transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
 }
