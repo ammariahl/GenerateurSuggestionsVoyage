@@ -5,9 +5,11 @@ import javax.persistence.ManyToMany;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import java.util.ArrayList;
 import java.util.List;
 
-@Entity
+@Entity(name = "activity") 
 public class Activity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,8 +19,8 @@ public class Activity {
     private boolean group;
     private boolean family;
 
-    @ManyToMany(mappedBy = "activity")
-    private List<Destination> destinations;
+    @ManyToMany(mappedBy = "activities")
+    private List<Destination> destinations = new ArrayList<>();
    
 
     public Activity() {

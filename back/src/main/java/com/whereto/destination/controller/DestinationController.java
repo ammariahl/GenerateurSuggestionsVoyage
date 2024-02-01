@@ -16,7 +16,7 @@ import java.util.List;
 @RequestMapping("api/destionations")
 public class DestinationController {
 
- private final DestinationService destinationService;
+  private final DestinationService destinationService;
 
     @Autowired
     public DestinationController(DestinationService destinationService) {

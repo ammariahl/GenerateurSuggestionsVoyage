@@ -13,7 +13,7 @@ import java.util.List;
 
 @Repository
 public interface DestinationRepository extends JpaRepository<Destination , Long>{
-//lets user this is we work with JPA entities 
+
     // List<Destination> findTopDestinationsBySeasonAndBudgetAndWeatherAndActivityAndDocument(
     //     Season season, Budget budget, Activity activity, Document document, Pageable pageable);
 

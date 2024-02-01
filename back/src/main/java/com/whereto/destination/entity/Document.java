@@ -7,8 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.List;
+import java.util.ArrayList;
 
-@Entity
+@Entity(name = "document") 
 public class Document {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,8 +19,8 @@ public class Document {
     private boolean visaUe;
     private boolean passportMde;
 
-    @ManyToMany(mappedBy = "document")
-    private List<Destination> destinations;
+    @ManyToMany(mappedBy = "documents")
+    private List<Destination> destinations = new ArrayList<>();
    
 
     public Document() {

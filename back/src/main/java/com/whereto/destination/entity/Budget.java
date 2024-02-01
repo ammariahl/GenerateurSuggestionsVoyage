@@ -5,9 +5,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.ArrayList;
 import java.util.List;
 
-@Entity
+@Entity(name = "budget") 
 public class Budget {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,8 +18,8 @@ public class Budget {
     private boolean bigBudget;
     private boolean unlimited;
 
-    @ManyToMany(mappedBy = "budget")
-    private List<Destination> destinations;
+    @ManyToMany(mappedBy = "budgets")
+    private List<Destination> destinations = new ArrayList<>();
 
    public Budget() {
        

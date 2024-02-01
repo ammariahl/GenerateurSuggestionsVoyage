@@ -6,11 +6,13 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.CascadeType;
-import javax.persistence.FetchType;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
 import javax.persistence.Id;
+import java.util.List;
+import java.util.ArrayList;
 
-@Entity
+@Entity(name = "destination") 
 public class Destination {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,20 +23,36 @@ public class Destination {
     private String descriptionLong;
 
     @ManyToMany
-    @JoinColumn(name = "season_id")
-    private Season season;
+    @JoinTable(
+        name = "destination_season",
+        joinColumns = @JoinColumn(name = "destination_id"),
+        inverseJoinColumns = @JoinColumn(name = "season_id")
+    )
+    private List<Season> seasons = new ArrayList<>();
 
     @ManyToMany
-    @JoinColumn(name = "budget_id")
-    private Budget budget;
+     @JoinTable(
+        name = "destination_budget",
+        joinColumns = @JoinColumn(name = "destination_id"),
+        inverseJoinColumns = @JoinColumn(name = "budget_id")
+    )
+    private List<Budget> budgets = new ArrayList<>();
 
     @ManyToMany
-    @JoinColumn(name = "activity_id")
-    private Activity activity;
+        @JoinTable(
+        name = "destination_activity",
+        joinColumns = @JoinColumn(name = "destination_id"),
+        inverseJoinColumns = @JoinColumn(name = "activity_id")
+    )
+    private List<Activity> activities = new ArrayList<>();
 
     @ManyToMany
-    @JoinColumn(name = "document_id")
-    private Document document;
+     @JoinTable(
+        name = "destination_document",
+        joinColumns = @JoinColumn(name = "destination_id"),
+        inverseJoinColumns = @JoinColumn(name = "document_id")
+    )
+    private List<Document> documents = new ArrayList<>();
 
  
     public Destination() {
@@ -82,36 +100,36 @@ public class Destination {
         this.descriptionLong = descriptionLong;
     }
 
-    public Season getSeason() {
-        return season;
+    public List<Season> getSeasons() {
+        return seasons;
     }
 
-    public void setSeason(Season season) {
-        this.season = season;
+    public void setSeasons(List<Season> seasons) {
+        this.seasons = seasons;
     }
 
-    public Budget getBudget() {
-        return budget;
+    public List<Budget> getBudgets() {
+        return budgets;
     }
 
-    public void setBudget(Budget budget) {
-        this.budget = budget;    }
+    public void setBudgets(List<Budget> budgets) {
+        this.budgets = budgets;    }
 
 
 
-    public Activity getActivity() {
-        return activity;
+    public List<Activity> getActivities() {
+        return activities;
     }
 
-    public void setActivity(Activity activity) {
-        this.activity = activity;
+    public void setActivities(List<Activity> activities) {
+        this.activities = activities;
     }
 
-    public Document getDocument() {
-        return document;
+    public List<Document> getDocuments() {
+        return documents;
     }
 
-    public void setDocument(Document document) {
-        this.document = document;
+    public void setDocuments(List<Document> documents) {
+        this.documents = documents;
     }
 }

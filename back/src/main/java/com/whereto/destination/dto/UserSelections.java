@@ -10,7 +10,8 @@ public class UserSelections {
     private String activity;
     private String document;
 
-public String getSeason() {
+
+    public String getSeason() {
         return season;
     }
 
@@ -49,7 +50,6 @@ public String getSeason() {
     public void setDocument(String document) {
         this.document = document;
     }
-
 
 
 }
