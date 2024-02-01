@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import java.util.List;
 import java.util.ArrayList;
 
-@Entity(name = "season") 
+@Entity
 public class Season {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

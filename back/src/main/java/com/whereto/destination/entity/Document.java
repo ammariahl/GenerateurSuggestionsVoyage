@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import java.util.List;
 import java.util.ArrayList;
 
-@Entity(name = "document") 
+@Entity
 public class Document {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

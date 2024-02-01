@@ -3,6 +3,8 @@ package com.whereto.destination.service;
 import com.whereto.destination.entity.Budget;
 import com.whereto.destination.entity.Destination;
 import com.whereto.destination.entity.Season;
+import com.whereto.destination.entity.Activity;
+import com.whereto.destination.entity.Document;
 import com.whereto.destination.dto.UserSelections;
 import com.whereto.destination.repository.DestinationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,17 +28,15 @@ public class DestinationService {
    
       public List<Destination> getTopDestinations(UserSelections userSelections, int limit) {
         // Extract user selections
-        String Season = userSelections.getSeason();
-        String budget = userSelections.getBudget();
-        String activity = userSelections.getActivity();
-        String document = userSelections.getDocument();
+        List<Season> seasons = userSelections.getSeasons();
+        List<Budget> budgets = userSelections.getBudgets();
+        List<Activity> activities = userSelections.getActivities();
+        List<Document>  documents = userSelections.getDocuments();
 
-        // Fetch top destinations based on user selections
-        // return destinationRepository.findTopDestinationsBySeasonAndBudgetAndWeatherAndActivityAndDocument(
-        //         Season, budget,  activity, document, PageRequest.of(0, limit));
+  
           Pageable pageable = PageRequest.of(0, limit);
-        return destinationRepository.findTopDestinationsBySeasonAndBudgetAndWeatherAndActivityAndDocument(
-                Season, budget, activity, document, pageable);
+        return destinationRepository.findTopDestinationsBySeasonAndBudgetAndActivityAndDocument(
+                seasons, budgets, activities, documents, pageable);
     }
    
 }

@@ -1,55 +1,49 @@
 package com.whereto.destination.dto;
 
 import org.springframework.stereotype.Component;
+import com.whereto.destination.entity.Budget;
+import com.whereto.destination.entity.Document;
+import com.whereto.destination.entity.Season;
+import com.whereto.destination.entity.Activity;
+import java.util.List;
 
 @Component
 public class UserSelections {
-    private String season;
-    private String budget;
-    private String weather;
-    private String activity;
-    private String document;
+    private List<Season> seasons;
+    private List<Budget> budgets;
+    private List<Activity> activities;
+    private List<Document> documents;
 
 
-    public String getSeason() {
-        return season;
+       public List<Season> getSeasons() {
+        return seasons;
     }
 
-    public void setSeason(String season) {
-        this.season = season;
+    public void setSeasons(List<Season> seasons) {
+        this.seasons = seasons;
     }
 
-    public String getBudget() {
-        return budget;
+    public List<Budget> getBudgets() {
+        return budgets;
     }
 
-    public void setBudget(String budget) {
-        this.budget = budget;
+    public void setBudgets(List<Budget> budgets) {
+        this.budgets = budgets;
     }
 
-    public String getWeather() {
-        return weather;
+    public List<Activity> getActivities() {
+        return activities;
     }
 
-    public void setWeather(String weather) {
-        this.weather = weather;
+    public void setActivities(List<Activity> activities) {
+        this.activities = activities;
     }
 
-    public String getActivity() {
-        return activity;
+    public List<Document> getDocuments() {
+        return documents;
     }
 
-    public void setActivity(String activity) {
-        this.activity = activity;
+    public void setDocuments(List<Document> documents) {
+        this.documents = documents;
     }
-
-    public String getDocument() {
-        return document;
-    }
-
-    public void setDocument(String document) {
-        this.document = document;
-    }
-
-
 }

@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity(name = "budget") 
+@Entity
 public class Budget {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
