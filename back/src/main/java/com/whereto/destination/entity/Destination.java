@@ -1,13 +1,11 @@
 package com.whereto.destination.entity;
 
 
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.JoinTable;
-import javax.persistence.JoinColumn;
 import javax.persistence.Id;
 import java.util.List;
 import java.util.ArrayList;
@@ -22,36 +20,16 @@ public class Destination {
     private String descriptionShort;
     private String descriptionLong;
 
-    @ManyToMany
-    @JoinTable(
-        name = "destination_season",
-        joinColumns = @JoinColumn(name = "destination_id"),
-        inverseJoinColumns = @JoinColumn(name = "season_id")
-    )
+    @OneToMany(mappedBy = "destination" )
     private List<Season> seasons = new ArrayList<>();
 
-    @ManyToMany
-     @JoinTable(
-        name = "destination_budget",
-        joinColumns = @JoinColumn(name = "destination_id"),
-        inverseJoinColumns = @JoinColumn(name = "budget_id")
-    )
+    @OneToMany(mappedBy = "destination" )
     private List<Budget> budgets = new ArrayList<>();
 
-    @ManyToMany
-        @JoinTable(
-        name = "destination_activity",
-        joinColumns = @JoinColumn(name = "destination_id"),
-        inverseJoinColumns = @JoinColumn(name = "activity_id")
-    )
+    @OneToMany(mappedBy = "destination" )
     private List<Activity> activities = new ArrayList<>();
 
-    @ManyToMany
-     @JoinTable(
-        name = "destination_document",
-        joinColumns = @JoinColumn(name = "destination_id"),
-        inverseJoinColumns = @JoinColumn(name = "document_id")
-    )
+    @OneToMany(mappedBy = "destination" )
     private List<Document> documents = new ArrayList<>();
 
  

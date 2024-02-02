@@ -1,13 +1,13 @@
 package com.whereto.destination.entity;
 
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.JoinColumn;
 import javax.persistence.Id;
-
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
 
 @Entity
 public class Activity {
@@ -16,11 +16,12 @@ public class Activity {
     private Long id;
     private boolean relaxing;
     private boolean adventure;
-    private boolean group;
+    private boolean groupactivity;
     private boolean family;
 
-    @ManyToMany(mappedBy = "activities")
-    private List<Destination> destinations = new ArrayList<>();
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "destinaton_id")
+    private Destination destination;
    
 
     public Activity() {
@@ -53,12 +54,12 @@ public class Activity {
         this.adventure = adventure;
     }
 
-    public boolean isGroup() {
-        return group;
+    public boolean isGroupactivity() {
+        return groupactivity;
     }
 
-    public void setGroup(boolean group) {
-        this.group = group;
+    public void setGroupactivity(boolean groupactivity) {
+        this.groupactivity = groupactivity;
     }
 
     public boolean isFamily() {
@@ -69,11 +70,11 @@ public class Activity {
         this.family = family;
     }
 
-    public List<Destination> getDestinations() {
-        return destinations;
+    public Destination getDestination() {
+        return destination;
     }
 
-    public void setDestinations(List<Destination> destinations) {
-        this.destinations = destinations;
+    public void setDestination(Destination destinations) {
+        this.destination = destination;
     }
 }

@@ -25,18 +25,20 @@ public class DestinationService {
         this.destinationRepository = destinationRepository;
     }
 
-   
-      public List<Destination> getTopDestinations(UserSelections userSelections, int limit) {
-        // Extract user selections
-        List<Season> seasons = userSelections.getSeasons();
-        List<Budget> budgets = userSelections.getBudgets();
-        List<Activity> activities = userSelections.getActivities();
-        List<Document>  documents = userSelections.getDocuments();
+    public List<Destination> getAllDestinations() {
+        return destinationRepository.findAll();
+    }
+    // public List<Destination> getTopDestinations(UserSelections userSelections, int limit) {
+    //     // Extract user selections
+    //     List<Season> seasons = userSelections.getSeasons();
+    //     List<Budget> budgets = userSelections.getBudgets();
+    //     List<Activity> activities = userSelections.getActivities();
+    //     List<Document> documents = userSelections.getDocuments();
 
   
-          Pageable pageable = PageRequest.of(0, limit);
-        return destinationRepository.findTopDestinationsBySeasonAndBudgetAndActivityAndDocument(
-                seasons, budgets, activities, documents, pageable);
-    }
+    //       Pageable pageable = PageRequest.of(0, limit);
+    //     return destinationRepository.findTopDestinationsBySeasonAndBudgetAndActivityAndDocument(
+    //             seasons, budgets, activities, documents, pageable);
+    // }
    
 }

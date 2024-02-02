@@ -23,10 +23,16 @@ public class DestinationController {
         this.destinationService = destinationService;
     }
 
-   @GetMapping("/top")
-    public ResponseEntity<List<Destination>> getTopDestinations(@RequestParam int limit, @RequestBody UserSelections userSelections) {
-        List<Destination> topDestinations = destinationService.getTopDestinations(userSelections, limit);
-        return new ResponseEntity<>(topDestinations, HttpStatus.OK);
+//    @GetMapping("/top")
+//     public ResponseEntity<List<Destination>> getTopDestinations(@RequestParam int limit, @RequestBody UserSelections userSelections) {
+//         List<Destination> topDestinations = destinationService.getTopDestinations(userSelections, limit);
+//         return new ResponseEntity<>(topDestinations, HttpStatus.OK);
+//     }
+
+        @GetMapping("/all")
+    public ResponseEntity<List<Destination>> getAllDestinations() {
+        List<Destination> allDestinations = destinationService.getAllDestinations();
+        return new ResponseEntity<>(allDestinations, HttpStatus.OK);
     }
 
     
