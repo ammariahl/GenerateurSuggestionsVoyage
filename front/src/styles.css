@@ -14,3 +14,10 @@
   --darkBlue: #67a0f6;
   --lightBlue: #9dd1f6;
 }
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Nunito Sans", sans-serif;
+}

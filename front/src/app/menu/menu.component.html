@@ -1,11 +1,14 @@
-<nav>
+<nav id="myFirst">
   <div class="logoContainer">
-    <a href=""> <img src="" alt="" /></a>
+    <a href=""> <img src="../../assets/img/Logo.svg" alt="" /></a>
   </div>
-  <div class="linksContainer">
-    <a href="">Tendance</a>
-    <a href="">Aléatoir</a>
-    <a href="">À propos</a>
-    <button>Trouver ma destination</button>
+  <div class="burger" (click)="toggleMenu()">
+    <i class="material-icons">{{ isMenuOpen ? "close" : "menu" }}</i>
+  </div>
+  <div class="linksContainer menu" [class.is-open]="isMenuOpen">
+    <a href="" class="menu-item">Tendance</a>
+    <a href="" class="menu-item">Aléatoire</a>
+    <a href="" class="menu-item">À propos</a>
+    <button class="menu-item">Trouver ma destination</button>
   </div>
 </nav>
