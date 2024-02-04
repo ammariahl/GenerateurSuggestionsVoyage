@@ -1,13 +1,16 @@
 package com.whereto.destination.entity;
 
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.GeneratedValue;
-import javax.persistence.JoinColumn;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Budget {
@@ -19,9 +22,13 @@ public class Budget {
     private boolean bigBudget;
     private boolean unlimited;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "destinaton_id")
-    private Destination destination;
+    @ManyToMany
+    @JoinTable(
+        name = "budget_destination",
+        joinColumns = @JoinColumn(name = "budget_id"),
+        inverseJoinColumns = @JoinColumn(name = "destination_id")
+    )
+    private List<Destination> destinations = new ArrayList<>();
 
    public Budget() {
        
@@ -68,11 +75,11 @@ public class Budget {
         this.unlimited = unlimited;
     }
 
-    public Destination getDestination() {
-        return destination;
-    }
+    public List<Destination> getDestinations() {
+            return destinations;
+        }
 
-    public void setDestination(Destination destination) {
-        this.destination = destination;
-    }
+        public void setDestinations(List<Destination> destinations) {
+            this.destinations = destinations;
+        }
 }

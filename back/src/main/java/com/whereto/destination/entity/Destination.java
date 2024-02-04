@@ -20,16 +20,16 @@ public class Destination {
     private String descriptionShort;
     private String descriptionLong;
 
-    @OneToMany(mappedBy = "destination" )
+    @OneToMany(mappedBy = "destinations" )
     private List<Season> seasons = new ArrayList<>();
 
-    @OneToMany(mappedBy = "destination" )
+    @OneToMany(mappedBy = "destinations" )
     private List<Budget> budgets = new ArrayList<>();
 
-    @OneToMany(mappedBy = "destination" )
+    @OneToMany(mappedBy = "destinations" )
     private List<Activity> activities = new ArrayList<>();
 
-    @OneToMany(mappedBy = "destination" )
+    @OneToMany(mappedBy = "destinations" )
     private List<Document> documents = new ArrayList<>();
 
  

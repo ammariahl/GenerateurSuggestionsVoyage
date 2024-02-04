@@ -2,11 +2,14 @@ package com.whereto.destination.entity;
 
 
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
 
@@ -20,9 +23,13 @@ public class Document {
     private boolean visaUe;
     private boolean passportMde;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "destinaton_id")
-    private Destination destination;
+    @ManyToMany
+    @JoinTable(
+        name = "document_destination",
+        joinColumns = @JoinColumn(name = "document_id"),
+        inverseJoinColumns = @JoinColumn(name = "destination_id")
+        )
+    private List<Destination> destinations = new ArrayList<>();
    
 
     public Document() {
@@ -71,11 +78,11 @@ public class Document {
         this.passportMde = passportMde;
     }
 
-    public Destination getDestination() {
-        return destination;
-    }
+    public List<Destination> getDestinations() {
+            return destinations;
+        }
 
-    public void setDestination(Destination destination) {
-        this.destination = destination;
-    }
+        public void setDestinations(List<Destination> destinations) {
+            this.destinations = destinations;
+        }
 }
