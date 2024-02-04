@@ -25,14 +25,15 @@
 html {
   height: 100vh;
 }
-body {
+body,
+section,
+main {
   height: 100%;
 }
 
 .flex {
   display: flex;
 }
-
 /* BUTTONS */
 
 .button {
@@ -65,4 +66,13 @@ body {
 
 .teal {
   background: linear-gradient(90deg, var(--darkTeal), var(--lightTeal));
+}
+
+/* SIDE IMAGE */
+
+#sideImg {
+  height: 100%;
+  width: 30%;
+  background-image: url("./assets/img/image_side.svg");
+  background-size: cover;
 }
