@@ -2,8 +2,10 @@ package com.whereto.destination.entity;
 
 
 import javax.persistence.OneToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
