@@ -9,10 +9,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.FetchType;
-import javax.persistence.CascadeType;
-import javax.persistence.FetchType;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Season {
@@ -24,6 +21,7 @@ public class Season {
     private String summer;
     private String autumn;
 
+    @JsonManagedReference
     @ManyToMany
     @JoinTable(
         name = "season_destination",

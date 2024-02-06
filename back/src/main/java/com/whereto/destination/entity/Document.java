@@ -10,8 +10,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.FetchType;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Document {
@@ -23,6 +22,7 @@ public class Document {
     private boolean visaUe;
     private boolean passportMde;
 
+    @JsonManagedReference
     @ManyToMany
     @JoinTable(
         name = "document_destination",

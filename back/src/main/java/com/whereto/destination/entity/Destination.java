@@ -1,8 +1,8 @@
 package com.whereto.destination.entity;
 
 
-import javax.persistence.OneToMany;
-import javax.persistence.OneToMany;
+
+
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
@@ -11,8 +11,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.List;
 import java.util.ArrayList;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Destination {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,16 +26,20 @@ public class Destination {
     private String descriptionShort;
     private String descriptionLong;
 
-    @OneToMany(mappedBy = "destinations" )
+    @JsonBackReference
+    @ManyToMany(mappedBy = "destinations" )
     private List<Season> seasons = new ArrayList<>();
 
-    @OneToMany(mappedBy = "destinations" )
+    @JsonBackReference
+    @ManyToMany(mappedBy = "destinations" )
     private List<Budget> budgets = new ArrayList<>();
 
-    @OneToMany(mappedBy = "destinations" )
+    @JsonBackReference
+    @ManyToMany(mappedBy = "destinations" )
     private List<Activity> activities = new ArrayList<>();
 
-    @OneToMany(mappedBy = "destinations" )
+    @JsonBackReference
+    @ManyToMany(mappedBy = "destinations" )
     private List<Document> documents = new ArrayList<>();
 
  

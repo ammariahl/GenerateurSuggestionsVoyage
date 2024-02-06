@@ -9,8 +9,7 @@ import javax.persistence.JoinColumn;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Id;
-import javax.persistence.CascadeType;
-import javax.persistence.FetchType;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Activity {
@@ -22,6 +21,7 @@ public class Activity {
     private boolean groupactivity;
     private boolean family;
 
+    @JsonManagedReference
     @ManyToMany
     @JoinTable(
         name = "activity_destination",

@@ -5,12 +5,11 @@ import javax.persistence.ManyToMany;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.CascadeType;
-import javax.persistence.FetchType;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import java.util.ArrayList;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Budget {
@@ -22,6 +21,7 @@ public class Budget {
     private boolean bigBudget;
     private boolean unlimited;
 
+    @JsonManagedReference
     @ManyToMany
     @JoinTable(
         name = "budget_destination",
