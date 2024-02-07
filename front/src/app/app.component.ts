@@ -7,4 +7,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'front';
+  design_image: string = '/assets/img/maquette_image_gauche.PNG';
+  logo_image: string = '/assets/img/maquette_logo.PNG';
+  isGoToForm: Boolean = false;
+
+  goToSearch(): void {
+    if (this.isGoToForm) {
+      this.isGoToForm = false;
+    } else {
+      this.isGoToForm = true;
+    }
+  }
 }
