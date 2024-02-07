@@ -1,27 +1,28 @@
 .divContainer {
   display: flex;
   flex-direction: column;
-  margin-top: 10%;
-  box-sizing: border-box;
 }
 
 .suggestion-title {
   color: black;
   text-align: center;
+  padding-top: 10%;
 }
 
 .preferences_options {
-  display: flex;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: repeat(2, 50%);
+  grid-template-rows: repeat(2, 50%);
+  margin: 10%;
 }
 
 button {
   color: white;
-  padding: 1%;
-  border: none;
   border-radius: 10px;
   cursor: pointer;
-  margin: 2%;
+  margin: 3%;
+  width: 80%;
+  height: 70%;
 }
 
 button:hover {
@@ -31,17 +32,59 @@ button:hover {
 }
 
 .preferences_button_1 {
+  grid-column-start: 1;
   background-color: #76d16a;
+  border: 2px solid #76d16a;
 }
 
 .preferences_button_2 {
+  grid-column-start: 2;
   background-color: #d1746a;
+  border: 2px solid #d1746a;
 }
 
 .preferences_button_3 {
+  grid-column-start: 1;
   background-color: #e9c757;
+  border: 2px solid #e9c757;
 }
 
 .preferences_button_4 {
+  grid-column-start: 2;
   background-color: #6ad1ce;
+  border: 2px solid #6ad1ce;
+}
+
+preferences_button_1.selected {
+  border: 2px solid black;
+}
+
+button.document_button_2:active {
+  border: 2px solid black;
+}
+
+button.document_button_3:active {
+  border: 2px solid black;
+}
+
+button.document_button_4:active {
+  border: 2px solid black;
+}
+
+.send-button {
+  background-color: #2eb67d;
+  color: white;
+  padding: 1%;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  float: right;
+  margin: 2%;
+  width: 25%;
+}
+
+.send-button:hover {
+  -moz-transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
 }
