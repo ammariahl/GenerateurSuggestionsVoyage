@@ -9,7 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import com.whereto.destination.repository.DestinationRepository;
-
+import org.springframework.data.web.PageableDefault;
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,12 +27,18 @@ public class DestinationController {
         this.destinationService = destinationService;
     }
 
-   @PostMapping(value = "/top", produces = "application/json", consumes = "application/json")
-    public ResponseEntity<List<Destination>> getTopDestinations(@RequestParam int limit, @RequestBody UserSelections userSelections) {
-        List<Destination> topDestinations = destinationService.getTopDestinations(userSelections, limit);
-        log.debug("Received request. Limit: {}, UserSelections: {}", limit, userSelections);
-        return new ResponseEntity<>(topDestinations, HttpStatus.OK);
-    }
+//    @PostMapping(value = "/top", produces = "application/json", consumes = "application/json")
+//     public ResponseEntity<List<Destination>> getTopDestinations(@RequestParam int limit, @RequestBody UserSelections userSelections) {
+//         List<Destination> topDestinations = destinationService.getTopDestinations(userSelections, limit);
+//         log.debug("Received request. Limit: {}, UserSelections: {}", limit, userSelections);
+//         return new ResponseEntity<>(topDestinations, HttpStatus.OK);
+//     }
+        @PostMapping(value = "/top",consumes = "application/json")
+        public ResponseEntity<List<Destination>> getTopDestinations(@RequestBody UserSelections userSelections) {
+            List<Destination> topDestinations = destinationService.getTopDestinations(userSelections);
+            log.debug("Received request. UserSelections: {}", userSelections);
+            return new ResponseEntity<>(topDestinations, HttpStatus.OK);
+        }
 
         @GetMapping("/all")
     public ResponseEntity<List<Destination>> getAllDestinations() {

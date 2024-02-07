@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
@@ -26,19 +27,19 @@ public class Destination {
     private String descriptionShort;
     private String descriptionLong;
 
-    @JsonBackReference
+  
     @ManyToMany(mappedBy = "destinations" )
     private List<Season> seasons = new ArrayList<>();
 
-    @JsonBackReference
+    
     @ManyToMany(mappedBy = "destinations" )
     private List<Budget> budgets = new ArrayList<>();
 
-    @JsonBackReference
+  
     @ManyToMany(mappedBy = "destinations" )
     private List<Activity> activities = new ArrayList<>();
 
-    @JsonBackReference
+   
     @ManyToMany(mappedBy = "destinations" )
     private List<Document> documents = new ArrayList<>();
 

@@ -17,6 +17,6 @@ public interface DestinationRepository extends JpaRepository<Destination , Long>
      List<Destination> findAll();
 
     List<Destination> findTopDestinationsBySeasonsInAndBudgetsInAndActivitiesInAndDocumentsIn(
-        List<Season> seasons, List<Budget> budgets, List<Activity> activities, List<Document> documents, Pageable pageable);
+        List<Season> seasons, List<Budget> budgets, List<Activity> activities, List<Document> documents);
     
 }

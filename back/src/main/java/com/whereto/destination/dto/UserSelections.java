@@ -6,13 +6,16 @@ import com.whereto.destination.entity.Document;
 import com.whereto.destination.entity.Season;
 import com.whereto.destination.entity.Activity;
 import java.util.List;
+import javax.persistence.Id;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
-@Component
+
 public class UserSelections {
+
     private List<Season> seasons;
 
     private List<Budget> budgets;
