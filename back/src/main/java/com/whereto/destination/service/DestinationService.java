@@ -20,42 +20,54 @@ import java.util.Optional;
 public class DestinationService {
 
     private final DestinationRepository destinationRepository;
+    private final ActivityService activityService;
+    private final BudgetService budgetService;
+    private final DocumentService documentService;
+    private final SeasonService seasonService;
+   
 
     @Autowired
-    public DestinationService(DestinationRepository destinationRepository) {
+    public DestinationService(DestinationRepository destinationRepository,
+                              SeasonService seasonService,
+                              ActivityService activityService,
+                              BudgetService budgetService,
+                              DocumentService documentService
+    ) {
         this.destinationRepository = destinationRepository;
+        this.seasonService = seasonService;
+        this.activityService = activityService;
+        this.budgetService = budgetService;
+        this.documentService = documentService;
+
     }
 
     public List<Destination> getAllDestinations() {
         return destinationRepository.findAll();
     }
-//     public List<Destination> getTopDestinations(UserSelections userSelections, int limit) {
-//         // Extract user selections
-//         List<Season> seasons = userSelections.getSeasons();
-//         List<Budget> budgets = userSelections.getBudgets();
-//         List<Activity> activities = userSelections.getActivities();
-//         List<Document> documents = userSelections.getDocuments();
 
-        
-  
-//           Pageable pageable = PageRequest.of(0, limit);
-//         List<Destination> topDestinations = destinationRepository.findTopDestinationsBySeasonsInAndBudgetsInAndActivitiesInAndDocumentsIn(
-//                 seasons, budgets, activities, documents, pageable);
-
-//                 return topDestinations != null ? topDestinations : Collections.emptyList();
-// }
 public List<Destination> getTopDestinations(UserSelections userSelections) {
     // Extract user selections
-    List<Season> seasons = userSelections.getSeasons();
-    List<Budget> budgets = userSelections.getBudgets();
-    List<Activity> activities = userSelections.getActivities();
-    List<Document> documents = userSelections.getDocuments();
+        List<Season> seasons = userSelections.getSeasons();
+        List<Budget> budgets = userSelections.getBudgets();
+        List<Activity> activities = userSelections.getActivities();
+        List<Document> documents = userSelections.getDocuments();
 
-    List<Destination> topDestinations = destinationRepository.findTopDestinationsBySeasonsInAndBudgetsInAndActivitiesInAndDocumentsIn(
-            seasons, budgets, activities, documents);
 
-    return topDestinations != null ? topDestinations : Collections.emptyList();
+        List<Season> managedSeasons = seasonService.getManagedSeasons(seasons);
+        List<Activity> managedActivities = activityService.getManagedActivities(activities);
+        List<Budget> managedBudgets = budgetService.getManagedBudgets(budgets);
+        List<Document> managedDocuments = documentService.getManagedDocuments(documents);
+
+
+    return destinationRepository.findTopDestinationsBySeasonsInAndBudgetsInAndActivitiesInAndDocumentsIn(
+                 managedSeasons, managedBudgets, managedActivities, managedDocuments);
+   
 }
+
+
+
+
+
 
     }
    

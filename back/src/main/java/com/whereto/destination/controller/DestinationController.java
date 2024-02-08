@@ -36,15 +36,15 @@ public class DestinationController {
         @PostMapping(value = "/top",consumes = "application/json")
         public ResponseEntity<List<Destination>> getTopDestinations(@RequestBody UserSelections userSelections) {
             List<Destination> topDestinations = destinationService.getTopDestinations(userSelections);
-            log.debug("Received request. UserSelections: {}", userSelections);
+            // log.debug("Received request. UserSelections: {}", userSelections);
             return new ResponseEntity<>(topDestinations, HttpStatus.OK);
         }
 
         @GetMapping("/all")
-    public ResponseEntity<List<Destination>> getAllDestinations() {
-        List<Destination> allDestinations = destinationService.getAllDestinations();
-        return new ResponseEntity<>(allDestinations, HttpStatus.OK);
-    }
+        public ResponseEntity<List<Destination>> getAllDestinations() {
+            List<Destination> allDestinations = destinationService.getAllDestinations();
+            return new ResponseEntity<>(allDestinations, HttpStatus.OK);
+        }
 
     
 }

@@ -9,7 +9,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Budget {
@@ -21,7 +21,7 @@ public class Budget {
     private boolean bigBudget;
     private boolean unlimited;
 
-    @JsonManagedReference
+    
     @ManyToMany
     @JoinTable(
         name = "budget_destination",
