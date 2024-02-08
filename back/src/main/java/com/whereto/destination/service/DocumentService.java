@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import com.whereto.destination.exception.CustomNotFoundException;
 
 @Service
 public class DocumentService {
@@ -20,18 +21,27 @@ public class DocumentService {
     public List<Document> getManagedDocuments(List<Document> documents) {
           List<Document> managedDocuments = new ArrayList<>();
           for (Document document : documents) {
-            Optional<Document> optionalDocument = documentRepository.findById(document.getId());
+            List<Document> matchingDocuments = getDocumentsByField(document);
             
-            if (optionalDocument.isPresent()) {
-                managedDocuments.add(optionalDocument.get());
+            if (!matchingDocuments.isEmpty()) {
+                managedDocuments.add(matchingDocuments.get(0));
             } else {
-                // Handle the case when the season is not found in the database
-                // throw an exception 
+                throw new CustomNotFoundException("Document is not found in the database");
             }
         }
 
         return managedDocuments;
 
+    }
+
+     private List<Document> getDocumentsByField(Document document) {
+        boolean cniUe = document.isCniUe();
+        boolean passportUe = document.isPassportUe();
+        boolean visaUe = document.isVisaUe();
+        boolean passportMde = document.isPassportMde();
+
+        return documentRepository.findByCniUeAndPassportUeAndVisaUeAndPassportMde(
+            cniUe, passportUe, visaUe, passportMde);
     }
 }
 

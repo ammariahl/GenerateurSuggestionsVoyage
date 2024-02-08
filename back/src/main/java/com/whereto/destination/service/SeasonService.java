@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import com.whereto.destination.exception.CustomNotFoundException;
 
 @Service
 public class SeasonService {
@@ -18,19 +19,41 @@ public class SeasonService {
     }
 
     public List<Season> getManagedSeasons(List<Season> seasons) {
-          List<Season> managedSeasons = new ArrayList<>();
-          for (Season season : seasons) {
-            Optional<Season> optionalSeason = seasonRepository.findById(season.getId());
-            
-            if (optionalSeason.isPresent()) {
-                managedSeasons.add(optionalSeason.get());
-            } else {
-                // Handle the case when the season is not found in the database
-                // throw an exception 
-            }
+
+           List<Season> managedSeasons = new ArrayList<>();
+
+    for (Season season : seasons) {
+       List<Season> matchingSeasons = getSeasonByField(season);
+
+        if (!matchingSeasons.isEmpty()) {
+            managedSeasons.add(matchingSeasons.get(0));
+        } else {
+           throw new CustomNotFoundException("This season is not found in the database");
         }
+    }
+       
 
         return managedSeasons;
 
+    }
+
+
+  private List<Season> getSeasonByField(Season season) {
+        List<Season> result = new ArrayList<>();
+
+        if (season.getSpring() != null) {
+            result.addAll(seasonRepository.findBySpring(season.getSpring()));
+        }
+        if (season.getAutumn() != null) {
+            result.addAll(seasonRepository.findByAutumn(season.getAutumn()));
+        }
+        if (season.getSummer() != null) {
+            result.addAll(seasonRepository.findBySummer(season.getSummer()));
+        }
+        if (season.getWinter() != null) {
+            result.addAll(seasonRepository.findByWinter(season.getWinter()));
+        }
+
+        return result;
     }
 }

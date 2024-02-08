@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import com.whereto.destination.exception.CustomNotFoundException;
 
 @Service
 public class BudgetService {
@@ -20,18 +21,27 @@ public class BudgetService {
     public List<Budget> getManagedBudgets(List<Budget> budgets) {
           List<Budget> managedBudgets = new ArrayList<>();
           for (Budget budget : budgets) {
-            Optional<Budget> optionalBudget = budgetRepository.findById(budget.getId());
+            List<Budget> matchingBudgets = getBudgetsByField(budget);
             
-            if (optionalBudget.isPresent()) {
-                managedBudgets.add(optionalBudget.get());
+            if (!matchingBudgets.isEmpty()) {
+                managedBudgets.add(matchingBudgets.get(0));
             } else {
-                // Handle the case when the season is not found in the database
-                // throw an exception 
+                throw new CustomNotFoundException("Budget is not found in the database");
             }
         }
 
         return managedBudgets;
 
     }
+  private List<Budget> getBudgetsByField(Budget budget) {
+        boolean littleBudget = budget.isLittleBudget();
+        boolean mediumBudget = budget.isMediumBudget();
+        boolean bigBudget = budget.isBigBudget();
+        boolean unlimited = budget.isUnlimited();
+
+        return budgetRepository.findByLittleBudgetAndMediumBudgetAndBigBudgetAndUnlimited(
+            littleBudget, mediumBudget, bigBudget, unlimited);
+    }
+
 }
 
