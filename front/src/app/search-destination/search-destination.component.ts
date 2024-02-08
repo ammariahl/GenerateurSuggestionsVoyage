@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DestinationCriteria } from '../models/destination-criteria.model';
 
 @Component({
   selector: 'app-search-destination',

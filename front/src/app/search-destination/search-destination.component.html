@@ -165,34 +165,38 @@
       <button
         class="preferences_button_1"
         (click)="preferencesSelection('cni ue')"
-        onclick="this.style.border = '2px solid grey'"
+        onclick="this.style.border = '2px solid gray'"
       >
         Carte d'identité UE
       </button>
       <button
         class="preferences_button_2"
         (click)="preferencesSelection('passeport ue')"
-        onclick="this.style.border = '2px solid grey'"
+        onclick="this.style.border = '2px solid gray'"
       >
         Passeport UE
       </button>
       <button
         class="preferences_button_3"
         (click)="preferencesSelection('visa ue')"
-        onclick="this.style.border = '2px solid grey'"
+        onclick="this.style.border = '2px solid gray'"
       >
         Visa UE
       </button>
       <button
         class="preferences_button_4"
         (click)="preferencesSelection('passeport mde')"
-        onclick="this.style.border = '2px solid grey'"
+        onclick="this.style.border = '2px solid gray'"
       >
         Passeport MDE
       </button>
     </div>
     <div class="send" [style.visibility]="!isSend ? 'visible' : 'hidden'">
-      <button class="send-button" (click)="sendSearchDestinationForm()">
+      <button
+        class="send-button"
+        (click)="sendSearchDestinationForm()"
+        [routerLink]="['/suggestion']"
+      >
         Valider
       </button>
     </div>

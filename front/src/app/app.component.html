@@ -1,14 +1,8 @@
-<div class="container">
-  <div class="design_image">
-    <div class="fixed_part">
-      <img [src]="design_image" />
-      <div class="logo_image" (click)="goToSearch()">
-        <img [src]="logo_image" />
-      </div>
-    </div>
-  </div>
-  <div class="content_box">
-    <!-- <app-suggestion class="content"></app-suggestion> -->
-    <app-search-destination class="content"></app-search-destination>
-  </div>
-</div>
+<app-menu></app-menu>
+
+<main class="flex">
+  <section id="sideImg"></section>
+  <section class="right flex">
+    <router-outlet></router-outlet>
+  </section>
+</main>

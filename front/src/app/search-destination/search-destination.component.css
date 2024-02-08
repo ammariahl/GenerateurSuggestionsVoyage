@@ -1,19 +1,16 @@
 .divContainer {
   display: flex;
-  flex-direction: column;
 }
 
 .suggestion-title {
   color: black;
   text-align: center;
-  padding-top: 10%;
 }
 
 .preferences_options {
   display: grid;
   grid-template-columns: repeat(2, 50%);
   grid-template-rows: repeat(2, 50%);
-  margin: 10%;
 }
 
 button {

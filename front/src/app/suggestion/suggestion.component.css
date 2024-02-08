@@ -5,21 +5,20 @@
 }
 
 .suggestion-title {
-  color: black;
+  color: var(--black);
   text-align: center;
 }
 
 .distination-card {
   display: flex;
   cursor: pointer;
-  border: 1% solid #ccc;
   border: none;
   border-radius: 15px;
-  background-color: rgb(239, 239, 239);
+  background-color: var(--grey);
   margin: 5%;
-  margin-left: 13%;
-  height: 10%;
-  width: 75%;
+
+  height: 12rem;
+  width: 45rem;
   overflow-clip-margin: content-box;
   overflow: clip;
 }
@@ -53,7 +52,7 @@ img {
 }
 
 .destination-name {
-  color: grey;
+  color: gray;
 }
 
 .destination-criteria {
@@ -66,7 +65,7 @@ img {
 
 .view-all-button {
   background-color: #68c8be;
-  color: white;
+  color: var(--white);
   padding: 1%;
   border: none;
   border-radius: 10px;
