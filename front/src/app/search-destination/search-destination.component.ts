@@ -52,18 +52,10 @@ export class SearchDestinationComponent implements OnInit {
       this.isActivitySend = true;
       this.activity = preference;
     } else if (this.documentsArray.includes(preference)) {
-      console.log('--- un bouton a été appelé');
-      console.log('avant :');
-      console.log(this.documents);
       if (!this.documents.includes(preference)) {
-        console.log('nouvel element');
         this.documents.push(preference);
-        console.log('apres le push :');
-        console.log(this.documents);
         if (this.documents[0] == '') {
           this.documents.shift();
-          console.log('apres supp du singleton :');
-          console.log(this.documents);
         }
       }
     }
@@ -79,5 +71,6 @@ export class SearchDestinationComponent implements OnInit {
     console.log(this.climat);
     console.log(this.budget);
     console.log(this.activity);
+    console.log(this.documents);
   }
 }
