@@ -4,6 +4,10 @@
 
 .destination-cards {
   flex-direction: column;
+
+  margin-top: 10%;
+  align-items: center;
+
 }
 
 .suggestion-title {
@@ -53,7 +57,11 @@ img {
 }
 
 .destination-name {
+
+
+
   color: var(--black);
+
 }
 
 .destination-criteria {
@@ -64,6 +72,24 @@ img {
   color: var(--black);
 }
 
+
+.view-all-button {
+  background-color: #68c8be;
+  color: var(--white);
+  padding: 1%;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  float: right;
+  margin: 2%;
+}
+
+.view-all-button:hover {
+  -moz-transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+=======
 .view-all {
   justify-content: flex-end;
+
 }
