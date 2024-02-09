@@ -80,7 +80,9 @@ html {
   width: 70%;
   justify-content: center;
   align-items: center;
+
   margin: 1rem auto;
+
 }
 
 app-menu {
