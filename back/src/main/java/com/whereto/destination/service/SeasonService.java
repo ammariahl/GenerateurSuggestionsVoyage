@@ -18,6 +18,10 @@ public class SeasonService {
         this.seasonRepository = seasonRepository;
     }
 
+    public List<Season> getAllSeasonsWithDestinations() {
+        return seasonRepository.findAllWithDestinations();
+    }
+
     public List<Season> getManagedSeasons(List<Season> seasons) {
 
            List<Season> managedSeasons = new ArrayList<>();

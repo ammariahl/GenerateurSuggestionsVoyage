@@ -18,6 +18,10 @@ public class ActivityService {
         this.activityRepository = activityRepository;
     }
 
+    public List<Activity> getAllActivitiesWithDestinations() {
+        return activityRepository.findAllWithDestinations();
+    }
+    
     public List<Activity> getManagedActivities(List<Activity> activities) {
           List<Activity> managedActivities = new ArrayList<>();
 
@@ -27,14 +31,8 @@ public class ActivityService {
 
             if (!matchingActivities.isEmpty()) {
 
-            managedActivities.add(matchingActivities.get(0));
-            
-                // if (optionalActivity.isPresent()) {
-                //     managedActivities.add(optionalActivity.get());
-                // } else {
-                //     throw new CustomNotFoundException("Activity is not found in the database");
-                    
-                // } 
+            managedActivities.add(matchingActivities.get(0));            
+       
             
         } else {
             throw new CustomNotFoundException("Activity ID is null for one or more activities");
