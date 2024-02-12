@@ -1,0 +1,204 @@
+<div id="divContainer">
+  <span
+    *ngIf="
+      !isPeriodeSend &&
+      !isClimatSend &&
+      !isBudgetSend &&
+      !isActivitySend &&
+      !isDocumentSend
+    "
+  >
+    <h2 class="suggestion-title">Je souhaite voyager en ...</h2>
+    <div class="preferences_options">
+      <button
+        class="preferences_button_1"
+        (click)="preferencesSelection('printemps')"
+      >
+        Printemps
+      </button>
+      <button
+        class="preferences_button_2"
+        (click)="preferencesSelection('ete')"
+      >
+        Ete
+      </button>
+      <button
+        class="preferences_button_3"
+        (click)="preferencesSelection('automne')"
+      >
+        Automne
+      </button>
+      <button
+        class="preferences_button_4"
+        (click)="preferencesSelection('hivers')"
+      >
+        Hivers
+      </button>
+    </div>
+  </span>
+
+  <span
+    *ngIf="
+      isPeriodeSend &&
+      !isClimatSend &&
+      !isBudgetSend &&
+      !isActivitySend &&
+      !isDocumentSend
+    "
+  >
+    <h2 class="suggestion-title">Plutôt ...</h2>
+    <div class="preferences_options">
+      <button
+        class="preferences_button_1"
+        (click)="preferencesSelection('chaud')"
+      >
+        Chaud
+      </button>
+      <button
+        class="preferences_button_2"
+        (click)="preferencesSelection('froid')"
+      >
+        Froid
+      </button>
+      <button
+        class="preferences_button_3"
+        (click)="preferencesSelection('doux')"
+      >
+        Doux
+      </button>
+      <button
+        class="preferences_button_4"
+        (click)="preferencesSelection('peu importe')"
+      >
+        Peu importe
+      </button>
+    </div>
+  </span>
+
+  <span
+    *ngIf="
+      !isPeriodeSend &&
+      isClimatSend &&
+      !isBudgetSend &&
+      !isActivitySend &&
+      !isDocumentSend
+    "
+  >
+    <h2 class="suggestion-title">Mon budget ...</h2>
+    <div class="preferences_options">
+      <button
+        class="preferences_button_1"
+        (click)="preferencesSelection('500')"
+      >
+        500€
+      </button>
+      <button
+        class="preferences_button_2"
+        (click)="preferencesSelection('1000')"
+      >
+        1000€
+      </button>
+      <button
+        class="preferences_button_3"
+        (click)="preferencesSelection('1500')"
+      >
+        1500
+      </button>
+      <button
+        class="preferences_button_4"
+        (click)="preferencesSelection('no limit')"
+      >
+        No limit !
+      </button>
+    </div>
+  </span>
+
+  <span
+    *ngIf="
+      !isPeriodeSend &&
+      !isClimatSend &&
+      isBudgetSend &&
+      !isActivitySend &&
+      !isDocumentSend
+    "
+  >
+    <h2 class="suggestion-title">Je voyage ...</h2>
+    <div class="preferences_options">
+      <button
+        class="preferences_button_1"
+        (click)="preferencesSelection('relaxer')"
+      >
+        Pour me relaxer
+      </button>
+      <button
+        class="preferences_button_2"
+        (click)="preferencesSelection('aventure')"
+      >
+        Pour l'aventure
+      </button>
+      <button
+        class="preferences_button_3"
+        (click)="preferencesSelection('amis')"
+      >
+        Entre amis
+      </button>
+      <button
+        class="preferences_button_4"
+        (click)="preferencesSelection('famille')"
+      >
+        En famille
+      </button>
+    </div>
+  </span>
+
+  <span
+    *ngIf="
+      !isPeriodeSend &&
+      !isClimatSend &&
+      !isBudgetSend &&
+      isActivitySend &&
+      !isDocumentSend
+    "
+  >
+    <h2 class="suggestion-title">Je possède ...</h2>
+    <div class="preferences_options">
+      <button
+        class="preferences_button_1"
+        (click)="preferencesSelection('cni ue')"
+        onclick="this.style.border = '2px solid gray'"
+      >
+        Carte d'identité UE
+      </button>
+      <button
+        class="preferences_button_2"
+        (click)="preferencesSelection('passeport ue')"
+        onclick="this.style.border = '2px solid gray'"
+      >
+        Passeport UE
+      </button>
+      <button
+        class="preferences_button_3"
+        (click)="preferencesSelection('visa ue')"
+        onclick="this.style.border = '2px solid gray'"
+      >
+        Visa UE
+      </button>
+      <button
+        class="preferences_button_4"
+        (click)="preferencesSelection('passeport mde')"
+        onclick="this.style.border = '2px solid gray'"
+      >
+        Passeport MDE
+      </button>
+    </div>
+    <div class="send" [style.visibility]="!isSend ? 'visible' : 'hidden'">
+      <button
+        class="send-button"
+        (click)="sendSearchDestinationForm()"
+        [routerLink]="['/suggestion']"
+      >
+        Valider
+      </button>
+    </div>
+  </span>
+</div>

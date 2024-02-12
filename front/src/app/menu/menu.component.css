@@ -1,0 +1,67 @@
+@import "material-icons/iconfont/material-icons.css";
+
+nav {
+  align-items: center;
+  justify-content: space-between;
+
+  background: none;
+  padding: 1rem;
+}
+
+.linksContainer {
+  gap: 1rem;
+}
+.linksContainer a {
+  padding: 0 8px;
+  font-size: 1.4rem;
+  text-decoration: none;
+  color: var(--black);
+  font-size: 1rem;
+}
+
+.burger {
+  padding: 0 10px;
+
+  display: none;
+  cursor: pointer;
+}
+
+i {
+  color: var(--black);
+  line-height: 60px;
+}
+.menu-item {
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  nav {
+    border-bottom: 1px solid var(--grey);
+  }
+  .menu {
+    align-items: center;
+    display: none;
+  }
+  .burger {
+    display: block;
+  }
+  .is-open {
+    display: block;
+    position: absolute;
+    top: calc(60px + 1rem);
+    background: #fff;
+    width: 100%;
+  }
+
+  .menu-item {
+    padding: 0 10px;
+    height: 60px;
+    line-height: 60px;
+    text-decoration: none;
+    display: block;
+
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--black);
+  }
+}

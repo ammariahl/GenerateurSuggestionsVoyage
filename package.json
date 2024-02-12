@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@fontsource/nunito-sans": "^5.0.8",
+    "material-icons": "^1.13.12"
+  }
+}
