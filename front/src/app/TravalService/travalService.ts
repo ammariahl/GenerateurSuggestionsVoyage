@@ -12,13 +12,13 @@ export class TravelService {
 
   constructor(private http: HttpClient) {}
 
-  sendTravelPreferences(preferences: any): Observable<any> {
+  sendTravelPreferences(userPreference: any): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
 
     return this.http
-      .post(this.apiUrl, preferences, {
+      .post(this.apiUrl, userPreference, {
         headers,
         withCredentials: true,
       })

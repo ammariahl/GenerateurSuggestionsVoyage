@@ -97,10 +97,10 @@ export class SearchDestinationComponent implements OnInit {
         return acc;
       }, [] as { [key: string]: boolean }[]),
     };
+    const userPreference = JSON.stringify(preferences);
+    console.log(JSON.stringify(preferences));
 
-    console.log(JSON.stringify(preferences, null, 2));
-
-    this.travelService.sendTravelPreferences(preferences).subscribe(
+    this.travelService.sendTravelPreferences(userPreference).subscribe(
       (response) => {
         console.log('Response from backend:', response);
       },
