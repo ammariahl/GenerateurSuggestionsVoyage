@@ -6,7 +6,7 @@
         Periode
       </p>
       <p class="timelinePreferenceSelected">
-        {{ periodeTimeline }}
+        {{ seasonTimeline }}
       </p>
     </div>
   </div>
@@ -61,25 +61,25 @@
         class="preferences_button_1"
         (click)="preferencesSelection('spring')"
       >
-        {{ periodeButtomName[0] }}
+        {{ seasonButtomName[0] }}
       </button>
       <button
         class="preferences_button_2"
         (click)="preferencesSelection('summer')"
       >
-        {{ periodeButtomName[1] }}
+        {{ seasonButtomName[1] }}
       </button>
       <button
         class="preferences_button_3"
         (click)="preferencesSelection('autumn')"
       >
-        {{ periodeButtomName[2] }}
+        {{ seasonButtomName[2] }}
       </button>
       <button
         class="preferences_button_4"
         (click)="preferencesSelection('winter')"
       >
-        {{ periodeButtomName[3] }}
+        {{ seasonButtomName[3] }}
       </button>
     </div>
   </span>
@@ -179,28 +179,28 @@
     <div class="preferences_options">
       <button
         class="preferences_button_1"
-        (click)="preferencesSelection('cni_ue')"
+        (click)="preferencesSelection('cniUe')"
         onclick="this.style.border = '2px solid gray'"
       >
         {{ documentsButtomName[0] }}
       </button>
       <button
         class="preferences_button_2"
-        (click)="preferencesSelection('passport_ue')"
+        (click)="preferencesSelection('passeportUe')"
         onclick="this.style.border = '2px solid gray'"
       >
         {{ documentsButtomName[1] }}
       </button>
       <button
         class="preferences_button_3"
-        (click)="preferencesSelection('visa_ue')"
+        (click)="preferencesSelection('visaUe')"
         onclick="this.style.border = '2px solid gray'"
       >
         {{ documentsButtomName[2] }}
       </button>
       <button
         class="preferences_button_4"
-        (click)="preferencesSelection('passport_mde')"
+        (click)="preferencesSelection('passeportMde')"
         onclick="this.style.border = '2px solid gray'"
       >
         {{ documentsButtomName[3] }}
@@ -211,8 +211,8 @@
         class="send-button"
         (click)="sendSearchDestinationForm()"
         [routerLink]="[
-          '/suggestion',
-          periode,
+          '/api/destinations/top',
+          season,
           climat,
           budget,
           activity,

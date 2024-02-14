@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { DestinationCard } from '../models/destination-card.model';
+import { TravelService } from '../TravalService/travalService';
 
 @Component({
   selector: 'app-suggestion',
@@ -7,6 +8,7 @@ import { DestinationCard } from '../models/destination-card.model';
   styleUrl: './suggestion.component.css',
 })
 export class SuggestionComponent {
+  /*
   destinationCard: DestinationCard[] = [
     {
       name: 'Espagne',
@@ -58,19 +60,31 @@ export class SuggestionComponent {
       documents: ['Passeport'],
       briefDescription: 'Pays africain',
     },
-  ];
+  ];*/
   isViewAll: Boolean = false;
   forOption: string = '';
+  destinationCard: DestinationCard[] = [];
 
-  constructor() {}
+  constructor(private travelService: TravelService) {}
 
-  viewAll(): void {
-    if (this.isViewAll) {
-      this.isViewAll = false;
-    } else {
-      this.isViewAll = true;
-    }
+  getTopDestinations(userSelections: DestinationCard): void {
+    this.travelService.sendTravelPreferences(userSelections).subscribe(
+      (response) => {
+        console.log('Received destinations:', response);
+        this.destinationCard = response as DestinationCard[];
+      },
+      (error) => {
+        console.error('Error getting destinations:', error);
+        console.log('No matching destinations:');
+      }
+    );
   }
 
-  showDestinationCard(): void {}
+  showDestinationCard(destination: DestinationCard): void {
+    console.log('Selected destination:', destination);
+  }
+
+  viewAll(): void {
+    this.isViewAll = !this.isViewAll;
+  }
 }

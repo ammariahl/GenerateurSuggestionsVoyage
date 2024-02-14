@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone, ChangeDetectorRef } from '@angular/core';
+import { TravelService } from '../TravalService/travalService';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,14 +9,14 @@ import { Router } from '@angular/router';
 })
 export class SearchDestinationComponent implements OnInit {
   // Preference selected
-  periode: string = '';
+  season: string = '';
   climat: string = '';
   budget: string = '';
   activity: string = '';
   documents: Array<string> = [''];
 
   // Preference selected  displayed on timeline
-  periodeTimeline: string = '';
+  seasonTimeline: string = '';
   climatTimeline: string = '';
   budgetTimeline: string = '';
   activityTimeline: string = '';
@@ -24,7 +25,7 @@ export class SearchDestinationComponent implements OnInit {
   questionNumber: number = 1;
 
   // Equivalence preference button and db
-  periodeArray: Array<string> = ['spring', 'summer', 'autumn', 'winter'];
+  seasonArray: Array<string> = ['spring', 'summer', 'autumn', 'winter'];
   climatArray: Array<string> = ['chaud', 'froid', 'doux', 'peu_importe'];
   budgetArray: Array<string> = [
     'little_budget',
@@ -39,12 +40,12 @@ export class SearchDestinationComponent implements OnInit {
     'family',
   ];
   documentsArray: Array<string> = [
-    'cni_ue',
-    'passport_ue',
-    'visa_ue',
-    'passport_mde',
+    'cniUe',
+    'passeportUe',
+    'visaUe',
+    'passeportMde',
   ];
-  periodeButtomName: Array<string> = ['Printemps', 'Ete', 'Automne', 'Hivers'];
+  seasonButtomName: Array<string> = ['Printemps', 'Ete', 'Automne', 'Hivers'];
   climatButtomName: Array<string> = ['Chaud', 'Froid', 'Doux', 'Peu importe'];
   budgetButtomName: Array<string> = ['500 €', '1000 €', '1500 €', 'No limit !'];
   activitiesButtomName: Array<string> = [
@@ -59,17 +60,30 @@ export class SearchDestinationComponent implements OnInit {
     'Visa UE',
     'Passeport Monde',
   ];
+  preferences: any = {
+    seasons: [],
+    budgets: [],
+    activities: [],
+    documents: [],
+  };
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private travelService: TravelService,
+    private zone: NgZone,
+    private cdr: ChangeDetectorRef
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('ngOnInit called');
+  }
 
   preferencesSelection(preference: string): void {
-    if (this.periodeArray.includes(preference)) {
+    if (this.seasonArray.includes(preference)) {
       this.questionNumber = 2;
-      this.periode = preference;
-      this.periodeTimeline =
-        this.periodeButtomName[this.periodeArray.indexOf(preference)];
+      this.season = preference;
+      this.seasonTimeline =
+        this.seasonButtomName[this.seasonArray.indexOf(preference)];
     } else if (this.climatArray.includes(preference)) {
       this.questionNumber = 3;
       this.climat = preference;
@@ -93,14 +107,15 @@ export class SearchDestinationComponent implements OnInit {
         }
       }
     }
+    this.cdr.detectChanges();
   }
 
   previous(step: number): void {
     if (step < this.questionNumber) {
       this.questionNumber = step;
       if (step < 2) {
-        this.periode = '';
-        this.periodeTimeline = '';
+        this.season = '';
+        this.seasonTimeline = '';
       }
       if (step < 3) {
         this.climat = '';
@@ -120,18 +135,35 @@ export class SearchDestinationComponent implements OnInit {
 
   sendSearchDestinationForm(): void {
     this.isSend = true;
-    // Selection submitted
-    console.log('Selection soumise avec succès : ');
-    console.log(this.isSend);
 
-    console.log(this.periode);
-    console.log(this.climat);
-    console.log(this.budget);
-    console.log(this.activity);
-    console.log(this.documents);
+    // Selection submitted
+    const preferences = {
+      seasons: [{ [this.season.toLowerCase()]: this.climat }],
+      budgets: [{ [this.budget]: true }],
+      activities: [{ [this.activity.toLowerCase()]: true }],
+      documents: this.documents.reduce((acc, doc) => {
+        if (doc.trim() !== '') {
+          acc.push({ [doc.replace(/ /g, '')]: true });
+        }
+        return acc;
+      }, [] as { [key: string]: boolean }[]),
+    };
+
+    const userPreference = JSON.stringify(preferences);
+    console.log(JSON.stringify(preferences));
+
+    this.travelService.sendTravelPreferences(userPreference).subscribe(
+      (response) => {
+        console.log('Response from backend:', response);
+      },
+      (error) => {
+        console.error('Error sending preferences:', error);
+      }
+    );
+
     this.router.navigate([
-      '/suggestion',
-      this.periode,
+      '/api/destinations/top',
+      this.season,
       this.climat,
       this.budget,
       this.activity,

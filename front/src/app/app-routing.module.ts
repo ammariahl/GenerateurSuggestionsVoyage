@@ -12,10 +12,9 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'search', component: SearchDestinationComponent },
   {
-    path: 'suggestion/:periode/:climat/:budget/:activity/:documents',
+    path: 'api/destinations/top/:periode/:climat/:budget/:activity/:documents',
     component: SuggestionComponent,
   },
-  // { path: 'contact', component: Contact
 ];
 
 @NgModule({

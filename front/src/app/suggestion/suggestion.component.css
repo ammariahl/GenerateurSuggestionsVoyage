@@ -10,7 +10,7 @@
   text-align: center;
 }
 
-.distination-card {
+.destination-card {
   display: flex;
   cursor: pointer;
   border: none;
@@ -24,7 +24,7 @@
   overflow: clip;
 }
 
-.distination-card:hover {
+.destination-card:hover {
   -moz-transform: scale(1.1);
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
