@@ -14,11 +14,12 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 @RestController
 @RequestMapping("api/destionations")
+@CrossOrigin(origins = "http://localhost:4200")
 public class DestinationController {
-
   private final DestinationService destinationService;
   private static final Logger log = LoggerFactory.getLogger(DestinationController.class);
 
