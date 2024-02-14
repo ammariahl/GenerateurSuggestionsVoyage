@@ -1,7 +1,7 @@
 <div id="divContainer">
   <span
     *ngIf="
-      !isPeriodeSend &&
+      !isSeasonSend &&
       !isClimatSend &&
       !isBudgetSend &&
       !isActivitySend &&
@@ -12,34 +12,33 @@
     <div class="preferences_options">
       <button
         class="preferences_button_1"
-        (click)="preferencesSelection('printemps')"
+        (click)="preferencesSelection('spring')"
       >
         Printemps
       </button>
       <button
         class="preferences_button_2"
-        (click)="preferencesSelection('ete')"
+        (click)="preferencesSelection('summer')"
       >
         Ete
       </button>
       <button
         class="preferences_button_3"
-        (click)="preferencesSelection('automne')"
+        (click)="preferencesSelection('autumn')"
       >
         Automne
       </button>
       <button
         class="preferences_button_4"
-        (click)="preferencesSelection('hivers')"
+        (click)="preferencesSelection('winter')"
       >
         Hivers
       </button>
     </div>
   </span>
-
   <span
     *ngIf="
-      isPeriodeSend &&
+      isSeasonSend &&
       !isClimatSend &&
       !isBudgetSend &&
       !isActivitySend &&
@@ -68,16 +67,15 @@
       </button>
       <button
         class="preferences_button_4"
-        (click)="preferencesSelection('peu importe')"
+        (click)="preferencesSelection('peuimporte')"
       >
         Peu importe
       </button>
     </div>
   </span>
-
   <span
     *ngIf="
-      !isPeriodeSend &&
+      !isSeasonSend &&
       isClimatSend &&
       !isBudgetSend &&
       !isActivitySend &&
@@ -88,25 +86,25 @@
     <div class="preferences_options">
       <button
         class="preferences_button_1"
-        (click)="preferencesSelection('500')"
+        (click)="preferencesSelection('littleBudget')"
       >
         500€
       </button>
       <button
         class="preferences_button_2"
-        (click)="preferencesSelection('1000')"
+        (click)="preferencesSelection('mediumBudget')"
       >
         1000€
       </button>
       <button
         class="preferences_button_3"
-        (click)="preferencesSelection('1500')"
+        (click)="preferencesSelection('bigBudget')"
       >
         1500
       </button>
       <button
         class="preferences_button_4"
-        (click)="preferencesSelection('no limit')"
+        (click)="preferencesSelection('unlimited')"
       >
         No limit !
       </button>
@@ -115,7 +113,7 @@
 
   <span
     *ngIf="
-      !isPeriodeSend &&
+      !isSeasonSend &&
       !isClimatSend &&
       isBudgetSend &&
       !isActivitySend &&
@@ -126,25 +124,25 @@
     <div class="preferences_options">
       <button
         class="preferences_button_1"
-        (click)="preferencesSelection('relaxer')"
+        (click)="preferencesSelection('relaxing')"
       >
         Pour me relaxer
       </button>
       <button
         class="preferences_button_2"
-        (click)="preferencesSelection('aventure')"
+        (click)="preferencesSelection('adventure')"
       >
         Pour l'aventure
       </button>
       <button
         class="preferences_button_3"
-        (click)="preferencesSelection('amis')"
+        (click)="preferencesSelection('groupactivity')"
       >
         Entre amis
       </button>
       <button
         class="preferences_button_4"
-        (click)="preferencesSelection('famille')"
+        (click)="preferencesSelection('family')"
       >
         En famille
       </button>
@@ -153,7 +151,7 @@
 
   <span
     *ngIf="
-      !isPeriodeSend &&
+      !isSeasonSend &&
       !isClimatSend &&
       !isBudgetSend &&
       isActivitySend &&
@@ -164,28 +162,28 @@
     <div class="preferences_options">
       <button
         class="preferences_button_1"
-        (click)="preferencesSelection('cni ue')"
+        (click)="preferencesSelection('cniUe')"
         onclick="this.style.border = '2px solid gray'"
       >
         Carte d'identité UE
       </button>
       <button
         class="preferences_button_2"
-        (click)="preferencesSelection('passeport ue')"
+        (click)="preferencesSelection('passeportUe')"
         onclick="this.style.border = '2px solid gray'"
       >
         Passeport UE
       </button>
       <button
         class="preferences_button_3"
-        (click)="preferencesSelection('visa ue')"
+        (click)="preferencesSelection('visaUe')"
         onclick="this.style.border = '2px solid gray'"
       >
         Visa UE
       </button>
       <button
         class="preferences_button_4"
-        (click)="preferencesSelection('passeport mde')"
+        (click)="preferencesSelection('passeportMde')"
         onclick="this.style.border = '2px solid gray'"
       >
         Passeport MDE

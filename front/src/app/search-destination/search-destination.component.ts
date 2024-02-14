@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone, ChangeDetectorRef } from '@angular/core';
+import { TravelService } from '../TravalService/travalService';
+import { DestinationCard } from '../models/destination-card.model';
 
 @Component({
   selector: 'app-search-destination',
@@ -6,48 +8,69 @@ import { Component, OnInit } from '@angular/core';
   styleUrl: './search-destination.component.css',
 })
 export class SearchDestinationComponent implements OnInit {
-  periode: string = '';
+  season: string = '';
   climat: string = '';
   budget: string = '';
   activity: string = '';
   documents: Array<string> = [''];
   isSend: boolean = false;
-  isPeriodeSend: boolean = false;
   isClimatSend: boolean = false;
+  isSeasonSend: boolean = false;
   isBudgetSend: boolean = false;
   isActivitySend: boolean = false;
   isDocumentSend: boolean = false;
-  periodeArray: Array<string> = ['hivers', 'printemps', 'ete', 'automne'];
-  climatArray: Array<string> = ['chaud', 'froid', 'doux', 'peu importe'];
-  budgetArray: Array<string> = ['500', '1000', '1500', 'no limit'];
-  activitiesArray: Array<string> = ['relaxer', 'aventure', 'amis', 'famille'];
-  documentsArray: Array<string> = [
-    'cni ue',
-    'passeport ue',
-    'visa ue',
-    'passeport mde',
+  climatArray: Array<string> = ['chaud', 'froid', 'doux', 'peuimporte'];
+  seasonArray: Array<string> = ['spring', 'autumn', 'summer', 'winter'];
+  budgetArray: Array<string> = [
+    'littleBbudget',
+    'mediumBudget',
+    'bigBudget',
+    'unlimited',
   ];
+  activitiesArray: Array<string> = [
+    'relaxing',
+    'adventure',
+    'groupactivity',
+    'family',
+  ];
+  documentsArray: Array<string> = [
+    'cniUe',
+    'passeportUe',
+    'visaUe',
+    'passeportMde',
+  ];
+  preferences: any = {
+    seasons: [],
+    budgets: [],
+    activities: [],
+    documents: [],
+  };
+  constructor(
+    private travelService: TravelService,
+    private zone: NgZone,
+    private cdr: ChangeDetectorRef
+  ) {}
 
-  constructor() {}
-
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('ngOnInit called');
+  }
 
   preferencesSelection(preference: string): void {
-    if (this.periodeArray.includes(preference)) {
-      this.isPeriodeSend = true;
-      this.periode = preference;
+    if (this.seasonArray.includes(preference)) {
+      this.isSeasonSend = true;
+      this.season = preference;
     } else if (this.climatArray.includes(preference)) {
-      this.isPeriodeSend = false;
+      this.isSeasonSend = false;
       this.isClimatSend = true;
       this.climat = preference;
     } else if (this.budgetArray.includes(preference)) {
-      this.isPeriodeSend = false;
       this.isClimatSend = false;
+      this.isSeasonSend = false;
       this.isBudgetSend = true;
       this.budget = preference;
     } else if (this.activitiesArray.includes(preference)) {
-      this.isPeriodeSend = false;
       this.isClimatSend = false;
+      this.isSeasonSend = false;
       this.isBudgetSend = false;
       this.isActivitySend = true;
       this.activity = preference;
@@ -59,18 +82,31 @@ export class SearchDestinationComponent implements OnInit {
         }
       }
     }
+    this.cdr.detectChanges();
   }
 
   sendSearchDestinationForm(): void {
-    this.isSend = true;
-    // Selection submitted
-    console.log('Selection soumise avec succès : ');
-    console.log(this.isSend);
+    const preferences = {
+      seasons: [{ [this.season.toLowerCase()]: this.climat }],
+      budgets: [{ [this.budget]: true }],
+      activities: [{ [this.activity.toLowerCase()]: true }],
+      documents: this.documents.reduce((acc, doc) => {
+        if (doc.trim() !== '') {
+          acc.push({ [doc.replace(/ /g, '')]: true });
+        }
+        return acc;
+      }, [] as { [key: string]: boolean }[]),
+    };
 
-    console.log(this.periode);
-    console.log(this.climat);
-    console.log(this.budget);
-    console.log(this.activity);
-    console.log(this.documents);
+    console.log(JSON.stringify(preferences, null, 2));
+
+    this.travelService.sendTravelPreferences(preferences).subscribe(
+      (response) => {
+        console.log('Response from backend:', response);
+      },
+      (error) => {
+        console.error('Error sending preferences:', error);
+      }
+    );
   }
 }

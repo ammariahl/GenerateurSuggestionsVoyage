@@ -7,7 +7,6 @@
 
   margin-top: 10%;
   align-items: center;
-
 }
 
 .suggestion-title {
@@ -57,11 +56,7 @@ img {
 }
 
 .destination-name {
-
-
-
   color: var(--black);
-
 }
 
 .destination-criteria {
@@ -71,7 +66,6 @@ img {
 .destination-brief-description {
   color: var(--black);
 }
-
 
 .view-all-button {
   background-color: #68c8be;
@@ -88,8 +82,7 @@ img {
   -moz-transform: scale(1.1);
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
-=======
+}
 .view-all {
   justify-content: flex-end;
-
 }

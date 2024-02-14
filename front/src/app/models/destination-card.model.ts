@@ -1,9 +1,9 @@
 export interface DestinationCard {
   image: string;
   name: string;
-  periode: string;
+  season: string;
   budget: string;
-  climat: string;
+  // climat: string;
   activity: string;
   documents: string[];
   briefDescription: string;
