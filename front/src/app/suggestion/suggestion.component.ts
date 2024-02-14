@@ -13,8 +13,8 @@ export class SuggestionComponent {
 
   constructor(private travelService: TravelService) {}
 
-  getTopDestinations(userSelections: DestinationCard): void {
-    this.travelService.sendTravelPreferences(userSelections).subscribe(
+  getTopDestinations(userPreference: any): void {
+    this.travelService.sendTravelPreferences(userPreference).subscribe(
       (response) => {
         console.log('Received destinations:', response);
         this.destinationCard = response as DestinationCard[];
