@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search-destination',
@@ -6,57 +7,113 @@ import { Component, OnInit } from '@angular/core';
   styleUrl: './search-destination.component.css',
 })
 export class SearchDestinationComponent implements OnInit {
+  // Preference selected
   periode: string = '';
   climat: string = '';
   budget: string = '';
   activity: string = '';
   documents: Array<string> = [''];
+
+  // Preference selected  displayed on timeline
+  periodeTimeline: string = '';
+  climatTimeline: string = '';
+  budgetTimeline: string = '';
+  activityTimeline: string = '';
+
   isSend: boolean = false;
-  isPeriodeSend: boolean = false;
-  isClimatSend: boolean = false;
-  isBudgetSend: boolean = false;
-  isActivitySend: boolean = false;
-  isDocumentSend: boolean = false;
-  periodeArray: Array<string> = ['hivers', 'printemps', 'ete', 'automne'];
-  climatArray: Array<string> = ['chaud', 'froid', 'doux', 'peu importe'];
-  budgetArray: Array<string> = ['500', '1000', '1500', 'no limit'];
-  activitiesArray: Array<string> = ['relaxer', 'aventure', 'amis', 'famille'];
+  questionNumber: number = 1;
+
+  // Equivalence preference button and db
+  periodeArray: Array<string> = ['spring', 'summer', 'autumn', 'winter'];
+  climatArray: Array<string> = ['chaud', 'froid', 'doux', 'peu_importe'];
+  budgetArray: Array<string> = [
+    'little_budget',
+    'medium_budget',
+    'big_budget',
+    'unlimited',
+  ];
+  activitiesArray: Array<string> = [
+    'relaxing',
+    'adventure',
+    'groupactivity',
+    'family',
+  ];
   documentsArray: Array<string> = [
-    'cni ue',
-    'passeport ue',
-    'visa ue',
-    'passeport mde',
+    'cni_ue',
+    'passport_ue',
+    'visa_ue',
+    'passport_mde',
+  ];
+  periodeButtomName: Array<string> = ['Printemps', 'Ete', 'Automne', 'Hivers'];
+  climatButtomName: Array<string> = ['Chaud', 'Froid', 'Doux', 'Peu importe'];
+  budgetButtomName: Array<string> = ['500 €', '1000 €', '1500 €', 'No limit !'];
+  activitiesButtomName: Array<string> = [
+    'Pour me relaxer',
+    "Pour l'aventure",
+    'Entre amis',
+    'En famille',
+  ];
+  documentsButtomName: Array<string> = [
+    "Carte d'identité UE",
+    'Passeport UE',
+    'Visa UE',
+    'Passeport Monde',
   ];
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {}
 
   preferencesSelection(preference: string): void {
     if (this.periodeArray.includes(preference)) {
-      this.isPeriodeSend = true;
+      this.questionNumber = 2;
       this.periode = preference;
+      this.periodeTimeline =
+        this.periodeButtomName[this.periodeArray.indexOf(preference)];
     } else if (this.climatArray.includes(preference)) {
-      this.isPeriodeSend = false;
-      this.isClimatSend = true;
+      this.questionNumber = 3;
       this.climat = preference;
+      this.climatTimeline =
+        this.climatButtomName[this.climatArray.indexOf(preference)];
     } else if (this.budgetArray.includes(preference)) {
-      this.isPeriodeSend = false;
-      this.isClimatSend = false;
-      this.isBudgetSend = true;
+      this.questionNumber = 4;
       this.budget = preference;
+      this.budgetTimeline =
+        this.budgetButtomName[this.budgetArray.indexOf(preference)];
     } else if (this.activitiesArray.includes(preference)) {
-      this.isPeriodeSend = false;
-      this.isClimatSend = false;
-      this.isBudgetSend = false;
-      this.isActivitySend = true;
+      this.questionNumber = 5;
       this.activity = preference;
+      this.activityTimeline =
+        this.activitiesButtomName[this.activitiesArray.indexOf(preference)];
     } else if (this.documentsArray.includes(preference)) {
       if (!this.documents.includes(preference)) {
         this.documents.push(preference);
         if (this.documents[0] == '') {
           this.documents.shift();
         }
+      }
+    }
+  }
+
+  previous(step: number): void {
+    if (step < this.questionNumber) {
+      this.questionNumber = step;
+      if (step < 2) {
+        this.periode = '';
+        this.periodeTimeline = '';
+      }
+      if (step < 3) {
+        this.climat = '';
+        this.climatTimeline = '';
+      }
+      if (step < 4) {
+        this.budget = '';
+        this.budgetTimeline = '';
+      }
+      if (step < 5) {
+        this.activity = '';
+        this.activityTimeline = '';
+        this.documents = [''];
       }
     }
   }
@@ -72,5 +129,13 @@ export class SearchDestinationComponent implements OnInit {
     console.log(this.budget);
     console.log(this.activity);
     console.log(this.documents);
+    this.router.navigate([
+      '/suggestion',
+      this.periode,
+      this.climat,
+      this.budget,
+      this.activity,
+      this.documents.join('**'),
+    ]);
   }
 }
