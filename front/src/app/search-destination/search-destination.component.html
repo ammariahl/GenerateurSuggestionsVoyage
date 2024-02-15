@@ -180,28 +180,28 @@
       <button
         class="preferences_button_1"
         (click)="preferencesSelection('cniUe')"
-        onclick="this.style.border = '2px solid gray'"
+        [ngClass]="{ border: cniUeSelected }"
       >
         {{ documentsButtomName[0] }}
       </button>
       <button
         class="preferences_button_2"
         (click)="preferencesSelection('passeportUe')"
-        onclick="this.style.border = '2px solid gray'"
+        [ngClass]="{ border: passeportUeSelected }"
       >
         {{ documentsButtomName[1] }}
       </button>
       <button
         class="preferences_button_3"
         (click)="preferencesSelection('visaUe')"
-        onclick="this.style.border = '2px solid gray'"
+        [ngClass]="{ border: visaUeSelected }"
       >
         {{ documentsButtomName[2] }}
       </button>
       <button
         class="preferences_button_4"
         (click)="preferencesSelection('passeportMde')"
-        onclick="this.style.border = '2px solid gray'"
+        [ngClass]="{ border: passeportMdeSelected }"
       >
         {{ documentsButtomName[3] }}
       </button>

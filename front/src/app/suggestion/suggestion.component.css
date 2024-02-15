@@ -52,7 +52,7 @@ img {
   height: 100%;
 }
 
-<<<<<<< HEAD .destination-name {
+.destination-name {
   color: var(--black);
 }
 
@@ -60,9 +60,9 @@ img {
   color: var(--black);
 }
 
-======= .destination-name,
+.destination-name,
 .destination-criteria,
->>>>>>>4fa03152685af5cae2182f4518ace846b5019818 .destination-brief-description {
+.destination-brief-description {
   color: gray;
 }
 
