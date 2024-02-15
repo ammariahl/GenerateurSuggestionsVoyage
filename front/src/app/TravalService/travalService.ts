@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { HttpErrorResponse } from '@angular/common/http';
+import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -22,9 +24,9 @@ export class TravelService {
         withCredentials: true,
       })
       .pipe(
-        catchError((error: any) => {
+        catchError((error: HttpErrorResponse) => {
           console.error('Error sending travel preferences:', error);
-          throw error;
+          return throwError('Something went wrong with the request.');
         })
       );
   }

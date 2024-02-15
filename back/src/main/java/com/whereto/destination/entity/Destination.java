@@ -16,6 +16,11 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.FetchType;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import javax.persistence.CascadeType;
+
 
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
@@ -28,19 +33,19 @@ public class Destination {
     private String descriptionShort;
     private String descriptionLong;
 
-  
-    @ManyToMany(mappedBy = "destinations" , fetch = FetchType.LAZY)
+    
+    @ManyToMany(mappedBy = "destinations" ,cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Season> seasons = new ArrayList<>();
 
     
-    @ManyToMany(mappedBy = "destinations", fetch = FetchType.LAZY )
+    @ManyToMany(mappedBy = "destinations",cascade = CascadeType.ALL, fetch = FetchType.LAZY )
     private List<Budget> budgets = new ArrayList<>();
 
-  
-    @ManyToMany(mappedBy = "destinations", fetch = FetchType.LAZY )
+   
+    @ManyToMany(mappedBy = "destinations",cascade = CascadeType.ALL, fetch = FetchType.LAZY )
     private List<Activity> activities = new ArrayList<>();
 
-   
+    
     @ManyToMany(mappedBy = "destinations", fetch = FetchType.LAZY  )
     private List<Document> documents = new ArrayList<>();
 
