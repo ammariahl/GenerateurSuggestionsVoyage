@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone, ChangeDetectorRef } from '@angular/core';
+import { TravelService } from '../TravalService/travalService';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search-destination',
@@ -6,51 +8,97 @@ import { Component, OnInit } from '@angular/core';
   styleUrl: './search-destination.component.css',
 })
 export class SearchDestinationComponent implements OnInit {
-  periode: string = '';
+  // Preference selected
+  season: string = '';
   climat: string = '';
   budget: string = '';
   activity: string = '';
   documents: Array<string> = [''];
+
+  // Preference selected  displayed on timeline
+  seasonTimeline: string = '';
+  climatTimeline: string = '';
+  budgetTimeline: string = '';
+  activityTimeline: string = '';
+
   isSend: boolean = false;
-  isPeriodeSend: boolean = false;
-  isClimatSend: boolean = false;
-  isBudgetSend: boolean = false;
-  isActivitySend: boolean = false;
-  isDocumentSend: boolean = false;
-  periodeArray: Array<string> = ['hivers', 'printemps', 'ete', 'automne'];
-  climatArray: Array<string> = ['chaud', 'froid', 'doux', 'peu importe'];
-  budgetArray: Array<string> = ['500', '1000', '1500', 'no limit'];
-  activitiesArray: Array<string> = ['relaxer', 'aventure', 'amis', 'famille'];
-  documentsArray: Array<string> = [
-    'cni ue',
-    'passeport ue',
-    'visa ue',
-    'passeport mde',
+  questionNumber: number = 1;
+
+  // Equivalence preference button and db
+  seasonArray: Array<string> = ['spring', 'summer', 'autumn', 'winter'];
+  climatArray: Array<string> = ['chaud', 'froid', 'doux', 'peu_importe'];
+  budgetArray: Array<string> = [
+    'little_budget',
+    'medium_budget',
+    'big_budget',
+    'unlimited',
   ];
+  activitiesArray: Array<string> = [
+    'relaxing',
+    'adventure',
+    'groupactivity',
+    'family',
+  ];
+  documentsArray: Array<string> = [
+    'cniUe',
+    'passeportUe',
+    'visaUe',
+    'passeportMde',
+  ];
+  seasonButtomName: Array<string> = ['Printemps', 'Ete', 'Automne', 'Hivers'];
+  climatButtomName: Array<string> = ['Chaud', 'Froid', 'Doux', 'Peu importe'];
+  budgetButtomName: Array<string> = ['500 €', '1000 €', '1500 €', 'No limit !'];
+  activitiesButtomName: Array<string> = [
+    'Pour me relaxer',
+    "Pour l'aventure",
+    'Entre amis',
+    'En famille',
+  ];
+  documentsButtomName: Array<string> = [
+    "Carte d'identité UE",
+    'Passeport UE',
+    'Visa UE',
+    'Passeport Monde',
+  ];
+  preferences: any = {
+    seasons: [],
+    budgets: [],
+    activities: [],
+    documents: [],
+  };
 
-  constructor() {}
+  constructor(
+    private router: Router,
+    private travelService: TravelService,
+    private zone: NgZone,
+    private cdr: ChangeDetectorRef
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('ngOnInit called');
+  }
 
   preferencesSelection(preference: string): void {
-    if (this.periodeArray.includes(preference)) {
-      this.isPeriodeSend = true;
-      this.periode = preference;
+    if (this.seasonArray.includes(preference)) {
+      this.questionNumber = 2;
+      this.season = preference;
+      this.seasonTimeline =
+        this.seasonButtomName[this.seasonArray.indexOf(preference)];
     } else if (this.climatArray.includes(preference)) {
-      this.isPeriodeSend = false;
-      this.isClimatSend = true;
+      this.questionNumber = 3;
       this.climat = preference;
+      this.climatTimeline =
+        this.climatButtomName[this.climatArray.indexOf(preference)];
     } else if (this.budgetArray.includes(preference)) {
-      this.isPeriodeSend = false;
-      this.isClimatSend = false;
-      this.isBudgetSend = true;
+      this.questionNumber = 4;
       this.budget = preference;
+      this.budgetTimeline =
+        this.budgetButtomName[this.budgetArray.indexOf(preference)];
     } else if (this.activitiesArray.includes(preference)) {
-      this.isPeriodeSend = false;
-      this.isClimatSend = false;
-      this.isBudgetSend = false;
-      this.isActivitySend = true;
+      this.questionNumber = 5;
       this.activity = preference;
+      this.activityTimeline =
+        this.activitiesButtomName[this.activitiesArray.indexOf(preference)];
     } else if (this.documentsArray.includes(preference)) {
       if (!this.documents.includes(preference)) {
         this.documents.push(preference);
@@ -59,18 +107,67 @@ export class SearchDestinationComponent implements OnInit {
         }
       }
     }
+    this.cdr.detectChanges();
+  }
+
+  previous(step: number): void {
+    if (step < this.questionNumber) {
+      this.questionNumber = step;
+      if (step < 2) {
+        this.season = '';
+        this.seasonTimeline = '';
+      }
+      if (step < 3) {
+        this.climat = '';
+        this.climatTimeline = '';
+      }
+      if (step < 4) {
+        this.budget = '';
+        this.budgetTimeline = '';
+      }
+      if (step < 5) {
+        this.activity = '';
+        this.activityTimeline = '';
+        this.documents = [''];
+      }
+    }
   }
 
   sendSearchDestinationForm(): void {
     this.isSend = true;
-    // Selection submitted
-    console.log('Selection soumise avec succès : ');
-    console.log(this.isSend);
 
-    console.log(this.periode);
-    console.log(this.climat);
-    console.log(this.budget);
-    console.log(this.activity);
-    console.log(this.documents);
+    // Selection submitted
+    const preferences = {
+      seasons: [{ [this.season.toLowerCase()]: this.climat }],
+      budgets: [{ [this.budget]: true }],
+      activities: [{ [this.activity.toLowerCase()]: true }],
+      documents: this.documents.reduce((acc, doc) => {
+        if (doc.trim() !== '') {
+          acc.push({ [doc.replace(/ /g, '')]: true });
+        }
+        return acc;
+      }, [] as { [key: string]: boolean }[]),
+    };
+
+    const userPreference = JSON.stringify(preferences);
+    console.log(JSON.stringify(preferences));
+
+    this.travelService.sendTravelPreferences(userPreference).subscribe(
+      (response) => {
+        console.log('Response from backend:', response);
+      },
+      (error) => {
+        console.error('Error sending preferences:', error);
+      }
+    );
+
+    this.router.navigate([
+      '/api/destinations/top',
+      this.season,
+      this.climat,
+      this.budget,
+      this.activity,
+      this.documents.join('**'),
+    ]);
   }
 }

@@ -1,201 +1,223 @@
+<div class="timeline-steps">
+  <div class="timeline-step">
+    <div class="timeline-content">
+      <div class="inner-circle" (click)="previous(1)"></div>
+      <p class="timelinePreferenceInitialization" *ngIf="questionNumber == 1">
+        Periode
+      </p>
+      <p class="timelinePreferenceSelected">
+        {{ seasonTimeline }}
+      </p>
+    </div>
+  </div>
+  <div class="timeline-step">
+    <div class="timeline-content">
+      <div class="inner-circle" (click)="previous(2)"></div>
+      <p class="timelinePreferenceInitialization" *ngIf="questionNumber < 3">
+        Climat
+      </p>
+      <p class="timelinePreferenceSelected">
+        {{ climatTimeline }}
+      </p>
+    </div>
+  </div>
+  <div class="timeline-step">
+    <div class="timeline-content">
+      <div class="inner-circle" (click)="previous(3)"></div>
+      <p class="timelinePreferenceInitialization" *ngIf="questionNumber < 4">
+        Budget
+      </p>
+      <p class="timelinePreferenceSelected">
+        {{ budgetTimeline }}
+      </p>
+    </div>
+  </div>
+  <div class="timeline-step">
+    <div class="timeline-content">
+      <div class="inner-circle" (click)="previous(4)"></div>
+      <p class="timelinePreferenceInitialization" *ngIf="questionNumber < 5">
+        Activité
+      </p>
+      <p class="timelinePreferenceSelected">
+        {{ activityTimeline }}
+      </p>
+    </div>
+  </div>
+  <div class="timeline-step">
+    <div class="timeline-content">
+      <div class="inner-circle"></div>
+      <p class="timelinePreferenceInitialization" *ngIf="questionNumber < 6">
+        Documents
+      </p>
+    </div>
+  </div>
+</div>
+
 <div id="divContainer">
-  <span
-    *ngIf="
-      !isPeriodeSend &&
-      !isClimatSend &&
-      !isBudgetSend &&
-      !isActivitySend &&
-      !isDocumentSend
-    "
-  >
+  <span *ngIf="questionNumber == 1">
     <h2 class="suggestion-title">Je souhaite voyager en ...</h2>
     <div class="preferences_options">
       <button
         class="preferences_button_1"
-        (click)="preferencesSelection('printemps')"
+        (click)="preferencesSelection('spring')"
       >
-        Printemps
+        {{ seasonButtomName[0] }}
       </button>
       <button
         class="preferences_button_2"
-        (click)="preferencesSelection('ete')"
+        (click)="preferencesSelection('summer')"
       >
-        Ete
+        {{ seasonButtomName[1] }}
       </button>
       <button
         class="preferences_button_3"
-        (click)="preferencesSelection('automne')"
+        (click)="preferencesSelection('autumn')"
       >
-        Automne
+        {{ seasonButtomName[2] }}
       </button>
       <button
         class="preferences_button_4"
-        (click)="preferencesSelection('hivers')"
+        (click)="preferencesSelection('winter')"
       >
-        Hivers
+        {{ seasonButtomName[3] }}
       </button>
     </div>
   </span>
 
-  <span
-    *ngIf="
-      isPeriodeSend &&
-      !isClimatSend &&
-      !isBudgetSend &&
-      !isActivitySend &&
-      !isDocumentSend
-    "
-  >
+  <span *ngIf="questionNumber == 2">
     <h2 class="suggestion-title">Plutôt ...</h2>
     <div class="preferences_options">
       <button
         class="preferences_button_1"
         (click)="preferencesSelection('chaud')"
       >
-        Chaud
+        {{ climatButtomName[0] }}
       </button>
       <button
         class="preferences_button_2"
         (click)="preferencesSelection('froid')"
       >
-        Froid
+        {{ climatButtomName[1] }}
       </button>
       <button
         class="preferences_button_3"
         (click)="preferencesSelection('doux')"
       >
-        Doux
+        {{ climatButtomName[2] }}
       </button>
       <button
         class="preferences_button_4"
-        (click)="preferencesSelection('peu importe')"
+        (click)="preferencesSelection('peu_importe')"
       >
-        Peu importe
+        {{ climatButtomName[3] }}
       </button>
     </div>
   </span>
 
-  <span
-    *ngIf="
-      !isPeriodeSend &&
-      isClimatSend &&
-      !isBudgetSend &&
-      !isActivitySend &&
-      !isDocumentSend
-    "
-  >
+  <span *ngIf="questionNumber == 3">
     <h2 class="suggestion-title">Mon budget ...</h2>
     <div class="preferences_options">
       <button
         class="preferences_button_1"
-        (click)="preferencesSelection('500')"
+        (click)="preferencesSelection('little_budget')"
       >
-        500€
+        {{ budgetButtomName[0] }}
       </button>
       <button
         class="preferences_button_2"
-        (click)="preferencesSelection('1000')"
+        (click)="preferencesSelection('medium_budget')"
       >
-        1000€
+        {{ budgetButtomName[1] }}
       </button>
       <button
         class="preferences_button_3"
-        (click)="preferencesSelection('1500')"
+        (click)="preferencesSelection('big_budget')"
       >
-        1500
+        {{ budgetButtomName[2] }}
       </button>
       <button
         class="preferences_button_4"
-        (click)="preferencesSelection('no limit')"
+        (click)="preferencesSelection('unlimited')"
       >
-        No limit !
+        {{ budgetButtomName[3] }}
       </button>
     </div>
   </span>
 
-  <span
-    *ngIf="
-      !isPeriodeSend &&
-      !isClimatSend &&
-      isBudgetSend &&
-      !isActivitySend &&
-      !isDocumentSend
-    "
-  >
+  <span *ngIf="questionNumber == 4">
     <h2 class="suggestion-title">Je voyage ...</h2>
     <div class="preferences_options">
       <button
         class="preferences_button_1"
-        (click)="preferencesSelection('relaxer')"
+        (click)="preferencesSelection('relaxing')"
       >
-        Pour me relaxer
+        {{ activitiesButtomName[0] }}
       </button>
       <button
         class="preferences_button_2"
-        (click)="preferencesSelection('aventure')"
+        (click)="preferencesSelection('adventure')"
       >
-        Pour l'aventure
+        {{ activitiesButtomName[1] }}
       </button>
       <button
         class="preferences_button_3"
-        (click)="preferencesSelection('amis')"
+        (click)="preferencesSelection('groupactivity')"
       >
-        Entre amis
+        {{ activitiesButtomName[2] }}
       </button>
       <button
         class="preferences_button_4"
-        (click)="preferencesSelection('famille')"
+        (click)="preferencesSelection('family')"
       >
-        En famille
+        {{ activitiesButtomName[3] }}
       </button>
     </div>
   </span>
 
-  <span
-    *ngIf="
-      !isPeriodeSend &&
-      !isClimatSend &&
-      !isBudgetSend &&
-      isActivitySend &&
-      !isDocumentSend
-    "
-  >
+  <span *ngIf="questionNumber == 5">
     <h2 class="suggestion-title">Je possède ...</h2>
     <div class="preferences_options">
       <button
         class="preferences_button_1"
-        (click)="preferencesSelection('cni ue')"
+        (click)="preferencesSelection('cniUe')"
         onclick="this.style.border = '2px solid gray'"
       >
-        Carte d'identité UE
+        {{ documentsButtomName[0] }}
       </button>
       <button
         class="preferences_button_2"
-        (click)="preferencesSelection('passeport ue')"
+        (click)="preferencesSelection('passeportUe')"
         onclick="this.style.border = '2px solid gray'"
       >
-        Passeport UE
+        {{ documentsButtomName[1] }}
       </button>
       <button
         class="preferences_button_3"
-        (click)="preferencesSelection('visa ue')"
+        (click)="preferencesSelection('visaUe')"
         onclick="this.style.border = '2px solid gray'"
       >
-        Visa UE
+        {{ documentsButtomName[2] }}
       </button>
       <button
         class="preferences_button_4"
-        (click)="preferencesSelection('passeport mde')"
+        (click)="preferencesSelection('passeportMde')"
         onclick="this.style.border = '2px solid gray'"
       >
-        Passeport MDE
+        {{ documentsButtomName[3] }}
       </button>
     </div>
     <div class="send" [style.visibility]="!isSend ? 'visible' : 'hidden'">
       <button
         class="send-button"
         (click)="sendSearchDestinationForm()"
-        [routerLink]="['/suggestion']"
+        [routerLink]="[
+          '/api/destinations/top',
+          season,
+          climat,
+          budget,
+          activity,
+          documents
+        ]"
       >
         Valider
       </button>
