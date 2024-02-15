@@ -7,11 +7,11 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class FilterConfig {
 
-    @Bean
-    public FilterRegistrationBean<CorsFilter> corsFilter() {
-        FilterRegistrationBean<CorsFilter> registrationBean = new FilterRegistrationBean<>();
-        registrationBean.setFilter(new CorsFilter());
-        registrationBean.addUrlPatterns("/api/*"); 
-        return registrationBean;
-    }
+    // @Bean
+    // public FilterRegistrationBean<CorsFilter> corsFilter() {
+    //     FilterRegistrationBean<CorsFilter> registrationBean = new FilterRegistrationBean<>();
+    //     registrationBean.setFilter(new CorsFilter());
+    //     registrationBean.addUrlPatterns("/api/*"); 
+    //     return registrationBean;
+    // }
 }
