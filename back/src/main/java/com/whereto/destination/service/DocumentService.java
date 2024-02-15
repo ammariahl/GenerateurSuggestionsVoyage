@@ -18,6 +18,10 @@ public class DocumentService {
         this.documentRepository = documentRepository;
     }
 
+     public List<Document> getAllDocumentsWithDestinations() {
+        return documentRepository.findAllWithDestinations();
+    }
+
     public List<Document> getManagedDocuments(List<Document> documents) {
           List<Document> managedDocuments = new ArrayList<>();
           for (Document document : documents) {

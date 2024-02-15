@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import java.util.ArrayList;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import javax.persistence.FetchType;
 
 @Entity
 public class Document {
@@ -22,7 +23,7 @@ public class Document {
     private boolean visaUe;
     private boolean passportMde;
 
-   
+    
     @ManyToMany
     @JoinTable(
         name = "document_destination",

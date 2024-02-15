@@ -14,11 +14,12 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 @RestController
 @RequestMapping("api/destionations")
+@CrossOrigin(origins = "http://localhost:4200")
 public class DestinationController {
-
   private final DestinationService destinationService;
   private static final Logger log = LoggerFactory.getLogger(DestinationController.class);
 
@@ -26,13 +27,6 @@ public class DestinationController {
     public DestinationController(DestinationService destinationService) {
         this.destinationService = destinationService;
     }
-
-//    @PostMapping(value = "/top", produces = "application/json", consumes = "application/json")
-//     public ResponseEntity<List<Destination>> getTopDestinations(@RequestParam int limit, @RequestBody UserSelections userSelections) {
-//         List<Destination> topDestinations = destinationService.getTopDestinations(userSelections, limit);
-//         log.debug("Received request. Limit: {}, UserSelections: {}", limit, userSelections);
-//         return new ResponseEntity<>(topDestinations, HttpStatus.OK);
-//     }
         @PostMapping(value = "/top",consumes = "application/json")
         public ResponseEntity<List<Destination>> getTopDestinations(@RequestBody UserSelections userSelections) {
             List<Destination> topDestinations = destinationService.getTopDestinations(userSelections);
@@ -46,5 +40,6 @@ public class DestinationController {
             return new ResponseEntity<>(allDestinations, HttpStatus.OK);
         }
 
+   
     
 }

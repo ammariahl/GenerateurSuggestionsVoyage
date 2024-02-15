@@ -18,6 +18,10 @@ public class BudgetService {
         this.budgetRepository = budgetRepository;
     }
 
+     public List<Budget> getAllBudgetsWithDestinations() {
+        return budgetRepository.findAllWithDestinations();
+    
+     }
     public List<Budget> getManagedBudgets(List<Budget> budgets) {
           List<Budget> managedBudgets = new ArrayList<>();
           for (Budget budget : budgets) {

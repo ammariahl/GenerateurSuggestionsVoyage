@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Id;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import javax.persistence.FetchType;
 
 @Entity
 public class Activity {
