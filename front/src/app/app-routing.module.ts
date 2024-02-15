@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { SuggestionComponent } from './suggestion/suggestion.component';
 import { AboutComponent } from './about/about.component';
-
 import { SearchDestinationComponent } from './search-destination/search-destination.component';
 
 const routes: Routes = [
@@ -11,11 +10,11 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'random', component: SuggestionComponent },
   { path: 'about', component: AboutComponent },
-
   { path: 'search', component: SearchDestinationComponent },
-  { path: 'suggestion', component: SuggestionComponent },
-
-  // { path: 'contact', component: Contact
+  {
+    path: 'api/destinations/top/:periode/:climat/:budget/:activity/:documents',
+    component: SuggestionComponent,
+  },
 ];
 
 @NgModule({

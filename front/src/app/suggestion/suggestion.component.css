@@ -1,10 +1,6 @@
-.container {
-  height: 100%;
-}
-
 .destination-cards {
+  display: flex;
   flex-direction: column;
-
   margin-top: 10%;
   align-items: center;
 }
@@ -14,7 +10,8 @@
   text-align: center;
 }
 
-.distination-card {
+.destination-card {
+  display: flex;
   cursor: pointer;
   border: none;
   border-radius: 15px;
@@ -27,7 +24,7 @@
   overflow: clip;
 }
 
-.distination-card:hover {
+.destination-card:hover {
   -moz-transform: scale(1.1);
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
@@ -55,7 +52,7 @@ img {
   height: 100%;
 }
 
-.destination-name {
+<<<<<<< HEAD .destination-name {
   color: var(--black);
 }
 
@@ -63,8 +60,10 @@ img {
   color: var(--black);
 }
 
-.destination-brief-description {
-  color: var(--black);
+======= .destination-name,
+.destination-criteria,
+>>>>>>>4fa03152685af5cae2182f4518ace846b5019818 .destination-brief-description {
+  color: gray;
 }
 
 .view-all-button {
