@@ -94,6 +94,12 @@ export class SuggestionComponent implements AfterViewInit {
 
     if (seasons && seasons.length > 0) {
       const firstSeason: any = seasons[0];
+      const seasonMap: { [key: string]: string } = {
+        winter: 'Hivers',
+        spring: 'Printemps',
+        summer: 'Eté',
+        autumn: 'Automne',
+      };
 
       for (const key in firstSeason) {
         if (
@@ -101,7 +107,8 @@ export class SuggestionComponent implements AfterViewInit {
           key !== 'id' &&
           firstSeason[key] !== '0'
         ) {
-          return `${key}: ${firstSeason[key]}`;
+          const frenchSeason = seasonMap[key] || key;
+          return `${frenchSeason} -  ${firstSeason[key]}`;
         }
       }
     }
@@ -125,18 +132,32 @@ export class SuggestionComponent implements AfterViewInit {
     }
 
     return 'No budget selected';
-    // getSelectedBudget(destination: DestinationCard): string {
-    //   // Implement the logic to display the selected budget based on user's choice
-    //   return destination.budgets?.[0]?.bigBudget ? 'Big Budget' : 'Other';
-    // }
+  }
 
-    // getSelectedActivity(destination: DestinationCard): string {
-    //   // Implement the logic to display the selected activity based on user's choice
-    //   return destination.activities?.[0]?.family ? 'En famille' : 'Autre';
-    // }
+  getSelectedDocument(destination: DestinationCard): string {
+    const documents = destination.documents;
 
-    // getDocumentsString(documents: string[]): string {
-    //   return documents.join(', ');
-    // }
+    if (documents && documents.length > 0) {
+      const firstDocument: any = documents[0];
+      const documentMap: { [key: string]: string } = {
+        cniUe: "Carte d'identité",
+        passportUe: 'Passeport (UE)',
+        visaUe: 'Visa (UE)',
+        passportMde: 'Passeport (Monde)',
+      };
+
+      for (const key in firstDocument) {
+        if (
+          Object.prototype.hasOwnProperty.call(firstDocument, key) &&
+          key !== 'id' &&
+          firstDocument[key]
+        ) {
+          const frenchDocument = documentMap[key] || key;
+          return `${frenchDocument}`;
+        }
+      }
+    }
+
+    return 'No document selected';
   }
 }
