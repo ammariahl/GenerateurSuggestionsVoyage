@@ -32,9 +32,9 @@ export class SearchDestinationComponent implements OnInit {
   seasonArray: Array<string> = ['spring', 'summer', 'autumn', 'winter'];
   climatArray: Array<string> = ['chaud', 'froid', 'doux', 'peu_importe'];
   budgetArray: Array<string> = [
-    'little_budget',
-    'medium_budget',
-    'big_budget',
+    'littleBudget',
+    'mediumBudget',
+    'bigBudget',
     'unlimited',
   ];
   activitiesArray: Array<string> = [
