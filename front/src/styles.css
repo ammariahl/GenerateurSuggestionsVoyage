@@ -2,7 +2,6 @@
   --black: #363636;
   --white: white;
   --grey: #f5f5f5;
-
   --darkGreen: #77bb56;
   --lightGreen: #9de99b;
   --darkRed: #f66867;
@@ -22,10 +21,11 @@
   font-family: "Nunito Sans", sans-serif;
 }
 
-body,
-section,
-main,
 html {
+  height: 100vh;
+}
+
+body {
   height: 100%;
 }
 
@@ -74,15 +74,37 @@ html {
   background-image: url("./assets/img/image_side.svg");
   background-size: cover;
   margin-top: -70px;
+  position: fixed;
 }
 
 .right {
   width: 70%;
-  justify-content: center;
-  align-items: center;
+  margin: 1rem auto 1rem 30%;
 }
 
 app-menu {
   position: relative;
   z-index: 1000;
+}
+
+@media screen and (max-width: 768px) {
+  #sideImg {
+    display: none;
+  }
+  .right {
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+  }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1200px) {
+  #sideImg {
+    width: 40%;
+  }
+  .right {
+    width: 70%;
+
+    margin: 1rem auto 1rem 40%;
+  }
 }

@@ -2,7 +2,7 @@
   <div class="destination-cards flex">
     <h1 class="suggestion-title">Choisissez votre destination idéale :</h1>
 
-    <div *ngIf="!isViewAll">
+    <div class="main flex" *ngIf="!isViewAll">
       <div
         class="distination-card flex"
         *ngFor="let destination of destinationCard | slice : 0 : 3"

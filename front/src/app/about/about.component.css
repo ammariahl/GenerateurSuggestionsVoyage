@@ -8,23 +8,25 @@
 
 .top,
 .bottom {
-  width: 80%;
+  width: 90%;
 }
 
-h2,
-h3 {
-  font-family: "Zen Loop", cursive;
-  font-size: 2rem;
-  margin: 1rem auto;
-}
-
-h3 {
-  font-family: "Zen Loop", cursive;
+h2 {
+  font-family: "Nunito Sans";
   font-size: 1.5rem;
   margin: 1rem auto;
+  font-weight: 600;
 }
 
-p {
+h3 {
+  font-family: "Nunito Sans";
+  font-size: 1.2rem;
+  margin: 1rem auto;
+  font-weight: 500;
+}
+
+p,
+h4 {
   font-size: 1rem;
   font-family: "Nunito Sans", sans-serif;
 }
@@ -38,6 +40,44 @@ p {
 .card {
   padding: 1rem;
   background-color: var(--grey);
-  width: 25rem;
+  width: 17rem;
   border-radius: 10px;
+}
+
+.up {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1.5rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.cardImg {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.icons {
+  gap: 1rem;
+  justify-content: flex-start;
+}
+.icons img {
+  width: 1.7rem;
+  height: 1.7rem;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+@media screen and (max-width: 1200px) {
+  .card {
+    width: 15rem;
+  }
 }
