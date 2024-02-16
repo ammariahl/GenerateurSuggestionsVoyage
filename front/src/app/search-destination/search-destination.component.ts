@@ -1,6 +1,8 @@
 import { Component, OnInit, NgZone, ChangeDetectorRef } from '@angular/core';
 import { TravelService } from '../TravalService/travalService';
 import { Router } from '@angular/router';
+import { catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-search-destination',
@@ -28,9 +30,9 @@ export class SearchDestinationComponent implements OnInit {
   seasonArray: Array<string> = ['spring', 'summer', 'autumn', 'winter'];
   climatArray: Array<string> = ['chaud', 'froid', 'doux', 'peu_importe'];
   budgetArray: Array<string> = [
-    'little_budget',
-    'medium_budget',
-    'big_budget',
+    'littleBudget',
+    'mediumBudget',
+    'bigBudget',
     'unlimited',
   ];
   activitiesArray: Array<string> = [
@@ -150,16 +152,23 @@ export class SearchDestinationComponent implements OnInit {
     };
 
     const userPreference = JSON.stringify(preferences);
-    console.log(JSON.stringify(preferences));
-
-    this.travelService.sendTravelPreferences(userPreference).subscribe(
-      (response) => {
-        console.log('Response from backend:', response);
-      },
-      (error) => {
-        console.error('Error sending preferences:', error);
-      }
-    );
+    // console.log(JSON.stringify(preferences));
+    console.log('User Preference:', userPreference);
+    this.travelService
+      .sendTravelPreferences(userPreference)
+      .pipe(
+        catchError((error) => {
+          console.error('Error sending preferences:', error);
+          // Handle the error or rethrow it as needed
+          return of(null); // or throw error;
+        })
+      )
+      .subscribe((response) => {
+        if (response !== null) {
+          console.log('Response from backend:', response);
+          console.log('Data from response:', response);
+        }
+      });
 
     this.router.navigate([
       '/api/destinations/top',
