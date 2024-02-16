@@ -25,6 +25,10 @@ export class SearchDestinationComponent implements OnInit {
 
   isSend: boolean = false;
   questionNumber: number = 1;
+  cniUeSelected: boolean = false;
+  passeportUeSelected: boolean = false;
+  visaUeSelected: boolean = false;
+  passeportMdeSelected: boolean = false;
 
   // Equivalence preference button and db
   seasonArray: Array<string> = ['spring', 'summer', 'autumn', 'winter'];
@@ -107,6 +111,22 @@ export class SearchDestinationComponent implements OnInit {
         if (this.documents[0] == '') {
           this.documents.shift();
         }
+      } else {
+        const i = this.documents.indexOf(preference);
+        this.documents.splice(i, 1);
+      }
+
+      if (preference == 'cniUe') {
+        this.cniUeSelected = !this.cniUeSelected;
+      }
+      if (preference == 'passeportUe') {
+        this.passeportUeSelected = !this.passeportUeSelected;
+      }
+      if (preference == 'visaUe') {
+        this.visaUeSelected = !this.visaUeSelected;
+      }
+      if (preference == 'passeportMde') {
+        this.passeportMdeSelected = !this.passeportMdeSelected;
       }
     }
     this.cdr.detectChanges();
