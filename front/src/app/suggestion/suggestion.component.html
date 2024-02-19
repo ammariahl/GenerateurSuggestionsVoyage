@@ -17,7 +17,11 @@
         <h4 class="destination-criteria">
           {{ getSelectedSeason(destination) }} -
           {{ getSelectedBudget(destination) }} -
-          {{ getSelectedDocument(destination) }}
+          <ul>
+            <li *ngFor="let document of getSelectedDocument(destination)">
+              {{ document }}
+            </li>
+          </ul>
         </h4>
         <p class="destination-brief-description">
           {{ destination.descriptionLong }}

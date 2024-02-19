@@ -134,30 +134,39 @@ export class SuggestionComponent implements AfterViewInit {
     return 'No budget selected';
   }
 
-  getSelectedDocument(destination: DestinationCard): string {
+  getSelectedDocument(destination: DestinationCard): string[] {
     const documents = destination.documents;
+    const selectedDocuments: string[] = [];
 
     if (documents && documents.length > 0) {
-      const firstDocument: any = documents[0];
+      // const firstDocument: any = documents[0];
       const documentMap: { [key: string]: string } = {
         cniUe: "Carte d'identité",
-        passportUe: 'Passeport (UE)',
+        passportUe: 'Passport (UE)',
         visaUe: 'Visa (UE)',
-        passportMde: 'Passeport (Monde)',
+        passportMde: 'Passport (Monde)',
       };
 
-      for (const key in firstDocument) {
-        if (
-          Object.prototype.hasOwnProperty.call(firstDocument, key) &&
-          key !== 'id' &&
-          firstDocument[key]
-        ) {
-          const frenchDocument = documentMap[key] || key;
-          return `${frenchDocument}`;
+      for (const document of documents as any) {
+        const documentDetails: string[] = [];
+        for (const key in document) {
+          if (
+            Object.prototype.hasOwnProperty.call(document, key) &&
+            key !== 'id' &&
+            document[key]
+          ) {
+            if (key !== 'destinations') {
+              const frenchDocument = documentMap[key] || key;
+              documentDetails.push(`${frenchDocument}`);
+            }
+          }
         }
+        selectedDocuments.push(documentDetails.join(', '));
       }
     }
 
-    return 'No document selected';
+    return selectedDocuments.length > 0
+      ? selectedDocuments
+      : ['No document selected'];
   }
 }
