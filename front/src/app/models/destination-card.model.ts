@@ -1,10 +1,14 @@
 export interface DestinationCard {
   image: string;
   name: string;
-  season: string;
-  budget: string;
-  // climat: string;
-  activity: string;
+  seasons: string;
+  budgets: {
+    littleBudget: boolean;
+    mediumBudget: boolean;
+    bigBudget: boolean;
+    unlimited: boolean;
+  }[];
+  activities: string;
   documents: string[];
-  briefDescription: string;
+  descriptionLong: string;
 }
