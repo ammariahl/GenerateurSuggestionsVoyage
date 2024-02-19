@@ -1,124 +1,28 @@
-<!-- <div class="destination-cards">
-
-<div class="destination-cards">
-
-  <h1 class="suggestion-title">Choisissez votre destination idéale :</h1>
-  <div
-    class="destination-card"
-    *ngFor="
-      let destination of destinationCard
-        | slice : 0 : (isViewAll ? destinationCard.length : 3)
-    "
-    (click)="showDestinationCard(destination)"
-  >
-    <div class="destination-left">
-      <img [src]="destination.image" />
-    </div>
-    <div class="destination-right">
-      <div class="destination-content">
-        <h2 class="destination-name">{{ destination.name }}</h2>
-        <h4 class="destination-criteria">
-          {{ destination.season }} - {{ destination.budget }} -
-          {{ destination.activity }} -
-          {{ destination.documents }}
-        </h4>
-        <p class="destination-brief-description">
-          {{ destination.briefDescription }}
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <div class="container">
-    <div class="destination-cards flex">
-      <h1 class="suggestion-title">Choisissez votre destination idéale :</h1>
-
-      <div *ngIf="!isViewAll">
-        <div
-          class="distination-card flex"
-          *ngFor="let destination of destinationCard | slice : 0 : 3"
-          (click)="showDestinationCard()"
-        >
-          <div class="destination-left">
-            <img [src]="destination.image" />
-          </div>
-          <div class="destination-right">
-            <div class="destination-content">
-              <h2 class="destination-name">{{ destination.name }}</h2>
-              <h4 class="destination-criteria">
-                {{ destination.season }} - {{ destination.budget }} -
-                {{ destination.activity }} -
-                {{ destination.documents }}
-              </h4>
-              <p class="destination-brief-description">
-                {{ destination.briefDescription }}
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <span *ngIf="isViewAll">
-        <div
-          class="distination-card flex"
-          *ngFor="let destination of destinationCard"
-        >
-          <div class="destination-left">
-            <img [src]="destination.image" />
-          </div>
-          <div class="destination-right">
-            <div class="destination-content">
-              <h2 class="destination-name">{{ destination.name }}</h2>
-              <h4 class="destination-criteria">
-                {{ destination.season }} - {{ destination.budget }} -
-                {{ destination.activity }} -
-                {{ destination.documents }}
-              </h4>
-              <p class="destination-brief-description">
-                {{ destination.briefDescription }}
-              </p>
-              <button class="discover-button" (click)="viewAll()">
-                Découvrir
-              </button>
-            </div>
-          </div>
-        </div>
-      </span>
-
-      <div
-        class="view-all flex"
-        [style.visibility]="!isViewAll ? 'visible' : 'hidden'"
-      >
-        <button class="button teal" (click)="viewAll()">
-          Voir d'autres destinations
-        </button>
-      </div>
-    </div>
-  </div>
-</div> -->
 <div class="destination-cards">
   <h1 class="suggestion-title">Choisissez votre destination idéale :</h1>
-  <div
-    class="destination-card"
-    *ngFor="
-      let destination of destinationCard
-        | slice : 0 : (isViewAll ? destinationCard.length : 3)
-    "
-    (click)="showDestinationCard(destination)"
-  >
-    <div class="destination-left">
-      <img [src]="destination.image" />
-    </div>
-    <div class="destination-right">
-      <div class="destination-content">
-        <h2 class="destination-name">{{ destination.name }}</h2>
-        <h4 class="destination-criteria">
-          {{ destination.season }} - {{ destination.budget }} -
-          {{ destination.activity }} - {{ destination.documents }}
-        </h4>
-        <p class="destination-brief-description">
-          {{ destination.briefDescription }}
-        </p>
+  <div class="main flex">
+    <div
+      class="destination-card"
+      *ngFor="
+        let destination of destinationCard
+          | slice : 0 : (isViewAll ? destinationCard.length : 3)
+      "
+      (click)="showDestinationCard(destination)"
+    >
+      <div class="destination-left">
+        <img [src]="destination.image" />
+      </div>
+      <div class="destination-right">
+        <div class="destination-content">
+          <h2 class="destination-name">{{ destination.name }}</h2>
+          <h4 class="destination-criteria">
+            {{ destination.season }} - {{ destination.budget }} -
+            {{ destination.activity }} - {{ destination.documents }}
+          </h4>
+          <p class="destination-brief-description">
+            {{ destination.briefDescription }}
+          </p>
+        </div>
       </div>
     </div>
   </div>
