@@ -26,9 +26,9 @@ export class SearchDestinationComponent implements OnInit {
   isSend: boolean = false;
   questionNumber: number = 1;
   cniUeSelected: boolean = false;
-  passeportUeSelected: boolean = false;
+  passportUeSelected: boolean = false;
   visaUeSelected: boolean = false;
-  passeportMdeSelected: boolean = false;
+  passportMdeSelected: boolean = false;
 
   // Equivalence preference button and db
   seasonArray: Array<string> = ['spring', 'summer', 'autumn', 'winter'];
@@ -47,9 +47,9 @@ export class SearchDestinationComponent implements OnInit {
   ];
   documentsArray: Array<string> = [
     'cniUe',
-    'passeportUe',
+    'passportUe',
     'visaUe',
-    'passeportMde',
+    'passportMde',
   ];
   seasonButtomName: Array<string> = ['Printemps', 'Ete', 'Automne', 'Hivers'];
   climatButtomName: Array<string> = ['Chaud', 'Froid', 'Doux', 'Peu importe'];
@@ -119,14 +119,14 @@ export class SearchDestinationComponent implements OnInit {
       if (preference == 'cniUe') {
         this.cniUeSelected = !this.cniUeSelected;
       }
-      if (preference == 'passeportUe') {
-        this.passeportUeSelected = !this.passeportUeSelected;
+      if (preference == 'passportUe') {
+        this.passportUeSelected = !this.passportUeSelected;
       }
       if (preference == 'visaUe') {
         this.visaUeSelected = !this.visaUeSelected;
       }
-      if (preference == 'passeportMde') {
-        this.passeportMdeSelected = !this.passeportMdeSelected;
+      if (preference == 'passportMde') {
+        this.passportMdeSelected = !this.passportMdeSelected;
       }
     }
     this.cdr.detectChanges();
