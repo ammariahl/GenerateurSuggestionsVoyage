@@ -30,8 +30,14 @@ public class Destination {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
+    @Column(columnDefinition = "TEXT")
     private String image;
+
+    @Column(columnDefinition = "TEXT")
     private String descriptionShort;
+
+    @Column(columnDefinition = "TEXT")
     private String descriptionLong;
 
     
