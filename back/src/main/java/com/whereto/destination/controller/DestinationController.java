@@ -34,6 +34,13 @@ public class DestinationController {
             return new ResponseEntity<>(topDestinations, HttpStatus.OK);
         }
 
+    //      @PostMapping(value = "/top", consumes = "application/json")
+    //     public ResponseEntity<List<Destination>> getTopDestinationsSeparate(@RequestBody UserSelections userSelections) {
+    //     List<Destination> topDestinations = destinationService.getTopDestinations(userSelections);
+    //     List<Destination> separatedDestinations = destinationService.separateNestedDestinations(topDestinations);
+    //     return new ResponseEntity<>(separatedDestinations, HttpStatus.OK);
+    // }
+
         @GetMapping("/all")
         public ResponseEntity<List<Destination>> getAllDestinations() {
             List<Destination> allDestinations = destinationService.getAllDestinations();

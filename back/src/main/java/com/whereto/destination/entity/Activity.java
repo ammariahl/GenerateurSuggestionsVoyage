@@ -1,7 +1,7 @@
 package com.whereto.destination.entity;
 
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.JoinTable;
@@ -23,13 +23,9 @@ public class Activity {
     private boolean family;
 
     
-    @ManyToMany
-    @JoinTable(
-        name = "activity_destination",
-        joinColumns = @JoinColumn(name = "activity_id"),
-        inverseJoinColumns = @JoinColumn(name = "destination_id")
-    )
-    private List<Destination> destinations = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "destination_id")
+    private Destination destination;
    
 
     public Activity() {
@@ -78,11 +74,11 @@ public class Activity {
         this.family = family;
     }
 
-    public List<Destination> getDestinations() {
-            return destinations;
-        }
+   public Destination getDestination() {
+        return destination;
+    }
 
-        public void setDestinations(List<Destination> destinations) {
-            this.destinations = destinations;
-        }
+    public void setDestination(Destination destination) {
+        this.destination = destination;
+    }
 }

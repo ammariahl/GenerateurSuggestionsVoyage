@@ -14,7 +14,7 @@ public interface DocumentRepository extends JpaRepository<Document, Long> {
       List<Document> findByCniUeAndPassportUeAndVisaUeAndPassportMde(
             boolean cniUe, boolean passportUe, boolean visaUe, boolean passportMde);
 
-    @Query("SELECT DISTINCT d FROM Document d LEFT JOIN FETCH d.destinations")
+    @Query("SELECT DISTINCT d FROM Document d LEFT JOIN FETCH d.destination")
     List<Document> findAllWithDestinations();       
 
 }
