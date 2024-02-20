@@ -155,7 +155,8 @@ export class SuggestionComponent implements AfterViewInit {
             key !== 'id' &&
             document[key]
           ) {
-            if (key !== 'destinations') {
+            //Exclude the "destinations"
+            if (key !== 'destination') {
               const frenchDocument = documentMap[key] || key;
               documentDetails.push(`${frenchDocument}`);
             }
