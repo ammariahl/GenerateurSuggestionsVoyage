@@ -16,8 +16,6 @@
   border: none;
   border-radius: 15px;
   background-color: var(--grey);
-  margin: 5%;
-
   height: 12rem;
   width: 45rem;
   overflow-clip-margin: content-box;
@@ -63,15 +61,14 @@ img {
 .destination-name,
 .destination-criteria,
 .destination-brief-description {
-  color: gray;
+  color: var(--gray);
 }
 
 .view-all-button {
-  background-color: #68c8be;
   color: var(--white);
-  padding: 1%;
+  padding: 2%;
   border: none;
-  border-radius: 10px;
+  border-radius: 50px;
   cursor: pointer;
   float: right;
   margin: 2%;
@@ -84,4 +81,33 @@ img {
 }
 .view-all {
   justify-content: flex-end;
+  margin-right: 2rem;
+}
+
+.main {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+@media screen and (max-width: 768px) {
+  img {
+    object-fit: cover;
+  }
+  .destination-cards {
+    margin-top: 2rem;
+    height: 12rem;
+    width: 100%;
+  }
+
+  .main {
+    width: 100%;
+  }
+
+  .distination-card {
+    height: 12rem;
+    width: 80%;
+  }
 }

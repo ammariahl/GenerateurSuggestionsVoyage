@@ -1,5 +1,6 @@
 <div class="destination-cards">
   <h1 class="suggestion-title">Choisissez votre destination idéale :</h1>
+
   <div
     class="destination-card"
     *ngFor="
@@ -29,10 +30,10 @@
       </div>
     </div>
   </div>
+</div>
 
-  <div class="view-all" [style.visibility]="!isViewAll ? 'visible' : 'hidden'">
-    <button class="view-all-button" (click)="viewAll()">
-      Voir d'autres destinations
-    </button>
-  </div>
+<div class="view-all" [style.visibility]="!isViewAll ? 'visible' : 'hidden'">
+  <button class="view-all-button teal" (click)="viewAll()">
+    Voir d'autres destinations
+  </button>
 </div>
