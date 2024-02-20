@@ -5,7 +5,7 @@ package com.whereto.destination.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -41,22 +41,22 @@ public class Destination {
     private String descriptionLong;
 
     
-    @ManyToMany(mappedBy = "destinations" ,cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "destination" ,cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Season> seasons = new ArrayList<>();
 
     
-    @ManyToMany(mappedBy = "destinations",cascade = CascadeType.ALL, fetch = FetchType.LAZY )
+    @OneToMany(mappedBy = "destination",cascade = CascadeType.ALL, fetch = FetchType.LAZY )
     private List<Budget> budgets = new ArrayList<>();
 
    
-    @ManyToMany(mappedBy = "destinations",cascade = CascadeType.ALL, fetch = FetchType.LAZY )
+    @OneToMany(mappedBy = "destination",cascade = CascadeType.ALL, fetch = FetchType.LAZY )
     private List<Activity> activities = new ArrayList<>();
 
     
-    @ManyToMany(mappedBy = "destinations", fetch = FetchType.LAZY  )
+    @OneToMany(mappedBy = "destination",cascade = CascadeType.ALL, fetch = FetchType.LAZY  )
     private List<Document> documents = new ArrayList<>();
 
- 
+   
     public Destination() {
      
     }
@@ -134,4 +134,5 @@ public class Destination {
     public void setDocuments(List<Document> documents) {
         this.documents = documents;
     }
+
 }
