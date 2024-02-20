@@ -13,6 +13,6 @@ public interface BudgetRepository extends JpaRepository<Budget, Long> {
    List<Budget> findByLittleBudgetAndMediumBudgetAndBigBudgetAndUnlimited(
             boolean littleBudget, boolean mediumBudget, boolean bigBudget, boolean unlimited);
 
-   @Query("SELECT DISTINCT b FROM Budget b LEFT JOIN FETCH b.destinations")
+   @Query("SELECT DISTINCT b FROM Budget b LEFT JOIN FETCH b.destination")
    List<Budget> findAllWithDestinations();
 }

@@ -14,7 +14,7 @@ import org.springframework.data.domain.Pageable;
 import com.whereto.destination.exception.CustomNotFoundException;
 import java.util.Collections;
 import java.util.stream.Collectors;
-
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -60,18 +60,19 @@ public List<Destination> getTopDestinations(UserSelections userSelections) {
         List<Activity> managedActivities = activityService.getManagedActivities(activities);
         List<Budget> managedBudgets = budgetService.getManagedBudgets(budgets);
         List<Document> managedDocuments = documentService.getManagedDocuments(documents);
+
+
+      
         List<Destination> topDestinations = destinationRepository.findTopDestinationsBySeasonsInAndBudgetsInAndActivitiesInAndDocumentsIn(
             managedSeasons, managedBudgets, managedActivities, managedDocuments);
 
+  
     if (topDestinations.isEmpty()) {
         throw new CustomNotFoundException("No matching destinations found");
     }
 
-    return topDestinations;
+   return topDestinations;
 }
-
-
-
 
 
 
