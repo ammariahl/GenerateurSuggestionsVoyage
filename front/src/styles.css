@@ -2,6 +2,7 @@
   --black: #363636;
   --white: white;
   --grey: #f5f5f5;
+  --green: #2eb67d;
   --darkGreen: #77bb56;
   --lightGreen: #9de99b;
   --darkRed: #f66867;
@@ -12,6 +13,9 @@
   --lightTeal: #aaeaea;
   --darkBlue: #67a0f6;
   --lightBlue: #9dd1f6;
+  --timeline: #2e89b6;
+  --gray: gray;
+  --timelinePreferenceInitialization: grey;
 }
 
 * {
