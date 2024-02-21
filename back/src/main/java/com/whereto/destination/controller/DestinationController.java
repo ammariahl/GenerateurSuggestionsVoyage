@@ -28,27 +28,10 @@ public class DestinationController {
     public DestinationController(DestinationService destinationService) {
         this.destinationService = destinationService;
     }
-//         @PostMapping(value = "/top",consumes = "application/json")
-//         public ResponseEntity<List<Destination>> getTopDestinations(@RequestBody UserSelections userSelections,
-//          @RequestParam(defaultValue = "0") int page,
-//          @RequestParam(defaultValue = "10") int size) {
-//             try{
-//   List<Destination> topDestinations = destinationService.getTopDestinations(userSelections,page, size);
-//             // log.debug("Received request. UserSelections: {}", userSelections);
-//             // return new ResponseEntity<>(topDestinations, HttpStatus.OK);
-//             return ResponseEntity.ok(topDestinations);
-//             }catch (Exception e) {
-//             // Handle exceptions as needed
-//             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-//         }
-          
-//         }
-
 
          @PostMapping(value = "/top", consumes = "application/json")
         public ResponseEntity<List<Destination>> getTopDestinations(@RequestBody UserSelections userSelections) {
         List<Destination> topDestinations = destinationService.getTopDestinations(userSelections);
-        // List<Destination> separatedDestinations = destinationService.separateNestedDestinations(topDestinations);
         return new ResponseEntity<>(topDestinations, HttpStatus.OK);
     }
 

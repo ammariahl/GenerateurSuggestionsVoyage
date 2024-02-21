@@ -18,23 +18,6 @@ import org.springframework.data.domain.Pageable;
 public interface DestinationRepository extends JpaRepository<Destination , Long>{
 
     List<Destination> findAll(); 
-
-
-// List<Destination> findTopDestinationsWithAssociations(
-//         @Param("seasons") List<Season> seasons,
-//         @Param("budgets") List<Budget> budgets,
-//         @Param("activities") List<Activity> activities,
-//         @Param("documents") List<Document> documents,
-//         Pageable pageable);
-  
-
-
-    // List<Destination> findTopDestinationsBySeasonsInAndBudgetsInAndActivitiesInAndDocumentsIn(
-    //      List<Season> seasons,
-    //      List<Budget> budgets, 
-    //     List<Activity> activities,         
-    //      List<Document> documents,Pageable pageable);
-    
    
     List<Destination> findTopDestinationsBySeasonsIn(List<Season> seasons);
 
