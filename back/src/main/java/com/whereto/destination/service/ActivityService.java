@@ -18,9 +18,9 @@ public class ActivityService {
         this.activityRepository = activityRepository;
     }
 
-    public List<Activity> getAllActivitiesWithDestinations() {
-        return activityRepository.findAllWithDestinations();
-    }
+    // public List<Activity> getAllActivitiesWithDestinations() {
+    //     return activityRepository.findAllWithDestinations();
+    // }
     
     public List<Activity> getManagedActivities(List<Activity> activities) {
           List<Activity> managedActivities = new ArrayList<>();

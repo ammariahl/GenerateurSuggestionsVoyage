@@ -18,9 +18,9 @@ public class DocumentService {
         this.documentRepository = documentRepository;
     }
 
-     public List<Document> getAllDocumentsWithDestinations() {
-        return documentRepository.findAllWithDestinations();
-    }
+    //  public List<Document> getAllDocumentsWithDestinations() {
+    //     return documentRepository.findAllWithDestinations();
+    // }
 
     public List<Document> getManagedDocuments(List<Document> documents) {
           List<Document> managedDocuments = new ArrayList<>();
@@ -29,7 +29,8 @@ public class DocumentService {
             
             if (!matchingDocuments.isEmpty()) {
                 // managedDocuments.add(matchingDocuments.get(0));
-                managedDocuments.addAll(matchingDocuments);
+                 managedDocuments.addAll(matchingDocuments);
+                
             } else {
                 throw new CustomNotFoundException("Document is not found in the database");
             }

@@ -12,6 +12,7 @@ import com.whereto.destination.entity.Season;
 import com.whereto.destination.entity.Activity;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.data.domain.Pageable;
 
 @Repository
 public interface DestinationRepository extends JpaRepository<Destination , Long>{
@@ -19,19 +20,49 @@ public interface DestinationRepository extends JpaRepository<Destination , Long>
     List<Destination> findAll(); 
 
 
-   @Query("SELECT DISTINCT d FROM Destination d " +
-           "LEFT JOIN d.seasons s " +
-           "LEFT JOIN d.budgets b " +
-           "LEFT JOIN d.activities a " +
-           "LEFT JOIN d.documents doc " +
-           "WHERE s IN :seasons AND b IN :budgets AND a IN :activities AND doc IN :documents")
-    List<Destination> findTopDestinationsBySeasonsInAndBudgetsInAndActivitiesInAndDocumentsIn(
-         List<Season> seasons,
-        List<Budget> budgets, 
-         List<Activity> activities,         
-         List<Document> documents);
+// List<Destination> findTopDestinationsWithAssociations(
+//         @Param("seasons") List<Season> seasons,
+//         @Param("budgets") List<Budget> budgets,
+//         @Param("activities") List<Activity> activities,
+//         @Param("documents") List<Document> documents,
+//         Pageable pageable);
+  
+
+
+    // List<Destination> findTopDestinationsBySeasonsInAndBudgetsInAndActivitiesInAndDocumentsIn(
+    //      List<Season> seasons,
+    //      List<Budget> budgets, 
+    //     List<Activity> activities,         
+    //      List<Document> documents,Pageable pageable);
     
+   
+    List<Destination> findTopDestinationsBySeasonsIn(List<Season> seasons);
+
+    List<Destination> findTopDestinationsByBudgetsIn(List<Budget> budgets);
+
+    List<Destination> findTopDestinationsByActivitiesIn(List<Activity> activities);
+
     List<Destination> findTopDestinationsByDocumentsIn(List<Document> documents);
+
+      List<Destination> findTopDestinationsBySeasonsInAndBudgetsInAndActivitiesInAndDocumentsIn(
+        List<Season> seasons,
+        List<Budget> budgets,
+        List<Activity> activities,
+        List<Document> documents);
+
+     @Query("SELECT DISTINCT d FROM Destination d " +
+            "JOIN d.seasons s " +
+            "JOIN d.budgets b " +
+            "JOIN d.activities a " +
+            "JOIN d.documents doc " +
+            "WHERE s IN :seasons OR b IN :budgets OR a IN :activities OR doc IN :documents")
+    List<Destination> findTopDestinationsWithAssociations(
+        @Param("seasons") List<Season> seasons,
+        @Param("budgets") List<Budget> budgets,
+        @Param("activities") List<Activity> activities,
+        @Param("documents") List<Document> documents);
+
     
-    
+
+
 }

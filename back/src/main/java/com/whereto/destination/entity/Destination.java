@@ -21,6 +21,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import org.hibernate.annotations.BatchSize;
 
 
 @Entity
@@ -41,20 +42,28 @@ public class Destination {
     private String descriptionLong;
 
     
-    @OneToMany(mappedBy = "destination" ,cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Season> seasons = new ArrayList<>();
+    @OneToMany(mappedBy = "destination" , fetch = FetchType.LAZY)
+    @BatchSize(size = 10)
+    @Fetch(FetchMode.SUBSELECT)
+    private List<Season> seasons ;
 
     
-    @OneToMany(mappedBy = "destination",cascade = CascadeType.ALL, fetch = FetchType.LAZY )
-    private List<Budget> budgets = new ArrayList<>();
+    @OneToMany(mappedBy = "destination", fetch = FetchType.LAZY )
+    @BatchSize(size = 10)
+    @Fetch(FetchMode.SUBSELECT)
+    private List<Budget> budgets ;
 
    
-    @OneToMany(mappedBy = "destination",cascade = CascadeType.ALL, fetch = FetchType.LAZY )
-    private List<Activity> activities = new ArrayList<>();
+    @OneToMany(mappedBy = "destination", fetch = FetchType.LAZY )
+    @BatchSize(size = 10)
+    @Fetch(FetchMode.SUBSELECT)
+    private List<Activity> activities ;
 
     
-    @OneToMany(mappedBy = "destination",cascade = CascadeType.ALL, fetch = FetchType.LAZY  )
-    private List<Document> documents = new ArrayList<>();
+    @OneToMany(mappedBy = "destination", fetch = FetchType.LAZY  )
+    @BatchSize(size = 10)
+    @Fetch(FetchMode.SUBSELECT)
+    private List<Document> documents ;
 
    
     public Destination() {
