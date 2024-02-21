@@ -18,6 +18,6 @@ public interface SeasonRepository extends JpaRepository<Season, Long> {
 
     List<Season> findByWinter(String winter);
 
-    @Query("SELECT DISTINCT s FROM Season s LEFT JOIN FETCH s.destinations")
-    List<Season> findAllWithDestinations();
+    // @Query("SELECT DISTINCT s FROM Season s LEFT JOIN FETCH s.destinations")
+    // List<Season> findAllWithDestinations();
 }

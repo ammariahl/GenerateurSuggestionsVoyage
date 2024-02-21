@@ -12,7 +12,7 @@ public interface ActivityRepository extends JpaRepository<Activity, Long> {
    List<Activity> findByRelaxingAndAdventureAndGroupactivityAndFamily(
             boolean relaxing, boolean adventure, boolean groupactivity, boolean family);
 
-@Query("SELECT DISTINCT a FROM Activity a LEFT JOIN FETCH a.destinations")
-List<Activity> findAllWithDestinations();
+// @Query("SELECT DISTINCT a FROM Activity a LEFT JOIN FETCH a.destinations")
+// List<Activity> findAllWithDestinations();
 
 }

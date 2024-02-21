@@ -5,7 +5,7 @@ package com.whereto.destination.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,6 +21,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import org.hibernate.annotations.BatchSize;
 
 
 @Entity
@@ -41,22 +42,30 @@ public class Destination {
     private String descriptionLong;
 
     
-    @ManyToMany(mappedBy = "destinations" ,cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Season> seasons = new ArrayList<>();
+    @OneToMany(mappedBy = "destination" , fetch = FetchType.LAZY)
+    @BatchSize(size = 10)
+    @Fetch(FetchMode.SUBSELECT)
+    private List<Season> seasons ;
 
     
-    @ManyToMany(mappedBy = "destinations",cascade = CascadeType.ALL, fetch = FetchType.LAZY )
-    private List<Budget> budgets = new ArrayList<>();
+    @OneToMany(mappedBy = "destination", fetch = FetchType.LAZY )
+    @BatchSize(size = 10)
+    @Fetch(FetchMode.SUBSELECT)
+    private List<Budget> budgets ;
 
    
-    @ManyToMany(mappedBy = "destinations",cascade = CascadeType.ALL, fetch = FetchType.LAZY )
-    private List<Activity> activities = new ArrayList<>();
+    @OneToMany(mappedBy = "destination", fetch = FetchType.LAZY )
+    @BatchSize(size = 10)
+    @Fetch(FetchMode.SUBSELECT)
+    private List<Activity> activities ;
 
     
-    @ManyToMany(mappedBy = "destinations", fetch = FetchType.LAZY  )
-    private List<Document> documents = new ArrayList<>();
+    @OneToMany(mappedBy = "destination", fetch = FetchType.LAZY  )
+    @BatchSize(size = 10)
+    @Fetch(FetchMode.SUBSELECT)
+    private List<Document> documents ;
 
- 
+   
     public Destination() {
      
     }
@@ -134,4 +143,5 @@ public class Destination {
     public void setDocuments(List<Document> documents) {
         this.documents = documents;
     }
+
 }

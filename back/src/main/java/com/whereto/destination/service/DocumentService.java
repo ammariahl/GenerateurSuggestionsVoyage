@@ -18,9 +18,9 @@ public class DocumentService {
         this.documentRepository = documentRepository;
     }
 
-     public List<Document> getAllDocumentsWithDestinations() {
-        return documentRepository.findAllWithDestinations();
-    }
+    //  public List<Document> getAllDocumentsWithDestinations() {
+    //     return documentRepository.findAllWithDestinations();
+    // }
 
     public List<Document> getManagedDocuments(List<Document> documents) {
           List<Document> managedDocuments = new ArrayList<>();
@@ -28,7 +28,9 @@ public class DocumentService {
             List<Document> matchingDocuments = getDocumentsByField(document);
             
             if (!matchingDocuments.isEmpty()) {
-                managedDocuments.add(matchingDocuments.get(0));
+                // managedDocuments.add(matchingDocuments.get(0));
+                 managedDocuments.addAll(matchingDocuments);
+                
             } else {
                 throw new CustomNotFoundException("Document is not found in the database");
             }
@@ -47,5 +49,7 @@ public class DocumentService {
         return documentRepository.findByCniUeAndPassportUeAndVisaUeAndPassportMde(
             cniUe, passportUe, visaUe, passportMde);
     }
+
+
 }
 
