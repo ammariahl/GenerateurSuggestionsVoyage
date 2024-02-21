@@ -1,0 +1,56 @@
+.container {
+  width: 100%;
+  padding: 2rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.top,
+.bottom {
+  width: 90%;
+}
+
+.top-box {
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  background-color: var(--grey);
+  border-radius: 10px;
+  margin-bottom: 2rem;
+}
+
+p {
+  text-align: center;
+  margin: 3%;
+  font-size: 1.2rem;
+}
+
+.cardContainerByCategory {
+  flex-direction: column;
+}
+
+.cardContainer {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card,
+img {
+  width: 17rem;
+  height: 12rem;
+  border-radius: 20px;
+}
+
+.card {
+  background-color: var(--grey);
+}
+
+@media screen and (max-width: 1200px) {
+  .card {
+    width: 15rem;
+  }
+}
