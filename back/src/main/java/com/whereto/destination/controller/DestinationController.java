@@ -15,6 +15,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.data.domain.PageRequest;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -27,19 +28,12 @@ public class DestinationController {
     public DestinationController(DestinationService destinationService) {
         this.destinationService = destinationService;
     }
-        @PostMapping(value = "/top",consumes = "application/json")
-        public ResponseEntity<List<Destination>> getTopDestinations(@RequestBody UserSelections userSelections) {
-            List<Destination> topDestinations = destinationService.getTopDestinations(userSelections);
-            // log.debug("Received request. UserSelections: {}", userSelections);
-            return new ResponseEntity<>(topDestinations, HttpStatus.OK);
-        }
 
-    //      @PostMapping(value = "/top", consumes = "application/json")
-    //     public ResponseEntity<List<Destination>> getTopDestinationsSeparate(@RequestBody UserSelections userSelections) {
-    //     List<Destination> topDestinations = destinationService.getTopDestinations(userSelections);
-    //     List<Destination> separatedDestinations = destinationService.separateNestedDestinations(topDestinations);
-    //     return new ResponseEntity<>(separatedDestinations, HttpStatus.OK);
-    // }
+         @PostMapping(value = "/top", consumes = "application/json")
+        public ResponseEntity<List<Destination>> getTopDestinations(@RequestBody UserSelections userSelections) {
+        List<Destination> topDestinations = destinationService.getTopDestinations(userSelections);
+        return new ResponseEntity<>(topDestinations, HttpStatus.OK);
+    }
 
         @GetMapping("/all")
         public ResponseEntity<List<Destination>> getAllDestinations() {
