@@ -12,11 +12,12 @@ const routes: Routes = [
   { path: 'random', component: SuggestionComponent },
   { path: 'about', component: AboutComponent },
   { path: 'search', component: SearchDestinationComponent },
-  { path: '**', component: PageNotFoundComponent },
+
   {
     path: 'api/destinations/top/:periode/:climat/:budget/:activity/:documents',
     component: SuggestionComponent,
   },
+  { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({
