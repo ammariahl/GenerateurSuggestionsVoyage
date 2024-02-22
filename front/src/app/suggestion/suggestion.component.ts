@@ -139,7 +139,6 @@ export class SuggestionComponent implements AfterViewInit {
     const selectedDocuments: string[] = [];
 
     if (documents && documents.length > 0) {
-      // const firstDocument: any = documents[0];
       const documentMap: { [key: string]: string } = {
         cniUe: "Carte d'identité",
         passportUe: 'Passport (UE)',
