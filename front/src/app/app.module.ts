@@ -11,6 +11,7 @@ import { DestinationComponent } from './destination/destination.component';
 import { AboutComponent } from './about/about.component';
 import { TravelService } from './TravalService/travalService';
 import { HttpClientModule } from '@angular/common/http';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
     HomeComponent,
     MenuComponent,
     AboutComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,

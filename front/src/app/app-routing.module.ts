@@ -4,6 +4,7 @@ import { HomeComponent } from './home/home.component';
 import { SuggestionComponent } from './suggestion/suggestion.component';
 import { AboutComponent } from './about/about.component';
 import { SearchDestinationComponent } from './search-destination/search-destination.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: 'random', component: SuggestionComponent },
   { path: 'about', component: AboutComponent },
   { path: 'search', component: SearchDestinationComponent },
+  { path: '**', component: PageNotFoundComponent },
   {
     path: 'api/destinations/top/:periode/:climat/:budget/:activity/:documents',
     component: SuggestionComponent,

@@ -1,3 +1,5 @@
+@import "material-icons/iconfont/material-icons.css";
+
 :root {
   --black: #363636;
   --white: white;
@@ -68,6 +70,10 @@ body {
 
 .teal {
   background: linear-gradient(90deg, var(--darkTeal), var(--lightTeal));
+}
+
+.blue {
+  background: linear-gradient(90deg, var(--darkBlue), var(--lightBlue));
 }
 
 /* SIDE IMAGE */
