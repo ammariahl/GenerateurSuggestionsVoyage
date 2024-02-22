@@ -6,6 +6,7 @@
     <i class="material-icons">{{ isMenuOpen ? "close" : "menu" }}</i>
   </div>
   <div class="linksContainer menu flex" [class.is-open]="isMenuOpen">
+    <a routerLink="/home" class="menu-item flex">Accueil</a>
     <a [routerLink]="['/random']" class="menu-item flex">Aléatoire</a>
     <a [routerLink]="['/about']" class="menu-item flex">À propos</a>
     <div class="menu-item">
