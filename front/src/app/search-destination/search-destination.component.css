@@ -106,24 +106,14 @@ button:hover {
   transform: scale(1.1);
 }
 
-.preferences_button_1 {
-  grid-column-start: 1;
-  background-color: var(--darkGreen);
-}
-
-.preferences_button_2 {
-  grid-column-start: 2;
-  background-color: var(--darkRed);
-}
-
+.preferences_button_1,
 .preferences_button_3 {
   grid-column-start: 1;
-  background-color: var(--darkYellow);
 }
 
+.preferences_button_2,
 .preferences_button_4 {
   grid-column-start: 2;
-  background-color: var(--darkTeal);
 }
 
 .send-button {
