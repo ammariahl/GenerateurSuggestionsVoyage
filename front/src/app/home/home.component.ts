@@ -1,5 +1,6 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
-import { SharedDestinationService } from '../TravalService/Shared-destination.service';
+import { Component, OnInit, NgZone } from '@angular/core';
+import { FamillyDestinationService } from '../TravalService/Familly-Destination.Service';
+import { SpringDestinationService } from '../TravalService/Spring-Destination.Service';
 import { DestinationCard } from '../models/destination-card.model';
 
 @Component({
@@ -7,67 +8,51 @@ import { DestinationCard } from '../models/destination-card.model';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
-export class HomeComponent {
-  winterDestinations: DestinationCard[] = [];
-  familyDestinations: string[] = ['1', '2', '3'];
-  adventureDestinations: string[] = ['1', '2', '3'];
+export class HomeComponent implements OnInit {
+  familydestinations: DestinationCard[] = [];
+  springdestinations: DestinationCard[] = [];
 
   constructor(
-    private cdr: ChangeDetectorRef,
-    private sharedDestinationService: SharedDestinationService
+    private famillyDestinationService: FamillyDestinationService,
+    private springDestinationService: SpringDestinationService,
+    private zone: NgZone
   ) {}
 
-  ngAfterViewInit(): void {
-    // Subscribe to the destinations$ observable when the component initializes
-    this.sharedDestinationService.destinations$.subscribe(
-      (destinations) => {
-        console.log('Received destinations from shared service:', destinations);
-        destinations.forEach((destination) => {
-          const selectedSeasons = destination.seasons;
-          const selectedBudgets = destination.budgets;
-          const selectedActivities = destination.activities;
-          const selectedDocuments = destination.documents;
-          // Accessing seasons
+  ngOnInit(): void {
+    this.loadFirstThreeFamilyDestinations();
+    this.loadFirstThreeSpringDestinations();
+  }
+  loadFirstThreeFamilyDestinations() {
+    this.famillyDestinationService.getFirstThreeFamilyDestinations().subscribe(
+      (response: DestinationCard[]) => {
+        this.zone.run(() => {
+          this.familydestinations = response;
           console.log(
-            'Seasons for destination',
-            destination.name,
-            ':',
-            selectedSeasons
-          );
-
-          // Accessing budgets
-          console.log(
-            'Budgets for destination',
-            destination.name,
-            ':',
-            selectedBudgets
-          );
-
-          // Accessing activities
-          console.log(
-            'Activities for destination',
-            destination.name,
-            ':',
-            selectedActivities
-          );
-
-          // Accessing documents
-          console.log(
-            'Documents for destination',
-            destination.name,
-            ':',
-            selectedDocuments
+            'First three family destinations:',
+            this.familydestinations
           );
         });
-        this.winterDestinations = destinations;
-        this.cdr.detectChanges();
       },
       (error) => {
-        console.error('Error getting destinations:', error);
-        console.log('No matching destinations:');
+        console.error('Error loading first three family destinations:', error);
       }
     );
   }
 
-  showDestinationCard(destination: DestinationCard): void {}
+  loadFirstThreeSpringDestinations() {
+    this.springDestinationService.getFirstThreeSpringDestinations().subscribe(
+      (response: DestinationCard[]) => {
+        this.zone.run(() => {
+          this.springdestinations = response;
+          console.log(
+            'First three family destinations:',
+            this.springdestinations
+          );
+        });
+      },
+      (error) => {
+        console.error('Error loading first three family destinations:', error);
+      }
+    );
+  }
 }
