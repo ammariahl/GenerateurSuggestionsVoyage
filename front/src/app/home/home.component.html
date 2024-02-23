@@ -13,31 +13,19 @@
 
   <div class="bottom">
     <div class="cardContainerByCategory flex">
-      <h3>Plongez dans la magie de l'hiver !</h3>
+      <h3>Plongez dans la magie de le Printemps !</h3>
 
       <div class="cardContainer flex">
-        <div class="card">
-          <img src="../../assets/img/maquette_logo.PNG" />
-        </div>
-        <div class="card">
-          <img src="../../assets/img/maquette_logo.PNG" />
-        </div>
-        <div class="card">
-          <img src="../../assets/img/maquette_logo.PNG" />
+        <div *ngFor="let destination of springdestinations">
+          <img [src]="destination.image" alt="{{ destination.name }}" />
         </div>
       </div>
 
       <h3>Plaisirs en famille : des destinations pour petits et grands !</h3>
 
       <div class="cardContainer flex">
-        <div class="card">
-          <img src="../../assets/img/maquette_logo.PNG" />
-        </div>
-        <div class="card">
-          <img src="../../assets/img/maquette_logo.PNG" />
-        </div>
-        <div class="card">
-          <img src="../../assets/img/maquette_logo.PNG" />
+        <div *ngFor="let destination of familydestinations">
+          <img [src]="destination.image" alt="{{ destination.name }}" />
         </div>
       </div>
 

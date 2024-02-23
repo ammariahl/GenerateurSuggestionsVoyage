@@ -10,6 +10,8 @@ import { SearchDestinationComponent } from './search-destination/search-destinat
 import { DestinationComponent } from './destination/destination.component';
 import { AboutComponent } from './about/about.component';
 import { TravelService } from './TravalService/travalService';
+import { FamillyDestinationService } from './TravalService/Familly-Destination.Service';
+import { SpringDestinationService } from './TravalService/Spring-Destination.Service';
 import { HttpClientModule } from '@angular/common/http';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
@@ -30,7 +32,11 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     NgOptimizedImage,
     HttpClientModule,
   ],
-  providers: [TravelService],
+  providers: [
+    TravelService,
+    FamillyDestinationService,
+    SpringDestinationService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
