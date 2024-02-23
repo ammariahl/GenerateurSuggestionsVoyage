@@ -71,8 +71,8 @@ public class SeasonService {
     }
         List<Destination> allWinterDestinations = seasonRepository.findDestinationsByIds(destinationIds);
 
-        if (allWinterDestinations.size() >= 4) {
-        return allWinterDestinations.subList(0, 4); 
+        if (allWinterDestinations.size() >= 3) {
+        return allWinterDestinations.subList(0, 3); 
     } else {
         return allWinterDestinations;
     }

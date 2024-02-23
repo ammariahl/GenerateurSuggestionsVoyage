@@ -1,6 +1,7 @@
 package com.whereto.destination.service;
 
 import com.whereto.destination.entity.Budget;
+import com.whereto.destination.entity.Destination;
 import com.whereto.destination.repository.BudgetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import com.whereto.destination.exception.CustomNotFoundException;
+import java.util.Collections;
 
 @Service
 public class BudgetService {
@@ -45,6 +47,20 @@ public class BudgetService {
 
         return budgetRepository.findByLittleBudgetAndMediumBudgetAndBigBudgetAndUnlimited(
             littleBudget, mediumBudget, bigBudget, unlimited);
+    }
+
+       public List<Destination> getFirstThreeBudgetDestinations() {
+        List<Long> destinationIds = budgetRepository.findDestinationIdsByBudget();
+        if (destinationIds == null || destinationIds.isEmpty()) {
+        return Collections.emptyList();
+    }
+        List<Destination> allBudgetDestinations = budgetRepository.findDestinationsByIds(destinationIds);
+
+        if (allBudgetDestinations.size() >= 4) {
+        return allBudgetDestinations.subList(0, 4); 
+    } else {
+        return allBudgetDestinations;
+    }
     }
 
 }

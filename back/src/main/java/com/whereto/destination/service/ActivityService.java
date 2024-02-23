@@ -67,8 +67,8 @@ public class ActivityService {
     }
         List<Destination> allFamilyDestinations = activityRepository.findDestinationsByIds(destinationIds);
 
-        if (allFamilyDestinations.size() >= 4) {
-        return allFamilyDestinations.subList(0, 4); 
+        if (allFamilyDestinations.size() >= 3) {
+        return allFamilyDestinations.subList(0, 3); 
     } else {
         return allFamilyDestinations;
     }
