@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { TravelService } from '../TravalService/travalService';
 import { catchError, of } from 'rxjs';
 
+
 @Component({
   selector: 'app-menu',
 
@@ -36,6 +37,15 @@ export class MenuComponent {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
+  toggleIsRandomTrue(): void {
+    this.travelService.isRandom = true;
+    console.log("Random = True");
+  }
+
+  toggleIsRandomFalse(): void {
+    this.travelService.isRandom = false;
+    console.log("Random = false");
+  }
   sendSearchDestinationForm(): void {
     // Selection submitted
     const preferences = {

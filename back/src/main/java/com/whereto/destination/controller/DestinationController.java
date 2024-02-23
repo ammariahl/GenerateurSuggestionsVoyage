@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import com.whereto.destination.repository.DestinationRepository;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.data.domain.Pageable;
+
+import java.util.Collections;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,7 +42,12 @@ public class DestinationController {
             List<Destination> allDestinations = destinationService.getAllDestinations();
             return new ResponseEntity<>(allDestinations, HttpStatus.OK);
         }
+        @GetMapping("/random")
+        public ResponseEntity<List<Destination>> getRandomDestinations() {
+            List<Destination> randomDestinations = destinationService.getAllDestinations();
+            Collections.shuffle(randomDestinations);
+        return new ResponseEntity<>(randomDestinations, HttpStatus.OK);
+        }
 
-   
     
 }

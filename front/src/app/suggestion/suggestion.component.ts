@@ -19,10 +19,16 @@ export class SuggestionComponent implements AfterViewInit {
 
   constructor(
     private cdr: ChangeDetectorRef,
-    private sharedDestinationService: SharedDestinationService
+    private sharedDestinationService: SharedDestinationService,
+    public travelService : TravelService
   ) {}
 
   ngAfterViewInit(): void {
+
+    if (this.travelService.isRandom){
+    this.getRandomDestinations();
+    }
+    else {
     // Subscribe to the destinations$ observable when the component initializes
     this.sharedDestinationService.destinations$.subscribe(
       (destinations) => {
@@ -72,6 +78,7 @@ export class SuggestionComponent implements AfterViewInit {
         console.log('No matching destinations:');
       }
     );
+    }
   }
 
   showDestinationCard(destination: DestinationCard): void {
@@ -168,5 +175,16 @@ export class SuggestionComponent implements AfterViewInit {
     return selectedDocuments.length > 0
       ? selectedDocuments
       : ['No document selected'];
+  }
+
+  getRandomDestinations(): void {
+    this.travelService.getRandomDestinations().subscribe(
+      (destinations: DestinationCard[]) => {
+        this.destinationCard = destinations;
+      },
+      (error : any) => {
+        console.error('Error fetching random destinations:', error);
+      }
+    );
   }
 }
