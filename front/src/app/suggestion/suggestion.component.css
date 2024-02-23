@@ -67,7 +67,7 @@ img {
 
 .view-all-button {
   color: var(--white);
-  padding: 2%;
+  padding: 1.5%;
   border: none;
   border-radius: 50px;
   cursor: pointer;

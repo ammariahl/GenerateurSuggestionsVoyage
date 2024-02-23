@@ -1,4 +1,5 @@
 export interface DestinationCard {
+  id: number;
   image: string;
   name: string;
   // seasons: string[];
@@ -19,4 +20,5 @@ export interface DestinationCard {
   activities: string;
   documents: string[];
   descriptionLong: string;
+  descriptionShort: string;
 }

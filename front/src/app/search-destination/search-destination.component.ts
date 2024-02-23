@@ -23,7 +23,6 @@ export class SearchDestinationComponent implements OnInit {
   budgetTimeline: string = '';
   activityTimeline: string = '';
 
-  isSend: boolean = false;
   questionNumber: number = 1;
   cniUeSelected: boolean = false;
   passportUeSelected: boolean = false;
@@ -156,47 +155,48 @@ export class SearchDestinationComponent implements OnInit {
   }
 
   sendSearchDestinationForm(): void {
-    this.isSend = true;
+    console.log('premier element de documents : ' + this.documents[0]);
+    if (this.documents[0] != undefined) {
+      // Selection submitted
+      const preferences = {
+        seasons: [{ [this.season.toLowerCase()]: this.climat }],
+        budgets: [{ [this.budget]: true }],
+        activities: [{ [this.activity.toLowerCase()]: true }],
+        documents: this.documents.reduce((acc, doc) => {
+          if (doc.trim() !== '') {
+            acc.push({ [doc.replace(/ /g, '')]: true });
+          }
+          return acc;
+        }, [] as { [key: string]: boolean }[]),
+      };
 
-    // Selection submitted
-    const preferences = {
-      seasons: [{ [this.season.toLowerCase()]: this.climat }],
-      budgets: [{ [this.budget]: true }],
-      activities: [{ [this.activity.toLowerCase()]: true }],
-      documents: this.documents.reduce((acc, doc) => {
-        if (doc.trim() !== '') {
-          acc.push({ [doc.replace(/ /g, '')]: true });
-        }
-        return acc;
-      }, [] as { [key: string]: boolean }[]),
-    };
+      const userPreference = JSON.stringify(preferences);
+      // console.log(JSON.stringify(preferences));
+      console.log('User Preference:', userPreference);
+      this.travelService
+        .sendTravelPreferences(userPreference)
+        .pipe(
+          catchError((error) => {
+            console.error('Error sending preferences:', error);
+            // Handle the error or rethrow it as needed
+            return of(null); // or throw error;
+          })
+        )
+        .subscribe((response) => {
+          if (response !== null) {
+            console.log('Response from backend:', response);
+            console.log('Data from response:', response);
+          }
+        });
 
-    const userPreference = JSON.stringify(preferences);
-    // console.log(JSON.stringify(preferences));
-    console.log('User Preference:', userPreference);
-    this.travelService
-      .sendTravelPreferences(userPreference)
-      .pipe(
-        catchError((error) => {
-          console.error('Error sending preferences:', error);
-          // Handle the error or rethrow it as needed
-          return of(null); // or throw error;
-        })
-      )
-      .subscribe((response) => {
-        if (response !== null) {
-          console.log('Response from backend:', response);
-          console.log('Data from response:', response);
-        }
-      });
-
-    this.router.navigate([
-      '/api/destinations/top',
-      this.season,
-      this.climat,
-      this.budget,
-      this.activity,
-      this.documents.join('**'),
-    ]);
+      this.router.navigate([
+        '/api/destinations/top',
+        this.season,
+        this.climat,
+        this.budget,
+        this.activity,
+        this.documents.join('**'),
+      ]);
+    }
   }
 }
