@@ -1,6 +1,7 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { FamillyDestinationService } from '../TravalService/Familly-Destination.Service';
 import { SpringDestinationService } from '../TravalService/Spring-Destination.Service';
+import { BudgetDestinationService } from '../TravalService/Budget-Destination.Service';
 import { DestinationCard } from '../models/destination-card.model';
 
 @Component({
@@ -11,16 +12,19 @@ import { DestinationCard } from '../models/destination-card.model';
 export class HomeComponent implements OnInit {
   familydestinations: DestinationCard[] = [];
   springdestinations: DestinationCard[] = [];
+  budgetdestinations: DestinationCard[] = [];
 
   constructor(
     private famillyDestinationService: FamillyDestinationService,
     private springDestinationService: SpringDestinationService,
+    private budgetDestinationService: BudgetDestinationService,
     private zone: NgZone
   ) {}
 
   ngOnInit(): void {
     this.loadFirstThreeFamilyDestinations();
     this.loadFirstThreeSpringDestinations();
+    this.loadFirstThreeBudgetDestinations();
   }
   loadFirstThreeFamilyDestinations() {
     this.famillyDestinationService.getFirstThreeFamilyDestinations().subscribe(
@@ -52,6 +56,23 @@ export class HomeComponent implements OnInit {
       },
       (error) => {
         console.error('Error loading first three family destinations:', error);
+      }
+    );
+  }
+
+  loadFirstThreeBudgetDestinations() {
+    this.budgetDestinationService.getFirstThreeBudgetDestinations().subscribe(
+      (response: DestinationCard[]) => {
+        this.zone.run(() => {
+          this.budgetdestinations = response;
+          console.log(
+            'First three budget destinations:',
+            this.budgetdestinations
+          );
+        });
+      },
+      (error) => {
+        console.error('Error loading first three budget destinations:', error);
       }
     );
   }

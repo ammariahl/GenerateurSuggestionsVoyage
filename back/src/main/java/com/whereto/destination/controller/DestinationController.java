@@ -4,6 +4,7 @@ import com.whereto.destination.entity.Destination;
 import com.whereto.destination.service.DestinationService;
 import com.whereto.destination.service.ActivityService;
 import com.whereto.destination.service.SeasonService;
+import com.whereto.destination.service.BudgetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.whereto.destination.dto.UserSelections;
 import org.springframework.http.ResponseEntity;
@@ -24,13 +25,20 @@ public class DestinationController {
   private final DestinationService destinationService;
   private final ActivityService activityService;
   private final SeasonService seasonService;
+  private final BudgetService budgetService;
   private static final Logger log = LoggerFactory.getLogger(DestinationController.class);
 
     @Autowired
-    public DestinationController(DestinationService destinationService,ActivityService activityService,SeasonService seasonService) {
+    public DestinationController(
+    DestinationService destinationService,
+    ActivityService activityService,
+    SeasonService seasonService,
+    BudgetService budgetService) {
+
         this.destinationService = destinationService;
         this.activityService = activityService;
         this.seasonService = seasonService;
+        this.budgetService = budgetService;
     }
 
          @PostMapping(value = "/top", consumes = "application/json")
@@ -54,5 +62,10 @@ public class DestinationController {
     @GetMapping("/first3springdestinations")
     public List<Destination> getFirstThreeSpringDestinations() {
         return seasonService.getFirstThreeSpringDestinations();
+    }
+
+    @GetMapping("/first3budgetdestinations")
+    public List<Destination> getFirstThreeBudgetDestinations() {
+        return budgetService.getFirstThreeBudgetDestinations();
     }
 }

@@ -12,6 +12,7 @@ import { AboutComponent } from './about/about.component';
 import { TravelService } from './TravalService/travalService';
 import { FamillyDestinationService } from './TravalService/Familly-Destination.Service';
 import { SpringDestinationService } from './TravalService/Spring-Destination.Service';
+import { BudgetDestinationService } from './TravalService/Budget-Destination.Service';
 import { HttpClientModule } from '@angular/common/http';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
@@ -36,6 +37,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     TravelService,
     FamillyDestinationService,
     SpringDestinationService,
+    BudgetDestinationService,
   ],
   bootstrap: [AppComponent],
 })
