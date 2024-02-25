@@ -1,15 +1,17 @@
 <section>
-  <aside class="header">
+  <aside class="header flex">
     <div class="img">
       <img [src]="destination.image" alt="image from the country" />
     </div>
-    <div class="shortInfos">
-      <h1>{{ destination.name }}</h1>
-      <p>{{ destination.descriptionShort }}</p>
-    </div>
-    <div class="documents flex" *ngFor="let doc of getTrueDocuments()">
-      <img src="../../assets/img/check.svg" alt="" class="icon" />
-      <p>{{ doc }}</p>
+    <div class="container">
+      <div class="shortInfos">
+        <h1>{{ destination.name }}</h1>
+        <p>{{ destination.descriptionShort }}</p>
+      </div>
+      <div class="documents flex" *ngFor="let doc of getTrueDocuments()">
+        <img src="../../assets/img/check.svg" alt="" class="icon" />
+        <p>{{ doc }}</p>
+      </div>
     </div>
   </aside>
 
@@ -17,4 +19,10 @@
     <h2>Description</h2>
     <p>{{ destination.descriptionLong }}</p>
   </aside>
+
+  <div class="all">
+    <button class="button teal" [routerLink]="['/all']">
+      Découvrir toutes les destinations
+    </button>
+  </div>
 </section>
