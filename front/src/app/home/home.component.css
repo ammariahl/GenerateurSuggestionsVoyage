@@ -49,6 +49,11 @@ img {
   background-color: var(--grey);
 }
 
+.all {
+  margin: 1rem;
+  text-align: center;
+  cursor: pointer;
+}
 @media screen and (max-width: 1200px) {
   .card {
     width: 15rem;
