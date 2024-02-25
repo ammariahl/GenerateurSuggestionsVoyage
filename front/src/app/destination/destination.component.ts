@@ -9,17 +9,23 @@ import { DestinationCard } from '../models/destination-card.model';
 })
 export class DestinationComponent implements OnInit {
   destination: DestinationCard = {} as DestinationCard;
-
+  trueDocumentKeys: string[] = [];
   constructor(private sharedDestination: SharedDestinationService) {}
 
   ngOnInit() {
-    this.destination = history.state.data;
-    console.log('Destination:', this.destination);
-    //console.log('Documents:', this.destination.documents);
-    this.getTrueDocuments();
+    if (history.state.data) {
+      this.destination = history.state.data;
+      console.log('Destination:', this.destination);
+      this.trueDocumentKeys = this.getTrueDocuments();
+      console.log('True documents:', this.trueDocumentKeys);
+    }
   }
 
-  getTrueDocuments() {
+  getTrueDocuments(): string[] {
+    if (!this.destination.documents) {
+      return [];
+    }
+
     const trueDocumentKeys = this.destination.documents.flatMap(
       (document: any) => {
         return Object.keys(document).filter(

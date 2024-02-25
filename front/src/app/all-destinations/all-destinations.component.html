@@ -1,1 +1,15 @@
-<p>all-destinations works!</p>
+<div class="container">
+  <h1>Toutes nos destinations</h1>
+  <aside *ngFor="let destination of destinations">
+    <div (click)="navigateToDestination(destination)" class="card flex">
+      <div class="img">
+        <img [src]="destination.image" alt="destination.name" />
+      </div>
+
+      <div class="card-body">
+        <h5 class="card-title">{{ destination.name }}</h5>
+        <p class="card-text">{{ destination.descriptionShort }}</p>
+      </div>
+    </div>
+  </aside>
+</div>

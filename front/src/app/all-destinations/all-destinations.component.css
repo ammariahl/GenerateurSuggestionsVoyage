@@ -1,0 +1,72 @@
+.container {
+  width: 100%;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin: 2rem 0;
+  text-align: center;
+  font-family: "Zen Loop", cursive;
+}
+
+.card {
+  background-color: var(--grey);
+  border-radius: 1rem;
+  margin: 20px auto;
+  width: 90%;
+  height: 8rem;
+}
+
+.img {
+  width: 12rem;
+  height: 8rem;
+}
+
+img {
+  width: 12rem;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 1rem 0 0 1rem;
+}
+
+.card-body {
+  padding: 1.2rem;
+}
+
+h5 {
+  font-size: 1.5rem;
+  letter-spacing: 0.1rem;
+  color: var(--black);
+  font-family: "Zen Loop", cursive;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1200px) {
+  .card {
+    height: 10rem;
+  }
+  .img {
+    width: 50%;
+    height: 100%;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .card {
+    height: 15rem;
+  }
+
+  .img {
+    width: 50%;
+    height: 100%;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
