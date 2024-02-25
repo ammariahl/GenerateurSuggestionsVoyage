@@ -1,11 +1,9 @@
 nav {
   align-items: center;
   justify-content: space-between;
-  position: sticky;
-  top: 0;
+
   background: none;
-  padding: 1rem;
-  z-index: 2;
+  padding: 1rem 2rem;
 }
 
 .linksContainer {
