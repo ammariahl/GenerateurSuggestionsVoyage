@@ -90,16 +90,6 @@
   margin: 8%;
 }
 
-button {
-  color: var(--white);
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  margin: 3%;
-  width: 80%;
-  height: 70%;
-}
-
 button:hover {
   -moz-transform: scale(1.1);
   -webkit-transform: scale(1.1);

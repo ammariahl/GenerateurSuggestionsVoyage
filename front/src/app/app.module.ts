@@ -13,6 +13,7 @@ import { TravelService } from './TravalService/travalService';
 import { HttpClientModule } from '@angular/common/http';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AllDestinationsComponent } from './all-destinations/all-destinations.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { AllDestinationsComponent } from './all-destinations/all-destinations.co
     AppRoutingModule,
     NgOptimizedImage,
     HttpClientModule,
+    ReactiveFormsModule,
   ],
   providers: [TravelService],
   bootstrap: [AppComponent],
