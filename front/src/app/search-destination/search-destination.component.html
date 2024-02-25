@@ -1,175 +1,181 @@
-<form [formGroup]="preferencesForm" (ngSubmit)="onSubmit()">
-  <div class="step">
-    <label>Je souhaite voyager en...</label>
-    <div class="buttons">
-      <button
-        type="button"
-        class="button green"
-        (click)="setPreference('season', 'spring', 1)"
-      >
-        Printemps
-      </button>
-      <button
-        type="button"
-        class="button red"
-        (click)="setPreference('season', 'summer', 1)"
-      >
-        Été
-      </button>
-      <button
-        type="button"
-        class="button yellow"
-        (click)="setPreference('season', 'autumn', 1)"
-      >
-        Automne
-      </button>
-      <button
-        type="button"
-        class="button teal"
-        (click)="setPreference('season', 'winter', 1)"
-      >
-        Hiver
-      </button>
+<div class="container">
+  <form [formGroup]="preferencesForm" (ngSubmit)="onSubmit()">
+    <div class="step">
+      <label>Je souhaite voyager en...</label>
+      <div class="buttons">
+        <button
+          type="button"
+          class="button green"
+          (click)="setPreference('season', 'spring', 1)"
+        >
+          Printemps
+        </button>
+        <button
+          type="button"
+          class="button red"
+          (click)="setPreference('season', 'summer', 1)"
+        >
+          Été
+        </button>
+        <button
+          type="button"
+          class="button yellow"
+          (click)="setPreference('season', 'autumn', 1)"
+        >
+          Automne
+        </button>
+        <button
+          type="button"
+          class="button teal"
+          (click)="setPreference('season', 'winter', 1)"
+        >
+          Hiver
+        </button>
+      </div>
     </div>
-  </div>
 
-  <div class="step" *ngIf="currentStep >= 1">
-    <label>Plutôt...</label>
-    <div class="buttons">
-      <button
-        type="button"
-        class="button green"
-        (click)="setPreference('climat', 'chaud', 2)"
-      >
-        Chaud
-      </button>
-      <button
-        type="button"
-        class="button red"
-        (click)="setPreference('climat', 'froid', 2)"
-      >
-        Froid
-      </button>
-      <button
-        type="button"
-        class="button yellow"
-        (click)="setPreference('climat', 'doux', 2)"
-      >
-        Doux
-      </button>
-      <button
-        type="button"
-        class="button teal"
-        (click)="setPreference('climat', 'peu_importe', 2)"
-      >
-        Peu importe
-      </button>
+    <div class="step" *ngIf="currentStep >= 1" [@slideInOut]>
+      <label>Plutôt...</label>
+      <div class="buttons">
+        <button
+          type="button"
+          class="button green"
+          (click)="setPreference('climat', 'chaud', 2)"
+        >
+          Chaud
+        </button>
+        <button
+          type="button"
+          class="button red"
+          (click)="setPreference('climat', 'froid', 2)"
+        >
+          Froid
+        </button>
+        <button
+          type="button"
+          class="button yellow"
+          (click)="setPreference('climat', 'doux', 2)"
+        >
+          Doux
+        </button>
+        <button
+          type="button"
+          class="button teal"
+          (click)="setPreference('climat', 'peu_importe', 2)"
+        >
+          Peu importe
+        </button>
+      </div>
     </div>
-  </div>
 
-  <div class="step" *ngIf="currentStep >= 2">
-    <label>Mon budget...</label>
-    <div class="buttons">
-      <button
-        type="button"
-        class="button green"
-        (click)="setPreference('budget', 'littleBudget', 3)"
-      >
-        Petit
-      </button>
-      <button
-        type="button"
-        class="button red"
-        (click)="setPreference('budget', 'mediumBudget', 3)"
-      >
-        Moyen
-      </button>
-      <button
-        type="button"
-        class="button yellow"
-        (click)="setPreference('budget', 'bigBudget', 3)"
-      >
-        Gros
-      </button>
-      <button
-        type="button"
-        class="button teal"
-        (click)="setPreference('budget', 'unlimited', 3)"
-      >
-        Illimité
-      </button>
+    <div class="step" *ngIf="currentStep >= 2" [@slideInOut]>
+      <label>Mon budget...</label>
+      <div class="buttons">
+        <button
+          type="button"
+          class="button green"
+          (click)="setPreference('budget', 'littleBudget', 3)"
+        >
+          Petit
+        </button>
+        <button
+          type="button"
+          class="button red"
+          (click)="setPreference('budget', 'mediumBudget', 3)"
+        >
+          Moyen
+        </button>
+        <button
+          type="button"
+          class="button yellow"
+          (click)="setPreference('budget', 'bigBudget', 3)"
+        >
+          Gros
+        </button>
+        <button
+          type="button"
+          class="button teal"
+          (click)="setPreference('budget', 'unlimited', 3)"
+        >
+          Illimité
+        </button>
+      </div>
     </div>
-  </div>
 
-  <div class="step" *ngIf="currentStep >= 3">
-    <label>Je voyage...</label>
-    <div class="buttons">
-      <button
-        type="button"
-        class="button green"
-        (click)="setPreference('activity', 'relaxing', 4)"
-      >
-        Relaxant
-      </button>
-      <button
-        type="button"
-        class="button red"
-        (click)="setPreference('activity', 'adventure', 4)"
-      >
-        Aventure
-      </button>
-      <button
-        type="button"
-        class="button yellow"
-        (click)="setPreference('activity', 'groupactivity', 4)"
-      >
-        En groupe
-      </button>
-      <button
-        type="button"
-        class="button teal"
-        (click)="setPreference('activity', 'family', 4)"
-      >
-        En famille
-      </button>
+    <div class="step" *ngIf="currentStep >= 3" [@slideInOut]>
+      <label>Je voyage...</label>
+      <div class="buttons">
+        <button
+          type="button"
+          class="button green"
+          (click)="setPreference('activity', 'relaxing', 4)"
+        >
+          Relaxant
+        </button>
+        <button
+          type="button"
+          class="button red"
+          (click)="setPreference('activity', 'adventure', 4)"
+        >
+          Aventure
+        </button>
+        <button
+          type="button"
+          class="button yellow"
+          (click)="setPreference('activity', 'groupactivity', 4)"
+        >
+          En groupe
+        </button>
+        <button
+          type="button"
+          class="button teal"
+          (click)="setPreference('activity', 'family', 4)"
+        >
+          En famille
+        </button>
+      </div>
     </div>
-  </div>
 
-  <div class="step" *ngIf="currentStep >= 4">
-    <label>Je possède...</label>
-    <div class="buttons">
-      <button
-        type="button"
-        class="button green"
-        (click)="onDocumentSelect('cniUe')"
-      >
-        CNI UE
-      </button>
-      <button
-        type="button"
-        class="button red"
-        (click)="onDocumentSelect('passportUe')"
-      >
-        Passeport UE
-      </button>
-      <button
-        type="button"
-        class="button yellow"
-        (click)="onDocumentSelect('visaUe')"
-      >
-        Visa UE
-      </button>
-      <button
-        type="button"
-        class="button teal"
-        (click)="onDocumentSelect('passportMde')"
-      >
-        Passeport MDE
-      </button>
+    <div class="step" *ngIf="currentStep >= 4" [@slideInOut]>
+      <label>Je possède...</label>
+      <div class="buttons">
+        <button
+          type="button"
+          class="button"
+          [class.green]="selectedDocuments['cniUe']"
+          (click)="onDocumentSelect('cniUe')"
+        >
+          CNI UE
+        </button>
+        <button
+          type="button"
+          class="button"
+          [class.red]="selectedDocuments['passportUe']"
+          (click)="onDocumentSelect('passportUe')"
+        >
+          Passeport UE
+        </button>
+        <button
+          type="button"
+          class="button"
+          [class.yellow]="selectedDocuments['visaUe']"
+          (click)="onDocumentSelect('visaUe')"
+        >
+          Visa UE
+        </button>
+        <button
+          type="button"
+          class="button"
+          [class.teal]="selectedDocuments['passportMde']"
+          (click)="onDocumentSelect('passportMde')"
+        >
+          Passeport MDE
+        </button>
+      </div>
     </div>
-  </div>
 
-  <div *ngIf="currentStep >= 4">
-    <button class="button blue" type="submit">Valider</button>
-  </div>
-</form>
+    <div *ngIf="currentStep >= 4">
+      <button class="button blue" type="submit">Valider</button>
+    </div>
+  </form>
+</div>

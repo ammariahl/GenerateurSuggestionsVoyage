@@ -1,15 +1,36 @@
-import { Component, OnInit, NgZone, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { TravelService } from '../TravalService/travalService';
 import { Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { DestinationCard } from '../models/destination-card.model';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-search-destination',
   templateUrl: './search-destination.component.html',
   styleUrl: './search-destination.component.css',
+  animations: [
+    trigger('slideInOut', [
+      transition(':enter', [
+        // :enter is alias to 'void => *'
+        style({ transform: 'translateY(-100%)', zIndex: -1 }),
+        animate(
+          '0.5s ease-in',
+          style({ transform: 'translateY(0)', zIndex: -1 })
+        ),
+      ]),
+      transition(':leave', [
+        // :leave is alias to '* => void'
+        style({ zIndex: -1 }),
+        animate(
+          '0.5s ease-out',
+          style({ transform: 'translateY(-100%)', zIndex: -1 })
+        ),
+      ]),
+    ]),
+  ],
 })
 export class SearchDestinationComponent {
   constructor(
@@ -57,8 +78,16 @@ export class SearchDestinationComponent {
   setPreference(field: string, value: string, step: number): void {
     this.preferencesForm.get(field)?.setValue(value);
     this.onButtonClick(step);
+    this.cdr.detectChanges();
     console.log('Field:', field, 'Value:', value, 'Step:', step);
   }
+  //Je crée un objet pour stocker les documents sélectionnés
+  selectedDocuments: { [key: string]: boolean } = {
+    cniUe: true,
+    passportUe: true,
+    visaUe: true,
+    passportMde: true,
+  };
 
   //Je fais en sorte qu'on puisse sélectionner plusieurs documents
   onDocumentSelect(document: any) {
@@ -70,6 +99,7 @@ export class SearchDestinationComponent {
       passportMde: document === 'passportMde',
     };
     documents.push(this.formBuilder.control(documentObject));
+    this.selectedDocuments[document] = !this.selectedDocuments[document];
   }
 
   //Je navigue vers la page de suggestions de destinations
@@ -113,5 +143,22 @@ export class SearchDestinationComponent {
 
     console.log('User Preference:', this.userPreference);
     this.navigateToSuggestion();
+  }
+
+  // Animations
+
+  ngAfterViewChecked() {
+    this.scrollToCurrentStep();
+  }
+  scrollToCurrentStep() {
+    const stepElements = Array.from(document.querySelectorAll('.step'));
+    const visibleStepElements = stepElements.filter(
+      (step) => (step as HTMLElement).offsetParent !== null
+    );
+    const lastVisibleStepElement =
+      visibleStepElements[visibleStepElements.length - 1];
+    if (lastVisibleStepElement) {
+      lastVisibleStepElement.scrollIntoView({ behavior: 'smooth' });
+    }
   }
 }
