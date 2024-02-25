@@ -6,6 +6,7 @@ import { AboutComponent } from './about/about.component';
 import { SearchDestinationComponent } from './search-destination/search-destination.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AllDestinationsComponent } from './all-destinations/all-destinations.component';
+import { DestinationComponent } from './destination/destination.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -26,6 +27,11 @@ const routes: Routes = [
     path: 'all',
     component: AllDestinationsComponent,
     title: 'All destinations',
+  },
+  {
+    path: 'destination/:name',
+    component: DestinationComponent,
+    title: 'Destination :name',
   },
   { path: '**', component: PageNotFoundComponent },
 ];

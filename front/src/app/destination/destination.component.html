@@ -1,1 +1,22 @@
-<section></section>
+<section>
+  <aside class="header">
+    <div class="img">
+      <img [src]="destination.image" alt="image from the country" />
+    </div>
+    <div class="shortInfos">
+      <h1>{{ destination.name }}</h1>
+      <h2>Documents</h2>
+      <div class="documents" *ngFor="let doc of getTrueDocuments()">
+        <img src="../../assets/img/check.svg" alt="" class="icon" />
+        <p>{{ doc }}</p>
+      </div>
+    </div>
+  </aside>
+</section>
+
+<section>
+  <div class="description">
+    <h2>Description</h2>
+    <p>{{ destination.descriptionLong }}</p>
+  </div>
+</section>

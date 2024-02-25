@@ -7,6 +7,7 @@ import {
 import { DestinationCard } from '../models/destination-card.model';
 import { TravelService } from '../TravalService/travalService';
 import { SharedDestinationService } from '../TravalService/Shared-destination.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-suggestion',
@@ -19,7 +20,8 @@ export class SuggestionComponent implements AfterViewInit {
 
   constructor(
     private cdr: ChangeDetectorRef,
-    private sharedDestinationService: SharedDestinationService
+    private sharedDestinationService: SharedDestinationService,
+    private router: Router
   ) {}
 
   ngAfterViewInit(): void {
@@ -75,15 +77,9 @@ export class SuggestionComponent implements AfterViewInit {
   }
 
   showDestinationCard(destination: DestinationCard): void {
-    // console.log('show destination card in suggestion component:', destination);
-    // // Access the properties of the selected destinationCard
-    // console.log('Selected Season:', destination.selectedSeason);
-    // console.log('Selected Budget:', destination.selectedBudget);
-    // console.log('Selected Activity:', destination.selectedActivity);
-    // console.log(
-    //   'Selected Documents:',
-    //   destination.selectedDocuments.join(', ')
-    // );
+    this.router.navigate(['/destination', destination.name], {
+      state: { data: destination },
+    });
   }
 
   viewAll(): void {
