@@ -5,18 +5,16 @@
     </div>
     <div class="shortInfos">
       <h1>{{ destination.name }}</h1>
-      <h2>Documents</h2>
-      <div class="documents" *ngFor="let doc of getTrueDocuments()">
-        <img src="../../assets/img/check.svg" alt="" class="icon" />
-        <p>{{ doc }}</p>
-      </div>
+      <p>{{ destination.descriptionShort }}</p>
+    </div>
+    <div class="documents flex" *ngFor="let doc of getTrueDocuments()">
+      <img src="../../assets/img/check.svg" alt="" class="icon" />
+      <p>{{ doc }}</p>
     </div>
   </aside>
-</section>
 
-<section>
-  <div class="description">
+  <aside class="description">
     <h2>Description</h2>
     <p>{{ destination.descriptionLong }}</p>
-  </div>
+  </aside>
 </section>

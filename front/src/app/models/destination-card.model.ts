@@ -11,4 +11,5 @@ export interface DestinationCard {
   activities: string;
   documents: string[];
   descriptionLong: string;
+  descriptionShort: string;
 }
