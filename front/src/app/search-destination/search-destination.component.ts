@@ -52,6 +52,8 @@ export class SearchDestinationComponent {
     activity: [],
     documents: [],
   };
+  stepCompleted: { [key: number]: boolean } = { 0: true };
+  stepValues: { [key: number]: string } = {};
 
   // Je crée le formulaire
   preferencesForm = this.formBuilder.group({
@@ -77,16 +79,18 @@ export class SearchDestinationComponent {
   //Je récupère les infos des boutons cliqués
   setPreference(field: string, value: string, step: number): void {
     this.preferencesForm.get(field)?.setValue(value);
+    this.stepValues[step] = value;
+    this.stepCompleted[step + 1] = true;
     this.onButtonClick(step);
     this.cdr.detectChanges();
     console.log('Field:', field, 'Value:', value, 'Step:', step);
   }
   //Je crée un objet pour stocker les documents sélectionnés
   selectedDocuments: { [key: string]: boolean } = {
-    cniUe: true,
-    passportUe: true,
-    visaUe: true,
-    passportMde: true,
+    cniUe: false,
+    passportUe: false,
+    visaUe: false,
+    passportMde: false,
   };
 
   //Je fais en sorte qu'on puisse sélectionner plusieurs documents
