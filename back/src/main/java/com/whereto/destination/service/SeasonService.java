@@ -1,6 +1,7 @@
 package com.whereto.destination.service;
 
 import com.whereto.destination.entity.Season;
+import com.whereto.destination.entity.Destination;
 import com.whereto.destination.repository.SeasonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import com.whereto.destination.exception.CustomNotFoundException;
+import java.util.Collections;
 
 @Service
 public class SeasonService {
@@ -59,5 +61,20 @@ public class SeasonService {
         }
 
         return result;
+    }
+
+
+     public List<Destination> getFirstThreeSpringDestinations() {
+        List<Long> destinationIds = seasonRepository.findDestinationIdsBySpring();
+        if (destinationIds == null || destinationIds.isEmpty()) {
+        return Collections.emptyList();
+    }
+        List<Destination> allWinterDestinations = seasonRepository.findDestinationsByIds(destinationIds);
+
+        if (allWinterDestinations.size() >= 3) {
+        return allWinterDestinations.subList(0, 3); 
+    } else {
+        return allWinterDestinations;
+    }
     }
 }

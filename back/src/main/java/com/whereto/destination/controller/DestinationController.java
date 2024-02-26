@@ -2,7 +2,9 @@ package com.whereto.destination.controller;
 
 import com.whereto.destination.entity.Destination;
 import com.whereto.destination.service.DestinationService;
-import org.springframework.web.bind.annotation.RestController;
+import com.whereto.destination.service.ActivityService;
+import com.whereto.destination.service.SeasonService;
+import com.whereto.destination.service.BudgetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.whereto.destination.dto.UserSelections;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +18,6 @@ import java.util.Collections;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.data.domain.PageRequest;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -24,11 +25,22 @@ import org.springframework.data.domain.PageRequest;
 @RequestMapping("api/destionations")
 public class DestinationController {
   private final DestinationService destinationService;
+  private final ActivityService activityService;
+  private final SeasonService seasonService;
+  private final BudgetService budgetService;
   private static final Logger log = LoggerFactory.getLogger(DestinationController.class);
 
     @Autowired
-    public DestinationController(DestinationService destinationService) {
+    public DestinationController(
+    DestinationService destinationService,
+    ActivityService activityService,
+    SeasonService seasonService,
+    BudgetService budgetService) {
+
         this.destinationService = destinationService;
+        this.activityService = activityService;
+        this.seasonService = seasonService;
+        this.budgetService = budgetService;
     }
 
          @PostMapping(value = "/top", consumes = "application/json")
@@ -49,5 +61,20 @@ public class DestinationController {
         return new ResponseEntity<>(randomDestinations, HttpStatus.OK);
         }
 
+
+    @GetMapping("/first3familydestinations")
+    public List<Destination> getFirstThreeFamilyDestinations() {
+        return activityService.getFirstThreeFamilyDestinations();
+    }
+
     
+    @GetMapping("/first3springdestinations")
+    public List<Destination> getFirstThreeSpringDestinations() {
+        return seasonService.getFirstThreeSpringDestinations();
+    }
+
+    @GetMapping("/first3budgetdestinations")
+    public List<Destination> getFirstThreeBudgetDestinations() {
+        return budgetService.getFirstThreeBudgetDestinations();
+    }
 }

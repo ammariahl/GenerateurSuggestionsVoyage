@@ -1,6 +1,7 @@
 package com.whereto.destination.service;
 
 import com.whereto.destination.entity.Activity;
+import com.whereto.destination.entity.Destination;
 import com.whereto.destination.repository.ActivityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import com.whereto.destination.exception.CustomNotFoundException;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
+import java.util.Collections;
+
 
 @Service
 public class ActivityService {
@@ -52,6 +57,21 @@ public class ActivityService {
 
         return activityRepository.findByRelaxingAndAdventureAndGroupactivityAndFamily(
             relaxing, adventure, groupactivity, family);
+    }
+
+
+ public List<Destination> getFirstThreeFamilyDestinations() {
+        List<Long> destinationIds = activityRepository.findDestinationIdsByFamily();
+        if (destinationIds == null || destinationIds.isEmpty()) {
+        return Collections.emptyList();
+    }
+        List<Destination> allFamilyDestinations = activityRepository.findDestinationsByIds(destinationIds);
+
+        if (allFamilyDestinations.size() >= 3) {
+        return allFamilyDestinations.subList(0, 3); 
+    } else {
+        return allFamilyDestinations;
+    }
     }
 }
 
