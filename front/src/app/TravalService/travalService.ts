@@ -11,16 +11,9 @@ import { DestinationCard } from '../models/destination-card.model';
   providedIn: 'root',
 })
 export class TravelService {
-<<<<<<< HEAD
-  private apiUrl = 'http://localhost:8080/api/destinations/top';
-  private randomUrl = 'http://localhost:8080/api/destionations';
-=======
-
   private apiUrl = 'http://localhost:8080/api/destinations/top';
 
-  private randomUrl = 'http://localhost:8080/api/destionations'
->>>>>>> 15d321802d41df9cf9b56c9db9ec30e716fc5534
-
+  private randomUrl = 'http://localhost:8080/api/destinations';
 
   constructor(
     private http: HttpClient,

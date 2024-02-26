@@ -22,67 +22,67 @@ export class SuggestionComponent implements AfterViewInit {
     private cdr: ChangeDetectorRef,
     private sharedDestinationService: SharedDestinationService,
 
-    private router: Router
+    private router: Router,
 
-    public travelService : TravelService
-
+    public travelService: TravelService
   ) {}
 
   ngAfterViewInit(): void {
-
-    if (this.travelService.isRandom){
-    this.getRandomDestinations();
-    }
-    else {
-    // Subscribe to the destinations$ observable when the component initializes
-    this.sharedDestinationService.destinations$.subscribe(
-      (destinations) => {
-        console.log('Received destinations from shared service:', destinations);
-        destinations.forEach((destination) => {
-          const selectedSeasons = destination.seasons;
-          const selectedBudgets = destination.budgets;
-          const selectedActivities = destination.activities;
-          const selectedDocuments = destination.documents;
-          // Accessing seasons
+    if (this.travelService.isRandom) {
+      this.getRandomDestinations();
+    } else {
+      // Subscribe to the destinations$ observable when the component initializes
+      this.sharedDestinationService.destinations$.subscribe(
+        (destinations) => {
           console.log(
-            'Seasons for destination',
-            destination.name,
-            ':',
-            selectedSeasons
+            'Received destinations from shared service:',
+            destinations
           );
+          destinations.forEach((destination) => {
+            const selectedSeasons = destination.seasons;
+            const selectedBudgets = destination.budgets;
+            const selectedActivities = destination.activities;
+            const selectedDocuments = destination.documents;
+            // Accessing seasons
+            console.log(
+              'Seasons for destination',
+              destination.name,
+              ':',
+              selectedSeasons
+            );
 
-          // Accessing budgets
-          console.log(
-            'Budgets for destination',
-            destination.name,
-            ':',
-            selectedBudgets
-          );
+            // Accessing budgets
+            console.log(
+              'Budgets for destination',
+              destination.name,
+              ':',
+              selectedBudgets
+            );
 
-          // Accessing activities
-          console.log(
-            'Activities for destination',
-            destination.name,
-            ':',
-            selectedActivities
-          );
+            // Accessing activities
+            console.log(
+              'Activities for destination',
+              destination.name,
+              ':',
+              selectedActivities
+            );
 
-          // Accessing documents
-          console.log(
-            'Documents for destination',
-            destination.name,
-            ':',
-            selectedDocuments
-          );
-        });
-        this.destinationCard = destinations;
-        this.cdr.detectChanges();
-      },
-      (error) => {
-        console.error('Error getting destinations:', error);
-        console.log('No matching destinations:');
-      }
-    );
+            // Accessing documents
+            console.log(
+              'Documents for destination',
+              destination.name,
+              ':',
+              selectedDocuments
+            );
+          });
+          this.destinationCard = destinations;
+          this.cdr.detectChanges();
+        },
+        (error) => {
+          console.error('Error getting destinations:', error);
+          console.log('No matching destinations:');
+        }
+      );
     }
   }
 
@@ -181,7 +181,7 @@ export class SuggestionComponent implements AfterViewInit {
       (destinations: DestinationCard[]) => {
         this.destinationCard = destinations;
       },
-      (error : any) => {
+      (error: any) => {
         console.error('Error fetching random destinations:', error);
       }
     );
