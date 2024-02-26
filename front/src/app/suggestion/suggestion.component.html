@@ -32,8 +32,14 @@
   </div>
 </div>
 
-<div class="view-all" [style.visibility]="!isViewAll ? 'visible' : 'hidden'">
+<div *ngIf="!travelService.isRandom" class="view-all" [style.visibility]="!isViewAll ? 'visible' : 'hidden'">
   <button class="view-all-button teal" (click)="viewAll()">
+    Voir d'autres destinations
+  </button>
+</div>
+
+<div *ngIf="travelService.isRandom" class="view-all" [style.visibility]="!isViewAll ? 'visible' : 'hidden'">
+  <button class="view-all-button teal" (click)="getRandomDestinations()">
     Voir d'autres destinations
   </button>
 </div>
