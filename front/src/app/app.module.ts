@@ -18,6 +18,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { AllDestinationsComponent } from './all-destinations/all-destinations.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DestinationNotFoundComponent } from './destination-not-found/destination-not-found.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AboutComponent,
     PageNotFoundComponent,
     AllDestinationsComponent,
+    DestinationNotFoundComponent,
   ],
   imports: [
     BrowserModule,
