@@ -7,6 +7,7 @@ import { SearchDestinationComponent } from './search-destination/search-destinat
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AllDestinationsComponent } from './all-destinations/all-destinations.component';
 import { DestinationComponent } from './destination/destination.component';
+import { DestinationNotFoundComponent } from './destination-not-found/destination-not-found.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -19,13 +20,15 @@ const routes: Routes = [
   },
   { path: 'about', component: AboutComponent, title: 'About' },
   { path: 'search', component: SearchDestinationComponent, title: 'Search' },
-
-
   {
     path: 'api/destinations/top/:periode/:climat/:budget/:activity/:documents',
     component: SuggestionComponent,
   },
-
+  {
+    path: 'destNotFound',
+    component: DestinationNotFoundComponent,
+    title: 'DestNotFound',
+  },
   {
     path: 'all',
     component: AllDestinationsComponent,
