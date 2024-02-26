@@ -56,8 +56,8 @@ public class BudgetService {
     }
         List<Destination> allBudgetDestinations = budgetRepository.findDestinationsByIds(destinationIds);
 
-        if (allBudgetDestinations.size() >= 4) {
-        return allBudgetDestinations.subList(0, 4); 
+        if (allBudgetDestinations.size() >= 3) {
+        return allBudgetDestinations.subList(0, 3); 
     } else {
         return allBudgetDestinations;
     }
