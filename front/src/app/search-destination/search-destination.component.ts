@@ -32,9 +32,7 @@ import { trigger, transition, style, animate } from '@angular/animations';
     ]),
   ],
 })
-
 export class SearchDestinationComponent {
-
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -110,6 +108,7 @@ export class SearchDestinationComponent {
       .sendTravelPreferences(this.userPreference)
       .pipe(
         catchError((error) => {
+          this.router.navigate(['/destNotFound']);
           console.log('Error:', error);
           return of([]);
         })
@@ -161,7 +160,6 @@ export class SearchDestinationComponent {
       visibleStepElements[visibleStepElements.length - 1];
     if (lastVisibleStepElement) {
       lastVisibleStepElement.scrollIntoView({ behavior: 'smooth' });
-
     }
   }
 }
