@@ -1,4 +1,40 @@
 <div class="container">
+  <div class="progress-bar flex">
+    <div class="pace flex" [class.active]="currentStep >= 0">
+      <div class="circle flex" (click)="stepCompleted[0] && (currentStep = 0)">
+        1
+      </div>
+      <div class="step-value">{{ stepValues[1] }}</div>
+    </div>
+    <div class="line"></div>
+    <div class="pace flex" [class.active]="currentStep >= 1">
+      <div class="circle flex" (click)="stepCompleted[1] && (currentStep = 1)">
+        2
+      </div>
+      <div class="step-value">{{ stepValues[2] }}</div>
+    </div>
+    <div class="line"></div>
+    <div class="pace flex" [class.active]="currentStep >= 2">
+      <div class="circle flex" (click)="stepCompleted[2] && (currentStep = 2)">
+        3
+      </div>
+      <div class="step-value">{{ stepValues[3] }}</div>
+    </div>
+    <div class="line"></div>
+    <div class="pace flex" [class.active]="currentStep >= 3">
+      <div class="circle flex" (click)="stepCompleted[3] && (currentStep = 3)">
+        4
+      </div>
+      <div class="step-value">{{ stepValues[4] }}</div>
+    </div>
+    <div class="line"></div>
+    <div class="pace flex" [class.active]="currentStep >= 4">
+      <div class="circle flex" (click)="stepCompleted[4] && (currentStep = 4)">
+        5
+      </div>
+    </div>
+  </div>
+
   <form [formGroup]="preferencesForm" (ngSubmit)="onSubmit()">
     <div class="step">
       <label>Je souhaite voyager en...</label>
@@ -34,7 +70,6 @@
       </div>
     </div>
 
-
     <div class="step" *ngIf="currentStep >= 1" [@slideInOut]>
       <label>Plutôt...</label>
       <div class="buttons">
@@ -67,9 +102,7 @@
           Peu importe
         </button>
       </div>
-
     </div>
-
 
     <div class="step" *ngIf="currentStep >= 2" [@slideInOut]>
       <label>Mon budget...</label>
@@ -103,9 +136,7 @@
           Illimité
         </button>
       </div>
-
     </div>
-
 
     <div class="step" *ngIf="currentStep >= 3" [@slideInOut]>
       <label>Je voyage...</label>
@@ -139,53 +170,48 @@
           En famille
         </button>
       </div>
-
     </div>
-
 
     <div class="step" *ngIf="currentStep >= 4" [@slideInOut]>
       <label>Je possède...</label>
       <div class="buttons">
         <button
           type="button"
-          class="button"
-          [class.green]="selectedDocuments['cniUe']"
+          class="button green"
+          [class.selected]="selectedDocuments['cniUe']"
           (click)="onDocumentSelect('cniUe')"
         >
           CNI UE
         </button>
         <button
           type="button"
-          class="button"
-          [class.red]="selectedDocuments['passportUe']"
+          class="button red"
+          [class.selected]="selectedDocuments['passportUe']"
           (click)="onDocumentSelect('passportUe')"
         >
           Passeport UE
         </button>
         <button
           type="button"
-          class="button"
-          [class.yellow]="selectedDocuments['visaUe']"
+          class="button yellow"
+          [class.selected]="selectedDocuments['visaUe']"
           (click)="onDocumentSelect('visaUe')"
         >
           Visa UE
         </button>
         <button
           type="button"
-          class="button"
-          [class.teal]="selectedDocuments['passportMde']"
+          class="button teal"
+          [class.selected]="selectedDocuments['passportMde']"
           (click)="onDocumentSelect('passportMde')"
         >
           Passeport MDE
         </button>
       </div>
-
     </div>
-
 
     <div *ngIf="currentStep >= 4">
       <button class="button blue" type="submit">Valider</button>
-
     </div>
   </form>
 </div>
