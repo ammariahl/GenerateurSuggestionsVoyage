@@ -1,218 +1,191 @@
-<div class="timeline-steps">
-  <div class="timeline-step">
-    <div class="timeline-content">
-      <div class="inner-circle" (click)="previous(1)"></div>
-      <p class="timelinePreferenceInitialization" *ngIf="questionNumber == 1">
-        Periode
-      </p>
-      <p class="timelinePreferenceSelected">
-        {{ seasonTimeline }}
-      </p>
+<div class="container">
+  <form [formGroup]="preferencesForm" (ngSubmit)="onSubmit()">
+    <div class="step">
+      <label>Je souhaite voyager en...</label>
+      <div class="buttons">
+        <button
+          type="button"
+          class="button green"
+          (click)="setPreference('season', 'spring', 1)"
+        >
+          Printemps
+        </button>
+        <button
+          type="button"
+          class="button red"
+          (click)="setPreference('season', 'summer', 1)"
+        >
+          Été
+        </button>
+        <button
+          type="button"
+          class="button yellow"
+          (click)="setPreference('season', 'autumn', 1)"
+        >
+          Automne
+        </button>
+        <button
+          type="button"
+          class="button teal"
+          (click)="setPreference('season', 'winter', 1)"
+        >
+          Hiver
+        </button>
+      </div>
     </div>
-  </div>
-  <div class="timeline-step">
-    <div class="timeline-content">
-      <div class="inner-circle" (click)="previous(2)"></div>
-      <p class="timelinePreferenceInitialization" *ngIf="questionNumber < 3">
-        Climat
-      </p>
-      <p class="timelinePreferenceSelected">
-        {{ climatTimeline }}
-      </p>
-    </div>
-  </div>
-  <div class="timeline-step">
-    <div class="timeline-content">
-      <div class="inner-circle" (click)="previous(3)"></div>
-      <p class="timelinePreferenceInitialization" *ngIf="questionNumber < 4">
-        Budget
-      </p>
-      <p class="timelinePreferenceSelected">
-        {{ budgetTimeline }}
-      </p>
-    </div>
-  </div>
-  <div class="timeline-step">
-    <div class="timeline-content">
-      <div class="inner-circle" (click)="previous(4)"></div>
-      <p class="timelinePreferenceInitialization" *ngIf="questionNumber < 5">
-        Activité
-      </p>
-      <p class="timelinePreferenceSelected">
-        {{ activityTimeline }}
-      </p>
-    </div>
-  </div>
-  <div class="timeline-step">
-    <div class="timeline-content">
-      <div class="inner-circle"></div>
-      <p class="timelinePreferenceInitialization" *ngIf="questionNumber < 6">
-        Documents
-      </p>
-    </div>
-  </div>
-</div>
 
-<div id="divContainer">
-  <span *ngIf="questionNumber == 1">
-    <h2 class="suggestion-title">Je souhaite voyager en ...</h2>
-    <div class="preferences_options">
-      <button
-        class="preferences_button_1 green"
-        (click)="preferencesSelection('spring')"
-      >
-        {{ seasonButtomName[0] }}
-      </button>
-      <button
-        class="preferences_button_2 red"
-        (click)="preferencesSelection('summer')"
-      >
-        {{ seasonButtomName[1] }}
-      </button>
-      <button
-        class="preferences_button_3 yellow"
-        (click)="preferencesSelection('autumn')"
-      >
-        {{ seasonButtomName[2] }}
-      </button>
-      <button
-        class="preferences_button_4 blue"
-        (click)="preferencesSelection('winter')"
-      >
-        {{ seasonButtomName[3] }}
-      </button>
-    </div>
-  </span>
 
-  <span *ngIf="questionNumber == 2">
-    <h2 class="suggestion-title">Plutôt ...</h2>
-    <div class="preferences_options">
-      <button
-        class="preferences_button_1 green"
-        (click)="preferencesSelection('chaud')"
-      >
-        {{ climatButtomName[0] }}
-      </button>
-      <button
-        class="preferences_button_2 red"
-        (click)="preferencesSelection('froid')"
-      >
-        {{ climatButtomName[1] }}
-      </button>
-      <button
-        class="preferences_button_3 yellow"
-        (click)="preferencesSelection('doux')"
-      >
-        {{ climatButtomName[2] }}
-      </button>
-      <button
-        class="preferences_button_4 blue"
-        (click)="preferencesSelection('peu_importe')"
-      >
-        {{ climatButtomName[3] }}
-      </button>
-    </div>
-  </span>
+    <div class="step" *ngIf="currentStep >= 1" [@slideInOut]>
+      <label>Plutôt...</label>
+      <div class="buttons">
+        <button
+          type="button"
+          class="button green"
+          (click)="setPreference('climat', 'chaud', 2)"
+        >
+          Chaud
+        </button>
+        <button
+          type="button"
+          class="button red"
+          (click)="setPreference('climat', 'froid', 2)"
+        >
+          Froid
+        </button>
+        <button
+          type="button"
+          class="button yellow"
+          (click)="setPreference('climat', 'doux', 2)"
+        >
+          Doux
+        </button>
+        <button
+          type="button"
+          class="button teal"
+          (click)="setPreference('climat', 'peu_importe', 2)"
+        >
+          Peu importe
+        </button>
+      </div>
 
-  <span *ngIf="questionNumber == 3">
-    <h2 class="suggestion-title">Mon budget ...</h2>
-    <div class="preferences_options">
-      <button
-        class="preferences_button_1 green"
-        (click)="preferencesSelection('littleBudget')"
-      >
-        {{ budgetButtomName[0] }}
-      </button>
-      <button
-        class="preferences_button_2 red"
-        (click)="preferencesSelection('mediumBudget')"
-      >
-        {{ budgetButtomName[1] }}
-      </button>
-      <button
-        class="preferences_button_3 yellow"
-        (click)="preferencesSelection('bigBudget')"
-      >
-        {{ budgetButtomName[2] }}
-      </button>
-      <button
-        class="preferences_button_4 blue"
-        (click)="preferencesSelection('unlimited')"
-      >
-        {{ budgetButtomName[3] }}
-      </button>
     </div>
-  </span>
 
-  <span *ngIf="questionNumber == 4">
-    <h2 class="suggestion-title">Je voyage ...</h2>
-    <div class="preferences_options">
-      <button
-        class="preferences_button_1 green"
-        (click)="preferencesSelection('relaxing')"
-      >
-        {{ activitiesButtomName[0] }}
-      </button>
-      <button
-        class="preferences_button_2 red"
-        (click)="preferencesSelection('adventure')"
-      >
-        {{ activitiesButtomName[1] }}
-      </button>
-      <button
-        class="preferences_button_3 yellow"
-        (click)="preferencesSelection('groupactivity')"
-      >
-        {{ activitiesButtomName[2] }}
-      </button>
-      <button
-        class="preferences_button_4 blue"
-        (click)="preferencesSelection('family')"
-      >
-        {{ activitiesButtomName[3] }}
-      </button>
-    </div>
-  </span>
 
-  <span *ngIf="questionNumber == 5">
-    <h2 class="suggestion-title">Je possède ...</h2>
-    <div class="preferences_options">
-      <button
-        class="preferences_button_1 green"
-        (click)="preferencesSelection('cniUe')"
-        [ngClass]="{ border: cniUeSelected }"
-      >
-        {{ documentsButtomName[0] }}
-      </button>
-      <button
-        class="preferences_button_2 red"
-        (click)="preferencesSelection('passportUe')"
-        [ngClass]="{ border: passportUeSelected }"
-      >
-        {{ documentsButtomName[1] }}
-      </button>
-      <button
-        class="preferences_button_3 yellow"
-        (click)="preferencesSelection('visaUe')"
-        [ngClass]="{ border: visaUeSelected }"
-      >
-        {{ documentsButtomName[2] }}
-      </button>
-      <button
-        class="preferences_button_4 blue"
-        (click)="preferencesSelection('passportMde')"
-        [ngClass]="{ border: passportMdeSelected }"
-      >
-        {{ documentsButtomName[3] }}
-      </button>
+    <div class="step" *ngIf="currentStep >= 2" [@slideInOut]>
+      <label>Mon budget...</label>
+      <div class="buttons">
+        <button
+          type="button"
+          class="button green"
+          (click)="setPreference('budget', 'littleBudget', 3)"
+        >
+          Petit
+        </button>
+        <button
+          type="button"
+          class="button red"
+          (click)="setPreference('budget', 'mediumBudget', 3)"
+        >
+          Moyen
+        </button>
+        <button
+          type="button"
+          class="button yellow"
+          (click)="setPreference('budget', 'bigBudget', 3)"
+        >
+          Gros
+        </button>
+        <button
+          type="button"
+          class="button teal"
+          (click)="setPreference('budget', 'unlimited', 3)"
+        >
+          Illimité
+        </button>
+      </div>
+
     </div>
-    <div
-      class="send"
-      [style.visibility]="questionNumber == 5 ? 'visible' : 'hidden'"
-    >
-      <button class="send-button green" (click)="sendSearchDestinationForm()">
-        Valider
-      </button>
+
+
+    <div class="step" *ngIf="currentStep >= 3" [@slideInOut]>
+      <label>Je voyage...</label>
+      <div class="buttons">
+        <button
+          type="button"
+          class="button green"
+          (click)="setPreference('activity', 'relaxing', 4)"
+        >
+          Relaxant
+        </button>
+        <button
+          type="button"
+          class="button red"
+          (click)="setPreference('activity', 'adventure', 4)"
+        >
+          Aventure
+        </button>
+        <button
+          type="button"
+          class="button yellow"
+          (click)="setPreference('activity', 'groupactivity', 4)"
+        >
+          En groupe
+        </button>
+        <button
+          type="button"
+          class="button teal"
+          (click)="setPreference('activity', 'family', 4)"
+        >
+          En famille
+        </button>
+      </div>
+
     </div>
-  </span>
+
+
+    <div class="step" *ngIf="currentStep >= 4" [@slideInOut]>
+      <label>Je possède...</label>
+      <div class="buttons">
+        <button
+          type="button"
+          class="button"
+          [class.green]="selectedDocuments['cniUe']"
+          (click)="onDocumentSelect('cniUe')"
+        >
+          CNI UE
+        </button>
+        <button
+          type="button"
+          class="button"
+          [class.red]="selectedDocuments['passportUe']"
+          (click)="onDocumentSelect('passportUe')"
+        >
+          Passeport UE
+        </button>
+        <button
+          type="button"
+          class="button"
+          [class.yellow]="selectedDocuments['visaUe']"
+          (click)="onDocumentSelect('visaUe')"
+        >
+          Visa UE
+        </button>
+        <button
+          type="button"
+          class="button"
+          [class.teal]="selectedDocuments['passportMde']"
+          (click)="onDocumentSelect('passportMde')"
+        >
+          Passeport MDE
+        </button>
+      </div>
+
+    </div>
+
+
+    <div *ngIf="currentStep >= 4">
+      <button class="button blue" type="submit">Valider</button>
+
+    </div>
+  </form>
 </div>
