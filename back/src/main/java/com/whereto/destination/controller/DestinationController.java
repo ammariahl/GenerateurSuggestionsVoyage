@@ -22,7 +22,7 @@ import org.springframework.data.domain.PageRequest;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("api/destionations")
+@RequestMapping("api/destinations")
 public class DestinationController {
   private final DestinationService destinationService;
   private final ActivityService activityService;
