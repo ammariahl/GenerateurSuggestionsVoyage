@@ -16,18 +16,21 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.PageRequest;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("api/destionations")
+@RequestMapping("api/destinations")
 public class DestinationController {
   private final DestinationService destinationService;
   private final ActivityService activityService;
   private final SeasonService seasonService;
   private final BudgetService budgetService;
+  private final DestinationRepository destinationRepository;
   private static final Logger log = LoggerFactory.getLogger(DestinationController.class);
 
     @Autowired
@@ -35,12 +38,14 @@ public class DestinationController {
     DestinationService destinationService,
     ActivityService activityService,
     SeasonService seasonService,
-    BudgetService budgetService) {
+    BudgetService budgetService,
+    DestinationRepository destinationRepository) {
 
         this.destinationService = destinationService;
         this.activityService = activityService;
         this.seasonService = seasonService;
         this.budgetService = budgetService;
+        this.destinationRepository = destinationRepository;
     }
 
          @PostMapping(value = "/top", consumes = "application/json")
@@ -61,22 +66,25 @@ public class DestinationController {
         return new ResponseEntity<>(randomDestinations, HttpStatus.OK);
         }
 
-<<<<<<<<< Temporary merge branch 1
-=========
-   
-    @GetMapping("/first3familydestinations")
-    public List<Destination> getFirstThreeFamilyDestinations() {
+        @GetMapping("/{id}")
+        public ResponseEntity<Destination> getDestinationById(@PathVariable Long id) {
+            Optional<Destination> destinationOptional = destinationRepository.findById(id);
+            return destinationOptional.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+        @GetMapping("/first3familydestinations")
+        public List<Destination> getFirstThreeFamilyDestinations() {
         return activityService.getFirstThreeFamilyDestinations();
     }
->>>>>>>>> Temporary merge branch 2
-    
-    @GetMapping("/first3springdestinations")
-    public List<Destination> getFirstThreeSpringDestinations() {
+
+        @GetMapping("/first3springdestinations")
+        public List<Destination> getFirstThreeSpringDestinations() {
         return seasonService.getFirstThreeSpringDestinations();
     }
 
-    @GetMapping("/first3budgetdestinations")
-    public List<Destination> getFirstThreeBudgetDestinations() {
+        @GetMapping("/first3budgetdestinations")
+        public List<Destination> getFirstThreeBudgetDestinations() {
         return budgetService.getFirstThreeBudgetDestinations();
-    }
-}
+    }}
+   
+
