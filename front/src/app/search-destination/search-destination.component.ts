@@ -112,6 +112,7 @@ export class SearchDestinationComponent {
       .sendTravelPreferences(this.userPreference)
       .pipe(
         catchError((error) => {
+          this.router.navigate(['/destNotFound']);
           console.log('Error:', error);
           return of([]);
         })

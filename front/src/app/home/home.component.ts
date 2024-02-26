@@ -3,6 +3,7 @@ import { FamillyDestinationService } from '../TravalService/Familly-Destination.
 import { SpringDestinationService } from '../TravalService/Spring-Destination.Service';
 import { BudgetDestinationService } from '../TravalService/Budget-Destination.Service';
 import { DestinationCard } from '../models/destination-card.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +19,8 @@ export class HomeComponent implements OnInit {
     private famillyDestinationService: FamillyDestinationService,
     private springDestinationService: SpringDestinationService,
     private budgetDestinationService: BudgetDestinationService,
-    private zone: NgZone
+    private zone: NgZone,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -75,5 +77,10 @@ export class HomeComponent implements OnInit {
         console.error('Error loading first three budget destinations:', error);
       }
     );
+  }
+  navigateToDestination(destination: DestinationCard) {
+    this.router.navigate(['/destination', destination.name], {
+      state: { data: destination },
+    });
   }
 }
