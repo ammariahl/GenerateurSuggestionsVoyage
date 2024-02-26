@@ -66,12 +66,22 @@ button:hover {
 }
 
 .pace {
+  position: relative;
   align-items: center;
   opacity: 0.5;
 }
 
 .pace.active {
   opacity: 1;
+}
+
+.step-value {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+
+  width: min-content;
+
+  color: var(--black);
 }
 
 .circle {
