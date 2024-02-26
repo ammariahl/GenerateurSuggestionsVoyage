@@ -12,25 +12,32 @@ import org.springframework.web.bind.annotation.*;
 import com.whereto.destination.repository.DestinationRepository;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.data.domain.Pageable;
+
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.data.domain.PageRequest;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("api/destionations")
+@RequestMapping("api/destinations")
 public class DestinationController {
   private final DestinationService destinationService;
   private final ActivityService activityService;
   private final SeasonService seasonService;
+  private final DestinationRepository destinationRepository;
   private static final Logger log = LoggerFactory.getLogger(DestinationController.class);
 
     @Autowired
-    public DestinationController(DestinationService destinationService,ActivityService activityService,SeasonService seasonService) {
+    public DestinationController(DestinationService destinationService, ActivityService activityService, SeasonService seasonService, DestinationRepository destinationRepository) {
         this.destinationService = destinationService;
         this.activityService = activityService;
         this.seasonService = seasonService;
+        this.destinationRepository = destinationRepository;
     }
 
          @PostMapping(value = "/top", consumes = "application/json")
@@ -45,14 +52,30 @@ public class DestinationController {
             return new ResponseEntity<>(allDestinations, HttpStatus.OK);
         }
 
-   
+        @GetMapping("/random")
+        public ResponseEntity<List<Destination>> getRandomDestinations() {
+            List<Destination> randomDestination = destinationService.getAllDestinations();
+            Collections.shuffle(randomDestination);
+            return new ResponseEntity<>(randomDestination, HttpStatus.OK);
+        }
+
+
+
     @GetMapping("/first3familydestinations")
     public List<Destination> getFirstThreeFamilyDestinations() {
         return activityService.getFirstThreeFamilyDestinations();
     }
-    
+
     @GetMapping("/first3springdestinations")
     public List<Destination> getFirstThreeSpringDestinations() {
         return seasonService.getFirstThreeSpringDestinations();
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Destination> getDestinationById(@PathVariable Long id) {
+        Optional<Destination> destinationOptional = destinationRepository.findById(id);
+        return destinationOptional.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
 }
+
