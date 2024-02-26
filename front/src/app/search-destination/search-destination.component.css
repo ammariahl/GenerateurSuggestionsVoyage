@@ -1,85 +1,31 @@
-.timeline-steps {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin: 8%;
+.container {
+  padding: 2rem;
 }
-
-.timeline-step {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
+.step {
   position: relative;
-  margin: 1rem;
-}
-
-.timelinePreferenceInitialization {
-  color: var(--timelinePreferenceInitialization);
-}
-
-.timelinePreferenceSelected {
-  color: var(--darkBlue);
-}
-
-@media (min-width: 768px) {
-  /* pointillés après timeline-step (sauf le dernier) */
-  .timeline-step:not(:last-child):after {
-    content: "";
-    display: block;
-    border-top: 0.25rem dotted var(--timeline);
-    width: 3.46rem;
-    position: absolute;
-    left: 7.5rem;
-    top: 0.3125rem;
-  }
-
-  /* pointillés avant timeline-step (sauf le premier) */
-  .timeline-step:not(:first-child):before {
-    content: "";
-    display: block;
-    border-top: 0.25rem dotted var(--timeline);
-    width: 3.8125rem;
-    position: absolute;
-    right: 7.5rem;
-    top: 0.3125rem;
-  }
-}
-
-.timeline-content {
-  width: 10rem;
-  text-align: center;
-}
-
-/* timeline : cercle interne */
-.inner-circle {
-  border-radius: 1.5rem;
-  height: 1rem;
-  width: 1rem;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--timeline);
-  cursor: pointer;
+  margin: 2rem 0;
+  flex-direction: column;
+  gap: 2rem;
+  background-color: white;
 }
 
-/* timeline : grand cercle */
-.inner-circle:before {
-  content: "";
-  background-color: var(--timeline);
-  display: inline-block;
-  height: 3rem;
-  width: 3rem;
-  min-width: 3rem;
-  border-radius: 6rem;
-  opacity: 0.5;
-}
-
-.divContainer {
-  display: flex;
-}
-
-.suggestion-title {
+.step label {
+  font-size: 1.5rem;
+  font-family: "Zen Loop", cursive;
+  font-weight: 700;
+  letter-spacing: 0.1rem;
   color: var(--black);
+}
+
+.buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
   text-align: center;
 }
 
@@ -133,6 +79,6 @@ button:hover {
   transform: scale(1.1);
 }
 
-.border {
-  border: 2px solid var(--gray);
+.buttons button {
+  flex: 0 0 40%;
 }

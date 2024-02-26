@@ -1,202 +1,167 @@
-import { Component, OnInit, NgZone, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { TravelService } from '../TravalService/travalService';
 import { Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { DestinationCard } from '../models/destination-card.model';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-search-destination',
   templateUrl: './search-destination.component.html',
   styleUrl: './search-destination.component.css',
+  animations: [
+    trigger('slideInOut', [
+      transition(':enter', [
+        // :enter is alias to 'void => *'
+        style({ transform: 'translateY(-100%)', zIndex: -1 }),
+        animate(
+          '0.5s ease-in',
+          style({ transform: 'translateY(0)', zIndex: -1 })
+        ),
+      ]),
+      transition(':leave', [
+        // :leave is alias to '* => void'
+        style({ zIndex: -1 }),
+        animate(
+          '0.5s ease-out',
+          style({ transform: 'translateY(-100%)', zIndex: -1 })
+        ),
+      ]),
+    ]),
+  ],
 })
-export class SearchDestinationComponent implements OnInit {
-  // Preference selected
-  season: string = '';
-  climat: string = '';
-  budget: string = '';
-  activity: string = '';
-  documents: Array<string> = [''];
 
-  // Preference selected  displayed on timeline
-  seasonTimeline: string = '';
-  climatTimeline: string = '';
-  budgetTimeline: string = '';
-  activityTimeline: string = '';
+export class SearchDestinationComponent {
 
-  questionNumber: number = 1;
-  cniUeSelected: boolean = false;
-  passportUeSelected: boolean = false;
-  visaUeSelected: boolean = false;
-  passportMdeSelected: boolean = false;
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private travelService: TravelService,
 
-  // Equivalence preference button and db
-  seasonArray: Array<string> = ['spring', 'summer', 'autumn', 'winter'];
-  climatArray: Array<string> = ['chaud', 'froid', 'doux', 'peu_importe'];
-  budgetArray: Array<string> = [
-    'littleBudget',
-    'mediumBudget',
-    'bigBudget',
-    'unlimited',
-  ];
-  activitiesArray: Array<string> = [
-    'relaxing',
-    'adventure',
-    'groupactivity',
-    'family',
-  ];
-  documentsArray: Array<string> = [
-    'cniUe',
-    'passportUe',
-    'visaUe',
-    'passportMde',
-  ];
-  seasonButtomName: Array<string> = ['Printemps', 'Ete', 'Automne', 'Hivers'];
-  climatButtomName: Array<string> = ['Chaud', 'Froid', 'Doux', 'Peu importe'];
-  budgetButtomName: Array<string> = ['500 €', '1000 €', '1500 €', 'No limit !'];
-  activitiesButtomName: Array<string> = [
-    'Pour me relaxer',
-    "Pour l'aventure",
-    'Entre amis',
-    'En famille',
-  ];
-  documentsButtomName: Array<string> = [
-    "Carte d'identité UE",
-    'Passeport UE',
-    'Visa UE',
-    'Passeport Monde',
-  ];
-  preferences: any = {
-    seasons: [],
-    budgets: [],
-    activities: [],
+    private cdr: ChangeDetectorRef
+  ) {}
+  // J'initialise le compteur
+  currentStep = 0;
+
+  // Je déclare les variables
+  destination: DestinationCard[] = [];
+  userPreference: any = {
+    season: [],
+    climat: [],
+    budget: [],
+    activity: [],
     documents: [],
   };
 
-  constructor(
-    private router: Router,
-    private travelService: TravelService,
-    private zone: NgZone,
-    private cdr: ChangeDetectorRef
-  ) {}
+  // Je crée le formulaire
+  preferencesForm = this.formBuilder.group({
+    season: ['', Validators.required],
+    climat: ['', Validators.required],
+    budget: ['', Validators.required],
+    activity: ['', Validators.required],
+    documents: this.formBuilder.array([], Validators.required),
+  });
 
-  ngOnInit(): void {
-    console.log('ngOnInit called');
+  // Je met à jour le compteur pour savoir où je suis dans le formulaire
+  onButtonClick(step: number): void {
+    if (step > this.currentStep) {
+      this.currentStep = step;
+      this.cdr.detectChanges();
+    } else {
+      this.currentStep = step - 1;
+      this.cdr.detectChanges();
+    }
+    console.log('Current step:', this.currentStep);
   }
 
-  preferencesSelection(preference: string): void {
-    if (this.seasonArray.includes(preference)) {
-      this.questionNumber = 2;
-      this.season = preference;
-      this.seasonTimeline =
-        this.seasonButtomName[this.seasonArray.indexOf(preference)];
-    } else if (this.climatArray.includes(preference)) {
-      this.questionNumber = 3;
-      this.climat = preference;
-      this.climatTimeline =
-        this.climatButtomName[this.climatArray.indexOf(preference)];
-    } else if (this.budgetArray.includes(preference)) {
-      this.questionNumber = 4;
-      this.budget = preference;
-      this.budgetTimeline =
-        this.budgetButtomName[this.budgetArray.indexOf(preference)];
-    } else if (this.activitiesArray.includes(preference)) {
-      this.questionNumber = 5;
-      this.activity = preference;
-      this.activityTimeline =
-        this.activitiesButtomName[this.activitiesArray.indexOf(preference)];
-    } else if (this.documentsArray.includes(preference)) {
-      if (!this.documents.includes(preference)) {
-        this.documents.push(preference);
-        if (this.documents[0] == '') {
-          this.documents.shift();
-        }
-      } else {
-        const i = this.documents.indexOf(preference);
-        this.documents.splice(i, 1);
-      }
-
-      if (preference == 'cniUe') {
-        this.cniUeSelected = !this.cniUeSelected;
-      }
-      if (preference == 'passportUe') {
-        this.passportUeSelected = !this.passportUeSelected;
-      }
-      if (preference == 'visaUe') {
-        this.visaUeSelected = !this.visaUeSelected;
-      }
-      if (preference == 'passportMde') {
-        this.passportMdeSelected = !this.passportMdeSelected;
-      }
-    }
+  //Je récupère les infos des boutons cliqués
+  setPreference(field: string, value: string, step: number): void {
+    this.preferencesForm.get(field)?.setValue(value);
+    this.onButtonClick(step);
     this.cdr.detectChanges();
+    console.log('Field:', field, 'Value:', value, 'Step:', step);
+  }
+  //Je crée un objet pour stocker les documents sélectionnés
+  selectedDocuments: { [key: string]: boolean } = {
+    cniUe: true,
+    passportUe: true,
+    visaUe: true,
+    passportMde: true,
+  };
+
+  //Je fais en sorte qu'on puisse sélectionner plusieurs documents
+  onDocumentSelect(document: any) {
+    const documents = this.preferencesForm.get('documents') as FormArray;
+    const documentObject = {
+      cniUe: document === 'cniUe',
+      passportUe: document === 'passportUe',
+      visaUe: document === 'visaUe',
+      passportMde: document === 'passportMde',
+    };
+    documents.push(this.formBuilder.control(documentObject));
+    this.selectedDocuments[document] = !this.selectedDocuments[document];
   }
 
-  previous(step: number): void {
-    if (step < this.questionNumber) {
-      this.questionNumber = step;
-      if (step < 2) {
-        this.season = '';
-        this.seasonTimeline = '';
-      }
-      if (step < 3) {
-        this.climat = '';
-        this.climatTimeline = '';
-      }
-      if (step < 4) {
-        this.budget = '';
-        this.budgetTimeline = '';
-      }
-      if (step < 5) {
-        this.activity = '';
-        this.activityTimeline = '';
-        this.documents = [''];
+  //Je navigue vers la page de suggestions de destinations
+  navigateToSuggestion() {
+    this.travelService
+      .sendTravelPreferences(this.userPreference)
+      .pipe(
+        catchError((error) => {
+          console.log('Error:', error);
+          return of([]);
+        })
+      )
+      .subscribe((response) => {
+        if (response !== null) {
+          console.log('Response from bke:', response);
+        }
+      });
+
+    const url = `api/destinations/top/${this.userPreference.season}/${
+      this.userPreference.climat
+    }/${this.userPreference.budget}/${
+      this.userPreference.activity
+    }/${this.userPreference.documents.join('**')}`;
+
+    this.router.navigate([url]);
+  }
+
+  //Quand le formulaire est soumis, je récupère les infos et je les envoie à la page de suggestions de destinations
+  onSubmit() {
+    this.userPreference.season.push(this.preferencesForm.value.season);
+    this.userPreference.climat.push(this.preferencesForm.value.climat);
+    this.userPreference.budget.push(this.preferencesForm.value.budget);
+    this.userPreference.activity.push(this.preferencesForm.value.activity);
+    const documentsControl = this.preferencesForm.get('documents');
+    if (documentsControl) {
+      const selectedDocuments = documentsControl.value;
+      for (let document of selectedDocuments) {
+        this.userPreference.documents.push(document);
       }
     }
+
+    console.log('User Preference:', this.userPreference);
+    this.navigateToSuggestion();
   }
 
-  sendSearchDestinationForm(): void {
-    console.log('premier element de documents : ' + this.documents[0]);
-    if (this.documents[0] != undefined) {
-      // Selection submitted
-      const preferences = {
-        seasons: [{ [this.season.toLowerCase()]: this.climat }],
-        budgets: [{ [this.budget]: true }],
-        activities: [{ [this.activity.toLowerCase()]: true }],
-        documents: this.documents.reduce((acc, doc) => {
-          if (doc.trim() !== '') {
-            acc.push({ [doc.replace(/ /g, '')]: true });
-          }
-          return acc;
-        }, [] as { [key: string]: boolean }[]),
-      };
+  // Animations
 
-      const userPreference = JSON.stringify(preferences);
-      // console.log(JSON.stringify(preferences));
-      console.log('User Preference:', userPreference);
-      this.travelService
-        .sendTravelPreferences(userPreference)
-        .pipe(
-          catchError((error) => {
-            console.error('Error sending preferences:', error);
-            // Handle the error or rethrow it as needed
-            return of(null); // or throw error;
-          })
-        )
-        .subscribe((response) => {
-          if (response !== null) {
-            console.log('Response from backend:', response);
-            console.log('Data from response:', response);
-          }
-        });
+  ngAfterViewChecked() {
+    this.scrollToCurrentStep();
+  }
+  scrollToCurrentStep() {
+    const stepElements = Array.from(document.querySelectorAll('.step'));
+    const visibleStepElements = stepElements.filter(
+      (step) => (step as HTMLElement).offsetParent !== null
+    );
+    const lastVisibleStepElement =
+      visibleStepElements[visibleStepElements.length - 1];
+    if (lastVisibleStepElement) {
+      lastVisibleStepElement.scrollIntoView({ behavior: 'smooth' });
 
-      this.router.navigate([
-        '/api/destinations/top',
-        this.season,
-        this.climat,
-        this.budget,
-        this.activity,
-        this.documents.join('**'),
-      ]);
     }
   }
 }

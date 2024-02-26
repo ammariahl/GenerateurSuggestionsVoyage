@@ -10,7 +10,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class BudgetDestinationService {
   private apiUrl =
-    'http://localhost:8080/api/destionations/first3budgetdestinations';
+    'http://localhost:8080/api/destinations/first3budgetdestinations';
 
   constructor(private http: HttpClient) {}
 

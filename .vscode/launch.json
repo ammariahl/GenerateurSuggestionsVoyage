@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-DestinationApplication<destination>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.whereto.destination.DestinationApplication",
+      "projectName": "destination",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}

@@ -7,6 +7,7 @@ import {
 import { DestinationCard } from '../models/destination-card.model';
 import { TravelService } from '../TravalService/travalService';
 import { SharedDestinationService } from '../TravalService/Shared-destination.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-suggestion',
@@ -19,71 +20,76 @@ export class SuggestionComponent implements AfterViewInit {
 
   constructor(
     private cdr: ChangeDetectorRef,
-    private sharedDestinationService: SharedDestinationService
+    private sharedDestinationService: SharedDestinationService,
+
+    private router: Router,
+
+    public travelService: TravelService
   ) {}
 
   ngAfterViewInit(): void {
-    // Subscribe to the destinations$ observable when the component initializes
-    this.sharedDestinationService.destinations$.subscribe(
-      (destinations) => {
-        console.log('Received destinations from shared service:', destinations);
-        destinations.forEach((destination) => {
-          const selectedSeasons = destination.seasons;
-          const selectedBudgets = destination.budgets;
-          const selectedActivities = destination.activities;
-          const selectedDocuments = destination.documents;
-          // Accessing seasons
+    if (this.travelService.isRandom) {
+      this.getRandomDestinations();
+    } else {
+      // Subscribe to the destinations$ observable when the component initializes
+      this.sharedDestinationService.destinations$.subscribe(
+        (destinations) => {
           console.log(
-            'Seasons for destination',
-            destination.name,
-            ':',
-            selectedSeasons
+            'Received destinations from shared service:',
+            destinations
           );
+          destinations.forEach((destination) => {
+            const selectedSeasons = destination.seasons;
+            const selectedBudgets = destination.budgets;
+            const selectedActivities = destination.activities;
+            const selectedDocuments = destination.documents;
+            // Accessing seasons
+            console.log(
+              'Seasons for destination',
+              destination.name,
+              ':',
+              selectedSeasons
+            );
 
-          // Accessing budgets
-          console.log(
-            'Budgets for destination',
-            destination.name,
-            ':',
-            selectedBudgets
-          );
+            // Accessing budgets
+            console.log(
+              'Budgets for destination',
+              destination.name,
+              ':',
+              selectedBudgets
+            );
 
-          // Accessing activities
-          console.log(
-            'Activities for destination',
-            destination.name,
-            ':',
-            selectedActivities
-          );
+            // Accessing activities
+            console.log(
+              'Activities for destination',
+              destination.name,
+              ':',
+              selectedActivities
+            );
 
-          // Accessing documents
-          console.log(
-            'Documents for destination',
-            destination.name,
-            ':',
-            selectedDocuments
-          );
-        });
-        this.destinationCard = destinations;
-        this.cdr.detectChanges();
-      },
-      (error) => {
-        console.error('Error getting destinations:', error);
-        console.log('No matching destinations:');
-      }
-    );
+            // Accessing documents
+            console.log(
+              'Documents for destination',
+              destination.name,
+              ':',
+              selectedDocuments
+            );
+          });
+          this.destinationCard = destinations;
+          this.cdr.detectChanges();
+        },
+        (error) => {
+          console.error('Error getting destinations:', error);
+          console.log('No matching destinations:');
+        }
+      );
+    }
   }
 
   showDestinationCard(destination: DestinationCard): void {
-    // console.log('show destination card in suggestion component:', destination);
-    // // Access the properties of the selected destinationCard
-    // console.log('Selected Season:', destination.selectedSeason);
-    // console.log('Selected Budget:', destination.selectedBudget);
-    // console.log('Selected Activity:', destination.selectedActivity);
-    // console.log(
-    //   'Selected Documents:',
-    //   destination.selectedDocuments.join(', ')
-    // );
+    this.router.navigate(['/destination', destination.name], {
+      state: { data: destination },
+    });
   }
 
   viewAll(): void {
@@ -168,5 +174,16 @@ export class SuggestionComponent implements AfterViewInit {
     return selectedDocuments.length > 0
       ? selectedDocuments
       : ['No document selected'];
+  }
+
+  getRandomDestinations(): void {
+    this.travelService.getRandomDestinations().subscribe(
+      (destinations: DestinationCard[]) => {
+        this.destinationCard = destinations;
+      },
+      (error: any) => {
+        console.error('Error fetching random destinations:', error);
+      }
+    );
   }
 }

@@ -15,6 +15,9 @@ import { SpringDestinationService } from './TravalService/Spring-Destination.Ser
 import { BudgetDestinationService } from './TravalService/Budget-Destination.Service';
 import { HttpClientModule } from '@angular/common/http';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { AllDestinationsComponent } from './all-destinations/all-destinations.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -26,12 +29,15 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     MenuComponent,
     AboutComponent,
     PageNotFoundComponent,
+    AllDestinationsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgOptimizedImage,
     HttpClientModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     TravelService,
