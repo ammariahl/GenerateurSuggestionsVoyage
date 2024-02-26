@@ -32,7 +32,9 @@ import { trigger, transition, style, animate } from '@angular/animations';
     ]),
   ],
 })
+
 export class SearchDestinationComponent {
+
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -159,6 +161,7 @@ export class SearchDestinationComponent {
       visibleStepElements[visibleStepElements.length - 1];
     if (lastVisibleStepElement) {
       lastVisibleStepElement.scrollIntoView({ behavior: 'smooth' });
+
     }
   }
 }

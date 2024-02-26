@@ -10,6 +10,9 @@ import { SearchDestinationComponent } from './search-destination/search-destinat
 import { DestinationComponent } from './destination/destination.component';
 import { AboutComponent } from './about/about.component';
 import { TravelService } from './TravalService/travalService';
+import { FamillyDestinationService } from './TravalService/Familly-Destination.Service';
+import { SpringDestinationService } from './TravalService/Spring-Destination.Service';
+import { BudgetDestinationService } from './TravalService/Budget-Destination.Service';
 import { HttpClientModule } from '@angular/common/http';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AllDestinationsComponent } from './all-destinations/all-destinations.component';
@@ -36,7 +39,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     BrowserAnimationsModule,
   ],
-  providers: [TravelService],
+  providers: [
+    TravelService,
+    FamillyDestinationService,
+    SpringDestinationService,
+    BudgetDestinationService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

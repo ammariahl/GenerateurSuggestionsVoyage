@@ -10,6 +10,7 @@ import { DestinationComponent } from './destination/destination.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
+
   { path: 'home', component: HomeComponent, title: 'Home' },
   {
     path: 'random',
@@ -19,10 +20,12 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent, title: 'About' },
   { path: 'search', component: SearchDestinationComponent, title: 'Search' },
 
+
   {
     path: 'api/destinations/top/:periode/:climat/:budget/:activity/:documents',
     component: SuggestionComponent,
   },
+
   {
     path: 'all',
     component: AllDestinationsComponent,
@@ -33,6 +36,7 @@ const routes: Routes = [
     component: DestinationComponent,
     title: 'Destination :name',
   },
+
   { path: '**', component: PageNotFoundComponent },
 ];
 

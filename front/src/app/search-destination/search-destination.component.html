@@ -34,6 +34,7 @@
       </div>
     </div>
 
+
     <div class="step" *ngIf="currentStep >= 1" [@slideInOut]>
       <label>Plutôt...</label>
       <div class="buttons">
@@ -66,7 +67,9 @@
           Peu importe
         </button>
       </div>
+
     </div>
+
 
     <div class="step" *ngIf="currentStep >= 2" [@slideInOut]>
       <label>Mon budget...</label>
@@ -100,7 +103,9 @@
           Illimité
         </button>
       </div>
+
     </div>
+
 
     <div class="step" *ngIf="currentStep >= 3" [@slideInOut]>
       <label>Je voyage...</label>
@@ -134,7 +139,9 @@
           En famille
         </button>
       </div>
+
     </div>
+
 
     <div class="step" *ngIf="currentStep >= 4" [@slideInOut]>
       <label>Je possède...</label>
@@ -172,10 +179,13 @@
           Passeport MDE
         </button>
       </div>
+
     </div>
+
 
     <div *ngIf="currentStep >= 4">
       <button class="button blue" type="submit">Valider</button>
+
     </div>
   </form>
 </div>
