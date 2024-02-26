@@ -11,15 +11,13 @@ import { DestinationCard } from '../models/destination-card.model';
   providedIn: 'root',
 })
 export class TravelService {
-
   private apiUrl = 'http://localhost:8080/api/destinations/top';
 
-  private randomUrl = 'http://localhost:8080/api/destionations'
-
+  private randomUrl = 'http://localhost:8080/api/destinations';
 
   constructor(
     private http: HttpClient,
-    private sharedDestinationService: SharedDestinationService,
+    private sharedDestinationService: SharedDestinationService
   ) {}
 
   isRandom = false;
@@ -33,10 +31,16 @@ export class TravelService {
       catchError((error: HttpErrorResponse) => {
         if (error.error instanceof ErrorEvent) {
           // Client-side error
-          console.error('An error occurred on the client:', error.error.message);
+          console.error(
+            'An error occurred on the client:',
+            error.error.message
+          );
         } else {
           // Server-side error
-          console.error(`Backend returned code ${error.status}, body was:`, error.error);
+          console.error(
+            `Backend returned code ${error.status}, body was:`,
+            error.error
+          );
         }
         return throwError('Something went wrong with the request.');
       })
