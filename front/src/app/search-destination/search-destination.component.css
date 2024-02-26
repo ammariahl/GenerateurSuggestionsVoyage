@@ -29,16 +29,6 @@
   text-align: center;
 }
 
-button {
-  color: var(--white);
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  margin: 3%;
-  width: 80%;
-  height: 70%;
-}
-
 button:hover {
   -moz-transform: scale(1.1);
   -webkit-transform: scale(1.1);
@@ -64,4 +54,39 @@ button:hover {
 
 .buttons button {
   flex: 0 0 40%;
+}
+
+.selected {
+  border: 2px solid var(--darkGreen);
+}
+
+.progress-bar {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pace {
+  align-items: center;
+  opacity: 0.5;
+}
+
+.pace.active {
+  opacity: 1;
+}
+
+.circle {
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  background-color: var(--darkTeal);
+  color: var(--white);
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.line {
+  flex-grow: 1;
+  height: 5px;
+  background-color: var(--lightTeal);
 }

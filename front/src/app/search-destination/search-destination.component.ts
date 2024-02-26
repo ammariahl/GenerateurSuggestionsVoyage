@@ -32,9 +32,7 @@ import { trigger, transition, style, animate } from '@angular/animations';
     ]),
   ],
 })
-
 export class SearchDestinationComponent {
-
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -85,10 +83,10 @@ export class SearchDestinationComponent {
   }
   //Je crée un objet pour stocker les documents sélectionnés
   selectedDocuments: { [key: string]: boolean } = {
-    cniUe: true,
-    passportUe: true,
-    visaUe: true,
-    passportMde: true,
+    cniUe: false,
+    passportUe: false,
+    visaUe: false,
+    passportMde: false,
   };
 
   //Je fais en sorte qu'on puisse sélectionner plusieurs documents
@@ -161,7 +159,6 @@ export class SearchDestinationComponent {
       visibleStepElements[visibleStepElements.length - 1];
     if (lastVisibleStepElement) {
       lastVisibleStepElement.scrollIntoView({ behavior: 'smooth' });
-
     }
   }
 }
