@@ -2,7 +2,7 @@ export interface DestinationCard {
   id: number;
   image: string;
   name: string;
-  // seasons: string[];
+  // seasons: string;
   seasons: {
     id: number;
     winter: string;
