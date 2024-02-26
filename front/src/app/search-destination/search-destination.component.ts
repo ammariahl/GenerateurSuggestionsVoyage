@@ -106,6 +106,9 @@ export class SearchDestinationComponent {
     this.selectedDocuments[document] = !this.selectedDocuments[document];
   }
 
+  atLeastOneDocumentSelected(): boolean {
+    return Object.values(this.selectedDocuments).some((value) => value);
+  }
   //Je navigue vers la page de suggestions de destinations
   navigateToSuggestion() {
     this.travelService

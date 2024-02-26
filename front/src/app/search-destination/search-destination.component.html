@@ -210,7 +210,7 @@
       </div>
     </div>
 
-    <div *ngIf="currentStep >= 4">
+    <div *ngIf="atLeastOneDocumentSelected()">
       <button class="button blue" type="submit">Valider</button>
     </div>
   </form>
