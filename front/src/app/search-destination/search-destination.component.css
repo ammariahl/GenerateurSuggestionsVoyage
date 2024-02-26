@@ -18,7 +18,6 @@
   font-weight: 700;
   letter-spacing: 0.1rem;
   color: var(--black);
-
 }
 
 .buttons {
@@ -28,13 +27,6 @@
   justify-content: space-between;
 
   text-align: center;
-}
-
-.preferences_options {
-  display: grid;
-  grid-template-columns: repeat(2, 50%);
-  grid-template-rows: repeat(2, 50%);
-  margin: 8%;
 }
 
 button {
@@ -53,16 +45,6 @@ button:hover {
   transform: scale(1.1);
 }
 
-.preferences_button_1,
-.preferences_button_3 {
-  grid-column-start: 1;
-}
-
-.preferences_button_2,
-.preferences_button_4 {
-  grid-column-start: 2;
-}
-
 .send-button {
   color: var(--white);
   padding: 1%;
@@ -78,9 +60,8 @@ button:hover {
   -moz-transform: scale(1.1);
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
-
 }
 
 .buttons button {
-  flex: 0 0 48%;
+  flex: 0 0 40%;
 }
