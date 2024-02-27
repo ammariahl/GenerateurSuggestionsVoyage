@@ -1,0 +1,51 @@
+.divContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.textContainer {
+  margin-top: 8%;
+}
+
+h2 {
+  color: var(--darkTeal);
+  margin: 5%;
+  text-align: center;
+}
+
+h3 {
+  color: var(--lightTeal);
+  margin: 3%;
+  text-align: center;
+}
+
+.preferences_options {
+  display: grid;
+  grid-template-columns: repeat(2, 50%);
+  margin: 5%;
+  justify-self: center;
+}
+
+button {
+  color: var(--white);
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  margin: 3%;
+  width: 90%;
+  height: 80%;
+}
+
+button:hover {
+  -moz-transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+.preferences_button_1 {
+  grid-column-start: 1;
+}
+
+.preferences_button_2 {
+  grid-column-start: 2;
+}

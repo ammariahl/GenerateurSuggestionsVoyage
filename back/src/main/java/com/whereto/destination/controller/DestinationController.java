@@ -26,12 +26,14 @@ import org.springframework.data.domain.PageRequest;
 @RestController
 @RequestMapping("api/destinations")
 public class DestinationController {
+
   private final DestinationService destinationService;
   private final ActivityService activityService;
   private final SeasonService seasonService;
   private final BudgetService budgetService;
   private final DestinationRepository destinationRepository;
   private static final Logger log = LoggerFactory.getLogger(DestinationController.class);
+
 
     @Autowired
     public DestinationController(
@@ -48,11 +50,12 @@ public class DestinationController {
         this.destinationRepository = destinationRepository;
     }
 
-         @PostMapping(value = "/top", consumes = "application/json")
-        public ResponseEntity<List<Destination>> getTopDestinations(@RequestBody UserSelections userSelections) {
+    @PostMapping(value = "/top", consumes = "application/json")
+    public ResponseEntity<List<Destination>> getTopDestinations(@RequestBody UserSelections userSelections) {
         List<Destination> topDestinations = destinationService.getTopDestinations(userSelections);
         return new ResponseEntity<>(topDestinations, HttpStatus.OK);
     }
+
 
         @GetMapping("/all")
         public ResponseEntity<List<Destination>> getAllDestinations() {
@@ -85,6 +88,8 @@ public class DestinationController {
         @GetMapping("/first3budgetdestinations")
         public List<Destination> getFirstThreeBudgetDestinations() {
         return budgetService.getFirstThreeBudgetDestinations();
-    }}
-   
+
+    }
+
+}
 

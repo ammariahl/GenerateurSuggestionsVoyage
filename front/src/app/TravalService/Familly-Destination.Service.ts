@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { tap, catchError, filter } from 'rxjs/operators';
+import { tap, catchError, filter, map } from 'rxjs/operators';
 import { DestinationCard } from '../models/destination-card.model';
 import { HttpErrorResponse } from '@angular/common/http';
 
@@ -10,7 +10,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class FamillyDestinationService {
   private apiUrl =
-    'http://localhost:8080/api/destionations/first3familydestinations';
+    'http://localhost:8080/api/destinations/first3familydestinations';
 
   constructor(private http: HttpClient) {}
 
@@ -18,10 +18,11 @@ export class FamillyDestinationService {
     const headers = new HttpHeaders();
 
     return this.http
-      .get<DestinationCard[]>(this.apiUrl, { headers, withCredentials: true })
+      .get<any[]>(this.apiUrl, { headers, withCredentials: true })
       .pipe(
+        map((response) => response.filter((item) => typeof item === 'object')),
         tap((response) => {
-          console.log('Success response:', response);
+          console.log('Success response family:', response);
         }),
 
         catchError((error: HttpErrorResponse) => {
