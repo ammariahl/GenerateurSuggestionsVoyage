@@ -54,7 +54,28 @@ export class SearchDestinationComponent {
   };
   stepCompleted: { [key: number]: boolean } = { 0: true };
   stepValues: { [key: number]: string } = {};
-
+  valueNames: { [key: string]: string } = {
+    spring: 'Printemps',
+    summer: 'Été',
+    autumn: 'Automne',
+    winter: 'Hiver',
+    chaud: 'Chaud',
+    froid: 'Froid',
+    doux: 'Doux',
+    peu_importe: 'Peu importe',
+    littleBudget: 'Petit budget',
+    mediumBudget: 'Budget moyen',
+    bigBudget: 'Gros budget',
+    unlimeted: 'Illimité',
+    relaxing: 'Relaxant',
+    adventure: 'Aventure',
+    groupactivity: 'Activité de groupe',
+    family: 'Famille',
+    cniUe: "Carte d'identité",
+    passportUE: 'Passeport UE',
+    visaUE: 'Visa UE',
+    passportMde: 'Passeport Monde',
+  };
   // Je crée le formulaire
   preferencesForm = this.formBuilder.group({
     season: ['', Validators.required],
@@ -79,12 +100,16 @@ export class SearchDestinationComponent {
   //Je récupère les infos des boutons cliqués
   setPreference(field: string, value: string, step: number): void {
     this.preferencesForm.get(field)?.setValue(value);
-    this.stepValues[step] = value;
+
+    const valueName = this.valueNames[value];
+
+    this.stepValues[step] = valueName;
     this.stepCompleted[step + 1] = true;
     this.onButtonClick(step);
     this.cdr.detectChanges();
     console.log('Field:', field, 'Value:', value, 'Step:', step);
   }
+
   //Je crée un objet pour stocker les documents sélectionnés
   selectedDocuments: { [key: string]: boolean } = {
     cniUe: false,
@@ -106,6 +131,9 @@ export class SearchDestinationComponent {
     this.selectedDocuments[document] = !this.selectedDocuments[document];
   }
 
+  atLeastOneDocumentSelected(): boolean {
+    return Object.values(this.selectedDocuments).some((value) => value);
+  }
   //Je navigue vers la page de suggestions de destinations
   navigateToSuggestion() {
     this.travelService
@@ -118,18 +146,19 @@ export class SearchDestinationComponent {
         })
       )
       .subscribe((response) => {
-        if (response !== null) {
+        if (response !== null && response.length > 0) {
           console.log('Response from bke:', response);
+          const url = `api/destinations/top/${this.userPreference.season}/${
+            this.userPreference.climat
+          }/${this.userPreference.budget}/${
+            this.userPreference.activity
+          }/${this.userPreference.documents.join('**')}`;
+
+          this.router.navigate([url]);
+        } else {
+          this.router.navigate(['/destNotFound']);
         }
       });
-
-    const url = `api/destinations/top/${this.userPreference.season}/${
-      this.userPreference.climat
-    }/${this.userPreference.budget}/${
-      this.userPreference.activity
-    }/${this.userPreference.documents.join('**')}`;
-
-    this.router.navigate([url]);
   }
 
   //Quand le formulaire est soumis, je récupère les infos et je les envoie à la page de suggestions de destinations

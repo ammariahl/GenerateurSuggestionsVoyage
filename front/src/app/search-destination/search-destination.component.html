@@ -40,6 +40,7 @@
       <label>Je souhaite voyager en...</label>
       <div class="buttons">
         <button
+          [class.selected]="preferencesForm.get('season')?.value === 'spring'"
           type="button"
           class="button green"
           (click)="setPreference('season', 'spring', 1)"
@@ -47,6 +48,7 @@
           Printemps
         </button>
         <button
+          [class.selected]="preferencesForm.get('season')?.value === 'summer'"
           type="button"
           class="button red"
           (click)="setPreference('season', 'summer', 1)"
@@ -54,6 +56,7 @@
           Été
         </button>
         <button
+          [class.selected]="preferencesForm.get('season')?.value === 'autumn'"
           type="button"
           class="button yellow"
           (click)="setPreference('season', 'autumn', 1)"
@@ -61,6 +64,7 @@
           Automne
         </button>
         <button
+          [class.selected]="preferencesForm.get('season')?.value === 'winter'"
           type="button"
           class="button teal"
           (click)="setPreference('season', 'winter', 1)"
@@ -74,6 +78,7 @@
       <label>Plutôt...</label>
       <div class="buttons">
         <button
+          [class.selected]="preferencesForm.get('climat')?.value === 'chaud'"
           type="button"
           class="button green"
           (click)="setPreference('climat', 'chaud', 2)"
@@ -81,6 +86,7 @@
           Chaud
         </button>
         <button
+          [class.selected]="preferencesForm.get('climat')?.value === 'froid'"
           type="button"
           class="button red"
           (click)="setPreference('climat', 'froid', 2)"
@@ -88,6 +94,7 @@
           Froid
         </button>
         <button
+          [class.selected]="preferencesForm.get('climat')?.value === 'doux'"
           type="button"
           class="button yellow"
           (click)="setPreference('climat', 'doux', 2)"
@@ -95,6 +102,9 @@
           Doux
         </button>
         <button
+          [class.selected]="
+            preferencesForm.get('climat')?.value === 'peu_importe'
+          "
           type="button"
           class="button teal"
           (click)="setPreference('climat', 'peu_importe', 2)"
@@ -108,6 +118,9 @@
       <label>Mon budget...</label>
       <div class="buttons">
         <button
+          [class.selected]="
+            preferencesForm.get('budget')?.value === 'littleBudget'
+          "
           type="button"
           class="button green"
           (click)="setPreference('budget', 'littleBudget', 3)"
@@ -115,6 +128,9 @@
           Petit
         </button>
         <button
+          [class.selected]="
+            preferencesForm.get('budget')?.value === 'mediumBudget'
+          "
           type="button"
           class="button red"
           (click)="setPreference('budget', 'mediumBudget', 3)"
@@ -122,6 +138,9 @@
           Moyen
         </button>
         <button
+          [class.selected]="
+            preferencesForm.get('budget')?.value === 'bigBudget'
+          "
           type="button"
           class="button yellow"
           (click)="setPreference('budget', 'bigBudget', 3)"
@@ -129,6 +148,9 @@
           Gros
         </button>
         <button
+          [class.selected]="
+            preferencesForm.get('budget')?.value === 'unlimited'
+          "
           type="button"
           class="button teal"
           (click)="setPreference('budget', 'unlimited', 3)"
@@ -142,6 +164,9 @@
       <label>Je voyage...</label>
       <div class="buttons">
         <button
+          [class.selected]="
+            preferencesForm.get('activity')?.value === 'relaxing'
+          "
           type="button"
           class="button green"
           (click)="setPreference('activity', 'relaxing', 4)"
@@ -149,6 +174,9 @@
           Relaxant
         </button>
         <button
+          [class.selected]="
+            preferencesForm.get('activity')?.value === 'adventure'
+          "
           type="button"
           class="button red"
           (click)="setPreference('activity', 'adventure', 4)"
@@ -156,6 +184,9 @@
           Aventure
         </button>
         <button
+          [class.selected]="
+            preferencesForm.get('activity')?.value === 'groupactivity'
+          "
           type="button"
           class="button yellow"
           (click)="setPreference('activity', 'groupactivity', 4)"
@@ -163,6 +194,7 @@
           En groupe
         </button>
         <button
+          [class.selected]="preferencesForm.get('activity')?.value === 'family'"
           type="button"
           class="button teal"
           (click)="setPreference('activity', 'family', 4)"
@@ -210,7 +242,7 @@
       </div>
     </div>
 
-    <div *ngIf="currentStep >= 4">
+    <div *ngIf="atLeastOneDocumentSelected()">
       <button class="button blue" type="submit">Valider</button>
     </div>
   </form>
