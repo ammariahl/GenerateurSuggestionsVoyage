@@ -146,18 +146,19 @@ export class SearchDestinationComponent {
         })
       )
       .subscribe((response) => {
-        if (response !== null) {
+        if (response !== null && response.length > 0) {
           console.log('Response from bke:', response);
+          const url = `api/destinations/top/${this.userPreference.season}/${
+            this.userPreference.climat
+          }/${this.userPreference.budget}/${
+            this.userPreference.activity
+          }/${this.userPreference.documents.join('**')}`;
+
+          this.router.navigate([url]);
+        } else {
+          this.router.navigate(['/destNotFound']);
         }
       });
-
-    const url = `api/destinations/top/${this.userPreference.season}/${
-      this.userPreference.climat
-    }/${this.userPreference.budget}/${
-      this.userPreference.activity
-    }/${this.userPreference.documents.join('**')}`;
-
-    this.router.navigate([url]);
   }
 
   //Quand le formulaire est soumis, je récupère les infos et je les envoie à la page de suggestions de destinations

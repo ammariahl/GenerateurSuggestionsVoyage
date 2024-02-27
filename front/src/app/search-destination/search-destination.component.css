@@ -54,6 +54,9 @@ button:hover {
 
 .buttons button {
   flex: 0 0 40%;
+
+  width: 7rem;
+  text-align: center;
 }
 
 .selected {
