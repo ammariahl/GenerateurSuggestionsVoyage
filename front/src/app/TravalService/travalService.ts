@@ -12,7 +12,9 @@ import { DestinationCard } from '../models/destination-card.model';
 })
 export class TravelService {
   private apiUrl = 'http://localhost:8080/api/destinations/top';
+
   private randomUrl = 'http://localhost:8080/api/destinations';
+
 
   constructor(
     private http: HttpClient,
