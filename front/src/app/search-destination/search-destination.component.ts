@@ -54,7 +54,28 @@ export class SearchDestinationComponent {
   };
   stepCompleted: { [key: number]: boolean } = { 0: true };
   stepValues: { [key: number]: string } = {};
-
+  valueNames: { [key: string]: string } = {
+    spring: 'Printemps',
+    summer: 'Été',
+    autumn: 'Automne',
+    winter: 'Hiver',
+    chaud: 'Chaud',
+    froid: 'Froid',
+    doux: 'Doux',
+    peu_importe: 'Peu importe',
+    littleBudget: 'Petit budget',
+    mediumBudget: 'Budget moyen',
+    bigBudget: 'Gros budget',
+    unlimeted: 'Illimité',
+    relaxing: 'Relaxant',
+    adventure: 'Aventure',
+    groupactivity: 'Activité de groupe',
+    family: 'Famille',
+    cniUe: "Carte d'identité",
+    passportUE: 'Passeport UE',
+    visaUE: 'Visa UE',
+    passportMde: 'Passeport Monde',
+  };
   // Je crée le formulaire
   preferencesForm = this.formBuilder.group({
     season: ['', Validators.required],
@@ -79,7 +100,10 @@ export class SearchDestinationComponent {
   //Je récupère les infos des boutons cliqués
   setPreference(field: string, value: string, step: number): void {
     this.preferencesForm.get(field)?.setValue(value);
-    this.stepValues[step] = value;
+
+    const valueName = this.valueNames[value];
+
+    this.stepValues[step] = valueName;
     this.stepCompleted[step + 1] = true;
     this.onButtonClick(step);
     this.cdr.detectChanges();
