@@ -109,6 +109,7 @@ export class SearchDestinationComponent {
     this.cdr.detectChanges();
     console.log('Field:', field, 'Value:', value, 'Step:', step);
   }
+
   //Je crée un objet pour stocker les documents sélectionnés
   selectedDocuments: { [key: string]: boolean } = {
     cniUe: false,

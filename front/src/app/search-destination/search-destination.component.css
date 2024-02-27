@@ -54,11 +54,11 @@ button:hover {
 
 .buttons button {
   flex: 0 0 40%;
-
 }
 
 .selected {
-  border: 2px solid var(--darkGreen);
+  border: 2px solid white;
+  box-shadow: 0 0 10px #36363663;
 }
 
 .progress-bar {
@@ -100,5 +100,4 @@ button:hover {
   flex-grow: 1;
   height: 5px;
   background-color: var(--lightTeal);
-
 }
