@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { SharedDestinationService } from '../TravalService/Shared-destination.service';
 import { DestinationCard } from '../models/destination-card.model';
 
 @Component({
@@ -10,7 +9,8 @@ import { DestinationCard } from '../models/destination-card.model';
 export class DestinationComponent implements OnInit {
   destination: DestinationCard = {} as DestinationCard;
   trueDocumentKeys: string[] = [];
-  constructor(private sharedDestination: SharedDestinationService) {}
+
+  constructor() {}
 
   ngOnInit() {
     if (history.state.data) {

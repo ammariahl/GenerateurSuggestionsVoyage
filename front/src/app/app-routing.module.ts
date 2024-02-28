@@ -11,7 +11,6 @@ import { DestinationNotFoundComponent } from './destination-not-found/destinatio
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-
   { path: 'home', component: HomeComponent, title: 'Home' },
   {
     path: 'random',

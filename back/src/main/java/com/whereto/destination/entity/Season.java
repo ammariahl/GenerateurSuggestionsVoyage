@@ -21,25 +21,21 @@ public class Season {
     private String spring;
     private String summer;
     private String autumn;
-
     
     @ManyToOne
     @JoinColumn(name = "destination_id")
-     private Destination destination;
-
+    private Destination destination;
     
-        public Season() {
-        }
+    public Season() {
+    }
+    
+    public Long getId() {
+        return id;
+    }
 
-
-
-        public Long getId() {
-            return id;
-        }
-
-        public void setId(Long id) {
-            this.id = id;
-        }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getWinter() {
         return winter;

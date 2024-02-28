@@ -52,6 +52,16 @@ img:hover {
   opacity: 0.8;
 }
 
+.destName {
+  visibility: hidden;
+}
+
+img:hover + .destName {
+  visibility: visible;
+  text-align: center;
+  color: black;
+}
+
 .all {
   margin: 1rem;
   text-align: center;

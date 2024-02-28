@@ -22,18 +22,13 @@ public class Document {
     private boolean passportUe;
     private boolean visaUe;
     private boolean passportMde;
-
     
     @ManyToOne
     @JoinColumn(name = "destination_id")
-    private Destination destination;
-   
+    private Destination destination;   
 
-    public Document() {
-        
-    }
-
-  
+    public Document() {        
+    }  
 
     public Long getId() {
         return id;

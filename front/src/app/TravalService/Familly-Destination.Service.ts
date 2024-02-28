@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { tap, catchError, filter, map } from 'rxjs/operators';
+import { tap, catchError, map } from 'rxjs/operators';
 import { DestinationCard } from '../models/destination-card.model';
 import { HttpErrorResponse } from '@angular/common/http';
 

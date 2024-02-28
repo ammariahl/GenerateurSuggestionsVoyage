@@ -12,8 +12,8 @@ import org.springframework.data.repository.query.Param;
 
 @Repository
 public interface BudgetRepository extends JpaRepository<Budget, Long> {
-   List<Budget> findByLittleBudgetAndMediumBudgetAndBigBudgetAndUnlimited(
-            boolean littleBudget, boolean mediumBudget, boolean bigBudget, boolean unlimited);
+    List<Budget> findByLittleBudgetAndMediumBudgetAndBigBudgetAndUnlimited(
+        boolean littleBudget, boolean mediumBudget, boolean bigBudget, boolean unlimited);
 
     @Query("SELECT a.destination.id FROM Budget a WHERE a.littleBudget <> '0'")
     List<Long> findDestinationIdsByBudget();

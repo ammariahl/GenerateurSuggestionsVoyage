@@ -1,37 +1,27 @@
 <div class="container">
   <div class="progress-bar flex">
     <div class="pace flex" [class.active]="currentStep >= 0">
-      <div class="circle flex" (click)="stepCompleted[0] && (currentStep = 0)">
-        1
-      </div>
+      <div class="circle flex" (click)="currentStep = 0">1</div>
       <div class="step-value">{{ stepValues[1] }}</div>
     </div>
     <div class="line"></div>
     <div class="pace flex" [class.active]="currentStep >= 1">
-      <div class="circle flex" (click)="stepCompleted[1] && (currentStep = 1)">
-        2
-      </div>
+      <div class="circle flex" (click)="currentStep = 1">2</div>
       <div class="step-value">{{ stepValues[2] }}</div>
     </div>
     <div class="line"></div>
     <div class="pace flex" [class.active]="currentStep >= 2">
-      <div class="circle flex" (click)="stepCompleted[2] && (currentStep = 2)">
-        3
-      </div>
+      <div class="circle flex" (click)="currentStep = 2">3</div>
       <div class="step-value">{{ stepValues[3] }}</div>
     </div>
     <div class="line"></div>
     <div class="pace flex" [class.active]="currentStep >= 3">
-      <div class="circle flex" (click)="stepCompleted[3] && (currentStep = 3)">
-        4
-      </div>
+      <div class="circle flex" (click)="currentStep = 3">4</div>
       <div class="step-value">{{ stepValues[4] }}</div>
     </div>
     <div class="line"></div>
     <div class="pace flex" [class.active]="currentStep >= 4">
-      <div class="circle flex" (click)="stepCompleted[4] && (currentStep = 4)">
-        5
-      </div>
+      <div class="circle flex" (click)="currentStep = 4">5</div>
     </div>
   </div>
 

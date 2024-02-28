@@ -21,16 +21,13 @@ public class Budget {
     private boolean mediumBudget;
     private boolean bigBudget;
     private boolean unlimited;
-
     
     @ManyToOne
     @JoinColumn(name = "destination_id")
     private Destination destination;
 
-   public Budget() {
-       
+    public Budget() {       
     }
-
 
     public Long getId() {
         return id;
@@ -72,7 +69,7 @@ public class Budget {
         this.unlimited = unlimited;
     }
 
-  public Destination getDestination() {
+    public Destination getDestination() {
         return destination;
     }
 
