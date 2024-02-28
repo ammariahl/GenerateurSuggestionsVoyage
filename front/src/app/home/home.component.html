@@ -22,6 +22,7 @@
           (click)="navigateToDestination(destination)"
         >
           <img [src]="destination.image" alt="{{ destination.name }}" />
+          <div class="destName">{{ destination.name }}</div>
         </div>
       </div>
 
@@ -29,10 +30,12 @@
 
       <div class="cardContainer flex">
         <div
+          class="card"
           *ngFor="let destination of familydestinations"
           (click)="navigateToDestination(destination)"
         >
           <img [src]="destination.image" alt="{{ destination.name }}" />
+          <div class="destName">{{ destination.name }}</div>
         </div>
       </div>
 
@@ -40,10 +43,12 @@
 
       <div class="cardContainer flex">
         <div
+          class="card"
           *ngFor="let destination of budgetdestinations"
           (click)="navigateToDestination(destination)"
         >
           <img [src]="destination.image" alt="{{ destination.name }}" />
+          <div class="destName">{{ destination.name }}</div>
         </div>
       </div>
     </div>

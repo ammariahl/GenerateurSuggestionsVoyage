@@ -28,7 +28,8 @@ export class HomeComponent implements OnInit {
     this.loadFirstThreeSpringDestinations();
     this.loadFirstThreeBudgetDestinations();
   }
-  loadFirstThreeFamilyDestinations() {
+
+  loadFirstThreeFamilyDestinations(): void {
     this.famillyDestinationService.getFirstThreeFamilyDestinations().subscribe(
       (response: DestinationCard[]) => {
         this.zone.run(() => {
@@ -45,7 +46,7 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  loadFirstThreeSpringDestinations() {
+  loadFirstThreeSpringDestinations(): void {
     this.springDestinationService.getFirstThreeSpringDestinations().subscribe(
       (response: DestinationCard[]) => {
         this.zone.run(() => {
@@ -62,7 +63,7 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  loadFirstThreeBudgetDestinations() {
+  loadFirstThreeBudgetDestinations(): void {
     this.budgetDestinationService.getFirstThreeBudgetDestinations().subscribe(
       (response: DestinationCard[]) => {
         this.zone.run(() => {
@@ -78,7 +79,8 @@ export class HomeComponent implements OnInit {
       }
     );
   }
-  navigateToDestination(destination: DestinationCard) {
+
+  navigateToDestination(destination: DestinationCard): void {
     this.router.navigate(['/destination', destination.name], {
       state: { data: destination },
     });

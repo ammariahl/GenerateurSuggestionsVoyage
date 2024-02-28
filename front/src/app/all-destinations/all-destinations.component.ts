@@ -9,25 +9,26 @@ import { Router } from '@angular/router';
   styleUrl: './all-destinations.component.css',
 })
 export class AllDestinationsComponent {
+  destinations: DestinationCard[] = [];
+
   constructor(
     private allDestinations: AllDestinationsService,
     private router: Router
   ) {}
 
-  destinations: DestinationCard[] = [];
+  ngOnInit(): void {
+    this.displayDestinations();
+  }
 
-  displayDestinations() {
+  displayDestinations(): void {
     this.allDestinations.getAllDestinations().subscribe((data: any) => {
       this.destinations = data;
     });
   }
 
-  navigateToDestination(destination: DestinationCard) {
+  navigateToDestination(destination: DestinationCard): void {
     this.router.navigate(['/destination', destination.name], {
       state: { data: destination },
     });
-  }
-  ngOnInit(): void {
-    this.displayDestinations();
   }
 }

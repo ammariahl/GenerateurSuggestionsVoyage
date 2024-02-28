@@ -12,13 +12,12 @@ import org.springframework.data.repository.query.Param;
 
 @Repository
 public interface ActivityRepository extends JpaRepository<Activity, Long> {
-   List<Activity> findByRelaxingAndAdventureAndGroupactivityAndFamily(
-            boolean relaxing, boolean adventure, boolean groupactivity, boolean family);
+    List<Activity> findByRelaxingAndAdventureAndGroupactivityAndFamily(
+        boolean relaxing, boolean adventure, boolean groupactivity, boolean family);
 
     @Query("SELECT a.destination.id FROM Activity a WHERE a.family = true")
     List<Long> findDestinationIdsByFamily();
 
     @Query("SELECT a.destination FROM Activity a WHERE a.destination.id IN :ids")
     List<Destination> findDestinationsByIds(@Param("ids") List<Long> ids);
-
 }

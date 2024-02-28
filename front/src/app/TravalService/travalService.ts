@@ -12,15 +12,14 @@ import { DestinationCard } from '../models/destination-card.model';
 })
 export class TravelService {
   private apiUrl = 'http://localhost:8080/api/destinations/top';
-
   private randomUrl = 'http://localhost:8080/api/destinations';
+  isRandom = false;
 
   constructor(
     private http: HttpClient,
     private sharedDestinationService: SharedDestinationService
   ) {}
 
-  isRandom = false;
   getRandomDestinations(): Observable<DestinationCard[]> {
     const url = `${this.randomUrl}/random`;
     return this.http.get<DestinationCard[]>(url).pipe(

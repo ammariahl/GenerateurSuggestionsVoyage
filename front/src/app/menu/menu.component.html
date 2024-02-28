@@ -13,10 +13,24 @@
       (click)="toggleIsRandomFalse()"
       >Accueil</a
     >
-    <a [routerLink]="['/random']" (click)="toggleIsRandomTrue()" class="menu-item flex">Aléatoire</a>
-    <a [routerLink]="['/about']" (click)="toggleIsRandomFalse()" class="menu-item flex">À propos</a>
+    <a
+      [routerLink]="['/random']"
+      (click)="toggleIsRandomTrue()"
+      class="menu-item flex"
+      >Aléatoire</a
+    >
+    <a
+      [routerLink]="['/about']"
+      (click)="toggleIsRandomFalse()"
+      class="menu-item flex"
+      >À propos</a
+    >
     <div class="menu-item">
-      <button (click)="toggleIsRandomFalse()" class="button red" [routerLink]="['/search']">
+      <button
+        (click)="toggleIsRandomFalse()"
+        class="button red"
+        [routerLink]="['/search']"
+      >
         Trouver ma destination
       </button>
     </div>

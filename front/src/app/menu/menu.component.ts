@@ -1,12 +1,9 @@
-import { ChangeDetectorRef, Component, NgZone } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
 import { TravelService } from '../TravalService/travalService';
 import { catchError, of } from 'rxjs';
 
-
 @Component({
   selector: 'app-menu',
-
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.css',
 })
@@ -26,12 +23,7 @@ export class MenuComponent {
   ];
   documents: Array<string> = ['cniUe', 'passportUe', 'visaUe', 'passportMde'];
 
-  constructor(
-    private router: Router,
-    private travelService: TravelService,
-    private zone: NgZone,
-    private cdr: ChangeDetectorRef
-  ) {}
+  constructor(private travelService: TravelService) {}
 
   toggleMenu(): void {
     this.isMenuOpen = !this.isMenuOpen;
@@ -39,15 +31,15 @@ export class MenuComponent {
 
   toggleIsRandomTrue(): void {
     this.travelService.isRandom = true;
-    console.log("Random = True");
+    console.log('Random = True');
   }
 
   toggleIsRandomFalse(): void {
     this.travelService.isRandom = false;
-    console.log("Random = false");
+    console.log('Random = false');
   }
+
   sendSearchDestinationForm(): void {
-    // Selection submitted
     const preferences = {
       seasons: [{ ['winter']: 'froid' }],
       budgets: this.budgets.reduce((acc, doc) => {
@@ -71,7 +63,6 @@ export class MenuComponent {
     };
 
     const userPreference = JSON.stringify(preferences);
-    // console.log(JSON.stringify(preferences));
     console.log('User Preference:', userPreference);
     this.travelService
       .sendTravelPreferences(userPreference)
