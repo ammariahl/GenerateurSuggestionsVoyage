@@ -34,6 +34,7 @@ public class DestinationController {
   private final DestinationRepository destinationRepository;
   private static final Logger log = LoggerFactory.getLogger(DestinationController.class);
 
+
     @Autowired
     public DestinationController(
     DestinationService destinationService,
@@ -54,6 +55,7 @@ public class DestinationController {
         List<Destination> topDestinations = destinationService.getAllDestinations();
         return new ResponseEntity<>(topDestinations, HttpStatus.OK);
     }
+
 
         @GetMapping("/all")
         public ResponseEntity<List<Destination>> getAllDestinations() {

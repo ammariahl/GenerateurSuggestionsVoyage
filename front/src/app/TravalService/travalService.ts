@@ -126,7 +126,7 @@ export class TravelService {
       ? JSON.parse(userPreferences)
        : userPreferences;
         {
-          
+
           if (userPreferenceObject.documents && userPreferenceObject.documents[0]) {
             console.log(
               'User Preferences documents:',
@@ -138,21 +138,21 @@ export class TravelService {
 
               console.log('Document Key:', documentKey);
               console.log('Document Value:', documentValue);
-       
+
               const destinationDocuments = Array.isArray(destination.documents)
                 ? destination.documents
                 : [destination.documents];
-       
+
               if (
                 destinationDocuments.some(
                   (document: any) => document[documentKey] === documentValue
                 )
               ) {
                 totalRelevanceScore += 1;
-                console.log("Relevance score after documents for", destination.name, totalRelevanceScore)              
+                console.log("Relevance score after documents for", destination.name, totalRelevanceScore)
               }
             });
-            
+
           } else {
             console.error('User Preferences Documents is null or undefined.');
           }
@@ -163,17 +163,17 @@ export class TravelService {
               'User Preferences activities:',
               userPreferenceObject.activity[0]
             );
-  
+
               const activityKey = userPreferenceObject.activity;
               const activityValue = true;
 
               console.log('Activity Key:', activityKey);
               console.log('Activity Value:', activityValue);
-       
+
               const destinationActivities = Array.isArray(destination.activities)
                 ? destination.activities
                  : [destination.activities];
-       
+
               if (
                 destinationActivities.some(
                   (activity: any) => activity[activityKey] === activityValue
@@ -189,17 +189,17 @@ export class TravelService {
           console.log('User Preferences Budget :', userPreferenceObject.budget)
           if (userPreferenceObject.budget && userPreferenceObject.budget[0]) {
             console.log('User Preferences Budget:', userPreferenceObject.budget[0]);
-            
+
             const budgetKey = userPreferences.budget;
             const budgetValue = true;
-       
+
              console.log('Budget Key:', budgetKey);
              console.log('Budget Value:', budgetValue);
-       
+
               const destinationBudgets = Array.isArray(destination.budgets)
                 ? destination.budgets
                : [destination.budgets];
-       
+
               if (
                 destinationBudgets.some(
                 (budget: any) => budget[budgetKey] === budgetValue
@@ -207,9 +207,9 @@ export class TravelService {
               ) {
                 console.log('Match found in budget!');
                 totalRelevanceScore += 100;
-       
+
               }
-      
+
                  } else {
                  console.error('User Preferences budget is null or undefined.');
                  }
@@ -218,7 +218,7 @@ export class TravelService {
             console.log('User Preferences Season :', userPreferences.season)
           if (userPreferenceObject.season && userPreferenceObject.season[0]) {
                 console.log('User Preferences Seasons:', userPreferenceObject.season[0]);
-                
+
                  const seasonKey = userPreferences.season;
                  const seasonValue = userPreferences.climat[0];
 
