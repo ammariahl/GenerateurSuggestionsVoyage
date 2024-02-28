@@ -16,6 +16,8 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.PageRequest;
@@ -48,8 +50,8 @@ public class DestinationController {
     }
 
          @PostMapping(value = "/top", consumes = "application/json")
-        public ResponseEntity<List<Destination>> getTopDestinations(@RequestBody UserSelections userSelections) {
-        List<Destination> topDestinations = destinationService.getTopDestinations(userSelections);
+        public ResponseEntity<List<Destination>> getTopDestinations() {
+        List<Destination> topDestinations = destinationService.getAllDestinations();
         return new ResponseEntity<>(topDestinations, HttpStatus.OK);
     }
 

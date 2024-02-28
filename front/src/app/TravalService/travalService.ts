@@ -6,6 +6,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { SharedDestinationService } from './Shared-destination.service';
 import { DestinationCard } from '../models/destination-card.model';
+import { UserPreference } from '../models/userPreferences.model';
 
 @Injectable({
   providedIn: 'root',
@@ -81,148 +82,172 @@ export class TravelService {
       );
   }
 
+
   //sorting destinations
-  private sortDestinationsByRelevance(
-    destinations: DestinationCard[],
-    userPreferences: any
-  ): DestinationCard[] {
-    console.log('Destinations before sorting:', destinations);
+ private sortDestinationsByRelevance(
+   destinations: DestinationCard[],
+   userPreferences: any
+ ): DestinationCard[] {
+   console.log('Destinations before sorting:', destinations);
+  const sortedDestinations = destinations.sort((a, b) => {
+    const totalRelevanceScoreA = this.calculateRelevanceScoreForDestination(
+      a,
+       userPreferences
+     );
+     const totalRelevanceScoreB = this.calculateRelevanceScoreForDestination(
+       b,
+       userPreferences
+    );
+     console.log(
+       `Total Relevance Score for ${a.name}: ${totalRelevanceScoreA}`
+     );
+     console.log(
+       `Total Relevance Score for ${b.name}: ${totalRelevanceScoreB}`
+     );
 
-    const sortedDestinations = destinations.sort((a, b) => {
-      const totalRelevanceScoreA = this.calculateRelevanceScoreForDestination(
-        a,
-        userPreferences
-      );
-      const totalRelevanceScoreB = this.calculateRelevanceScoreForDestination(
-        b,
-        userPreferences
-      );
-      console.log(
-        `Total Relevance Score for ${a.name}: ${totalRelevanceScoreA}`
-      );
-      console.log(
-        `Total Relevance Score for ${b.name}: ${totalRelevanceScoreB}`
-      );
+     // Sort in descending order (highest relevance score first)
+    return totalRelevanceScoreB - totalRelevanceScoreA;
+   });
 
-      // Sort in descending order (highest relevance score first)
-      return totalRelevanceScoreB - totalRelevanceScoreA;
-    });
+   console.log('Destinations after sorting:', sortedDestinations);
+   return sortedDestinations;
+ }
 
-    console.log('Destinations after sorting:', sortedDestinations);
-    return sortedDestinations;
-  }
+ private calculateRelevanceScoreForDestination(
+   destination: DestinationCard,
+   userPreferences: any
+ ): number {
+   let totalRelevanceScore = 0;
+   console.log('User Preferences:', userPreferences);
+   console.log('Destination Seasons:', destination.seasons);
 
-  private calculateRelevanceScoreForDestination(
-    destination: DestinationCard,
-    userPreferences: any
-  ): number {
-    let totalRelevanceScore = 0;
-    console.log('User Preferences:', userPreferences);
-    console.log('Destination Seasons:', destination.seasons);
+   const userPreferenceObject =
+     typeof userPreferences === 'string'
+      ? JSON.parse(userPreferences)
+       : userPreferences;
+        {
+          
+          if (userPreferenceObject.documents && userPreferenceObject.documents[0]) {
+            console.log(
+              'User Preferences documents:',
+              userPreferenceObject.documents[0]
+            );
+            userPreferences.documents?.forEach((documentPreference: any) => {
+              const documentKey = Object.keys(documentPreference)[0];
+              const documentValue = documentPreference[documentKey];
 
-    const userPreferenceObject =
-      typeof userPreferences === 'string'
-        ? JSON.parse(userPreferences)
-        : userPreferences;
+              console.log('Document Key:', documentKey);
+              console.log('Document Value:', documentValue);
+       
+              const destinationDocuments = Array.isArray(destination.documents)
+                ? destination.documents
+                : [destination.documents];
+       
+              if (
+                destinationDocuments.some(
+                  (document: any) => document[documentKey] === documentValue
+                )
+              ) {
+                totalRelevanceScore += 1;
+                console.log("Relevance score after documents for", destination.name, totalRelevanceScore)              
+              }
+            });
+            
+          } else {
+            console.error('User Preferences Documents is null or undefined.');
+          }
 
-    if (userPreferenceObject.seasons && userPreferenceObject.seasons[0]) {
-      console.log('User Preferences Seasons:', userPreferenceObject.seasons[0]);
-      userPreferenceObject.seasons.forEach((seasonPreference: any) => {
-        const seasonKey = Object.keys(seasonPreference)[0];
-        const seasonValue = seasonPreference[seasonKey];
+          console.log('User Preferences Activities :', userPreferenceObject.activity)
+          if (userPreferenceObject.activity && userPreferenceObject.activity[0]) {
+            console.log(
+              'User Preferences activities:',
+              userPreferenceObject.activity[0]
+            );
+  
+              const activityKey = userPreferenceObject.activity;
+              const activityValue = true;
 
-        console.log('Season Key:', seasonKey);
-        console.log('Season Value:', seasonValue);
+              console.log('Activity Key:', activityKey);
+              console.log('Activity Value:', activityValue);
+       
+              const destinationActivities = Array.isArray(destination.activities)
+                ? destination.activities
+                 : [destination.activities];
+       
+              if (
+                destinationActivities.some(
+                  (activity: any) => activity[activityKey] === activityValue
+                )
+              ) {
+                totalRelevanceScore += 10;
+                console.log("Relevance score after activities for", destination.name, totalRelevanceScore);
+              }
+          } else {
+            console.error('User Preferences Activities is null or undefined.');
+          }
 
-        const destinationSeasons = Array.isArray(destination.seasons)
-          ? destination.seasons
-          : [destination.seasons];
+          console.log('User Preferences Budget :', userPreferenceObject.budget)
+          if (userPreferenceObject.budget && userPreferenceObject.budget[0]) {
+            console.log('User Preferences Budget:', userPreferenceObject.budget[0]);
+            
+            const budgetKey = userPreferences.budget;
+            const budgetValue = true;
+       
+             console.log('Budget Key:', budgetKey);
+             console.log('Budget Value:', budgetValue);
+       
+              const destinationBudgets = Array.isArray(destination.budgets)
+                ? destination.budgets
+               : [destination.budgets];
+       
+              if (
+                destinationBudgets.some(
+                (budget: any) => budget[budgetKey] === budgetValue
+               )
+              ) {
+                console.log('Match found in budget!');
+                totalRelevanceScore += 100;
+       
+              }
+      
+                 } else {
+                 console.error('User Preferences budget is null or undefined.');
+                 }
 
-        if (
-          destinationSeasons.some(
-            (season: any) => season[seasonKey] === seasonValue
-          )
-        ) {
-          console.log('Match found in seasons!');
-          totalRelevanceScore += 10;
-        }
-      });
-    } else {
-      console.error('User Preferences Seasons is null or undefined.');
-    }
 
-    if (userPreferenceObject.budgets && userPreferenceObject.budgets[0]) {
-      console.log('User Preferences budgets:', userPreferenceObject.budgets[0]);
-      userPreferences.budgets?.forEach((budgetPreference: any) => {
-        const budgetKey = Object.keys(budgetPreference)[0];
-        const budgetValue = budgetPreference[budgetKey];
+            console.log('User Preferences Season :', userPreferences.season)
+          if (userPreferenceObject.season && userPreferenceObject.season[0]) {
+                console.log('User Preferences Seasons:', userPreferenceObject.season[0]);
+                
+                 const seasonKey = userPreferences.season;
+                 const seasonValue = userPreferences.climat[0];
 
-        const destinationBudget = Array.isArray(destination.budgets)
-          ? destination.budgets
-          : [destination.budgets];
+      console.log('Season Key:', seasonKey);
+      console.log('Season Value:', seasonValue);
 
-        if (
-          destinationBudget.some(
-            (budget: any) => budget[budgetKey] === budgetValue
-          )
-        ) {
-          totalRelevanceScore += 10;
-        }
-      });
-    } else {
-      console.error('User Preferences Seasons is null or undefined.');
-    }
+       const destinationSeasons = Array.isArray(destination.seasons)
+         ? destination.seasons
+        : [destination.seasons];
 
-    if (userPreferenceObject.activities && userPreferenceObject.activities[0]) {
-      console.log(
-        'User Preferences activities:',
-        userPreferenceObject.activities[0]
-      );
-      userPreferences.activities?.forEach((activityPreference: any) => {
-        const activityKey = Object.keys(activityPreference)[0];
-        const activityValue = activityPreference[activityKey];
+        console.log('destinationSeasons.some :', destinationSeasons)
+        console.log('season value 2 :', seasonValue)
+       if (
+         destinationSeasons.some(
+         (season: any) => season[seasonKey] === seasonValue
+        )
+       ) {
+         console.log('Match found in seasons!');
+         totalRelevanceScore += 1000;
 
-        const destinationActivities = Array.isArray(destination.activities)
-          ? destination.activities
-          : [destination.activities];
+       }
 
-        if (
-          destinationActivities.some(
-            (activity: any) => activity[activityKey] === activityValue
-          )
-        ) {
-          totalRelevanceScore += 10;
-        }
-      });
-    } else {
-      console.error('User Preferences Seasons is null or undefined.');
-    }
+          } else {
+          console.error('User Preferences Seasons is null or undefined.');
+          }
 
-    if (userPreferenceObject.documents && userPreferenceObject.documents[0]) {
-      console.log(
-        'User Preferences documents:',
-        userPreferenceObject.documents[0]
-      );
-      userPreferences.documents?.forEach((documentPreference: any) => {
-        const documentKey = Object.keys(documentPreference)[0];
-        const documentValue = documentPreference[documentKey];
 
-        const destinationDocuments = Array.isArray(destination.documents)
-          ? destination.documents
-          : [destination.documents];
-
-        if (
-          destinationDocuments.some(
-            (document: any) => document[documentKey] === documentValue
-          )
-        ) {
-          totalRelevanceScore += 10;
-        }
-      });
-    } else {
-      console.error('User Preferences Seasons is null or undefined.');
-    }
-
-    return totalRelevanceScore;
-  }
+   console.log("Relevance Score for :", destination.name, totalRelevanceScore);
+   return totalRelevanceScore;
+ }
+}
 }
