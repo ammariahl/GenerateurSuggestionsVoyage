@@ -16,15 +16,23 @@
       <h3>Plongez dans la magie du Printemps !</h3>
 
       <div class="cardContainer flex">
-        <div *ngFor="let destination of springdestinations">
+        <div
+          class="card"
+          *ngFor="let destination of springdestinations"
+          (click)="navigateToDestination(destination)"
+        >
           <img [src]="destination.image" alt="{{ destination.name }}" />
+          <!--<span class="destName">{{ destination.name }}</span>-->
         </div>
       </div>
 
       <h3>Plaisirs en famille : des destinations pour petits et grands !</h3>
 
       <div class="cardContainer flex">
-        <div *ngFor="let destination of familydestinations">
+        <div
+          *ngFor="let destination of familydestinations"
+          (click)="navigateToDestination(destination)"
+        >
           <img [src]="destination.image" alt="{{ destination.name }}" />
         </div>
       </div>
@@ -32,10 +40,19 @@
       <h3>Prêts pour petits budget !</h3>
 
       <div class="cardContainer flex">
-        <div *ngFor="let destination of budgetdestinations">
+        <div
+          *ngFor="let destination of budgetdestinations"
+          (click)="navigateToDestination(destination)"
+        >
           <img [src]="destination.image" alt="{{ destination.name }}" />
         </div>
       </div>
+    </div>
+
+    <div class="all">
+      <button class="button teal" [routerLink]="['/all']">
+        Découvrir toutes les destinations
+      </button>
     </div>
   </div>
 </div>

@@ -16,8 +16,6 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.PageRequest;
@@ -26,6 +24,7 @@ import org.springframework.data.domain.PageRequest;
 @RestController
 @RequestMapping("api/destinations")
 public class DestinationController {
+
   private final DestinationService destinationService;
   private final ActivityService activityService;
   private final SeasonService seasonService;
@@ -77,14 +76,14 @@ public class DestinationController {
         return activityService.getFirstThreeFamilyDestinations();
     }
 
-        @GetMapping("/first3springdestinations")
-        public List<Destination> getFirstThreeSpringDestinations() {
+    
+    @GetMapping("/first3springdestinations")
+    public List<Destination> getFirstThreeSpringDestinations() {
         return seasonService.getFirstThreeSpringDestinations();
     }
 
-        @GetMapping("/first3budgetdestinations")
-        public List<Destination> getFirstThreeBudgetDestinations() {
+    @GetMapping("/first3budgetdestinations")
+    public List<Destination> getFirstThreeBudgetDestinations() {
         return budgetService.getFirstThreeBudgetDestinations();
-    }}
-   
-
+    }
+}

@@ -10,7 +10,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class SpringDestinationService {
   private apiUrl =
-    'http://localhost:8080/api/destionations/first3springdestinations';
+    'http://localhost:8080/api/destinations/first3springdestinations';
 
   constructor(private http: HttpClient) {}
 
