@@ -177,7 +177,7 @@ export class TravelService {
           )
         ) {
           console.log('Match found in Budget!');
-          return 1;
+          return 100;
         }
       } else if (Array.isArray(userPreferenceObject.budget)) {
         const userBudget = userPreferenceObject.budget;
@@ -193,7 +193,7 @@ export class TravelService {
             )
           ) {
             console.log('Match found in Budget!');
-            return 1;
+            return 100;
           }
         }
       } else {
@@ -228,7 +228,7 @@ export class TravelService {
           )
         ) {
           console.log('Match found in activity!');
-          return 1;
+          return 10;
         }
       } else if (Array.isArray(userPreferenceObject.activity)) {
         const userActivity = userPreferenceObject.activity;
@@ -244,7 +244,7 @@ export class TravelService {
             )
           ) {
             console.log('Match found in activity!');
-            return 1;
+            return 10;
           }
         }
       } else {
@@ -316,7 +316,7 @@ export class TravelService {
           )
         ) {
           console.log('Match found in seasons!');
-          return 15;
+          return 1000;
         }
       } else if (Array.isArray(userPreferenceObject.season)) {
         const userSeason = userPreferenceObject.season;
@@ -332,7 +332,7 @@ export class TravelService {
             )
           ) {
             console.log('Match found in seasons!');
-            return 15;
+            return 1000;
           }
         }
       } else {
