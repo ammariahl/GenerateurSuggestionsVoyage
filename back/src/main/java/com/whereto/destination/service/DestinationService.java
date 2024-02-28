@@ -73,12 +73,15 @@ public List<Destination> getTopDestinations(UserSelections userSelections) {
         List<Activity> managedActivities = activityService.getManagedActivities(activities);
         List<Budget> managedBudgets = budgetService.getManagedBudgets(budgets);
         List<Document> managedDocuments = documentService.getManagedDocuments(documents);
- 
+        
+//   Sort sort = createSortFromUserSelections(userSelections);
  List<Destination> combinedDestinations = destinationRepository.findTopDestinationsWithAssociations(
         managedSeasons,
         managedBudgets,
         managedActivities,
         managedDocuments
+        
+        
     );
      System.out.println("Managed managedBudgets: " + managedBudgets);
 
@@ -89,6 +92,8 @@ public List<Destination> getTopDestinations(UserSelections userSelections) {
     return combinedDestinations;
 
         } 
+
+
     }
 
 
