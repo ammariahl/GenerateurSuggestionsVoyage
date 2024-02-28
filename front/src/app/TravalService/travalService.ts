@@ -83,7 +83,6 @@ export class TravelService {
   }
 
 
-
   //sorting destinations
  private sortDestinationsByRelevance(
    destinations: DestinationCard[],
@@ -105,19 +104,21 @@ export class TravelService {
      console.log(
        `Total Relevance Score for ${b.name}: ${totalRelevanceScoreB}`
      );
+
       if (totalRelevanceScoreA !== totalRelevanceScoreB) {
         // Sort in descending order (highest relevance score first)
+        console.log('Sorting:', a.name, b.name);
         return totalRelevanceScoreB - totalRelevanceScoreA;
       } else {
         // If relevance scores are equal, use destination names for tiebreaker
-        return a.name.localeCompare(b.name);
+        console.log('Tiebreaker:', a.name, b.name);
+        return b.name.localeCompare(a.name);
       }
     });
 
     console.log('Destinations after sorting:', sortedDestinations);
     return sortedDestinations;
   }
-
 
  private calculateRelevanceScoreForDestination(
    destination: DestinationCard,
@@ -250,5 +251,4 @@ export class TravelService {
    console.log("Relevance Score for :", destination.name, totalRelevanceScore);
    return totalRelevanceScore;
  }
-}
 }
