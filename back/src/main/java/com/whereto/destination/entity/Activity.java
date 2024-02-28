@@ -21,18 +21,13 @@ public class Activity {
     private boolean adventure;
     private boolean groupactivity;
     private boolean family;
-
     
     @ManyToOne
     @JoinColumn(name = "destination_id")
     private Destination destination;
-   
 
-    public Activity() {
-      
+    public Activity() {      
     }
-
-   
 
     public Long getId() {
         return id;
@@ -74,7 +69,7 @@ public class Activity {
         this.family = family;
     }
 
-   public Destination getDestination() {
+    public Destination getDestination() {
         return destination;
     }
 

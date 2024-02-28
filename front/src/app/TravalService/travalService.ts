@@ -13,14 +13,14 @@ import { UserPreference } from '../models/userPreferences.model';
 })
 export class TravelService {
   private apiUrl = 'http://localhost:8080/api/destinations/top';
-  private randomUrl = 'http://localhost:8080/api/destinations'
+  private randomUrl = 'http://localhost:8080/api/destinations';
+  isRandom = false;
 
   constructor(
     private http: HttpClient,
     private sharedDestinationService: SharedDestinationService,
   ) {}
 
-  isRandom = false;
   getRandomDestinations(): Observable<DestinationCard[]> {
     const url = `${this.randomUrl}/random`;
     return this.http.get<DestinationCard[]>(url).pipe(
@@ -83,6 +83,7 @@ export class TravelService {
   }
 
 
+
   //sorting destinations
  private sortDestinationsByRelevance(
    destinations: DestinationCard[],
@@ -104,14 +105,19 @@ export class TravelService {
      console.log(
        `Total Relevance Score for ${b.name}: ${totalRelevanceScoreB}`
      );
+      if (totalRelevanceScoreA !== totalRelevanceScoreB) {
+        // Sort in descending order (highest relevance score first)
+        return totalRelevanceScoreB - totalRelevanceScoreA;
+      } else {
+        // If relevance scores are equal, use destination names for tiebreaker
+        return a.name.localeCompare(b.name);
+      }
+    });
 
-     // Sort in descending order (highest relevance score first)
-    return totalRelevanceScoreB - totalRelevanceScoreA;
-   });
+    console.log('Destinations after sorting:', sortedDestinations);
+    return sortedDestinations;
+  }
 
-   console.log('Destinations after sorting:', sortedDestinations);
-   return sortedDestinations;
- }
 
  private calculateRelevanceScoreForDestination(
    destination: DestinationCard,

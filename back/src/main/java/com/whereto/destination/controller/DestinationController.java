@@ -27,13 +27,12 @@ import org.springframework.data.domain.PageRequest;
 @RequestMapping("api/destinations")
 public class DestinationController {
 
-  private final DestinationService destinationService;
-  private final ActivityService activityService;
-  private final SeasonService seasonService;
-  private final BudgetService budgetService;
-  private final DestinationRepository destinationRepository;
-  private static final Logger log = LoggerFactory.getLogger(DestinationController.class);
-
+    private final DestinationService destinationService;
+    private final ActivityService activityService;
+    private final SeasonService seasonService;
+    private final BudgetService budgetService;
+    private final DestinationRepository destinationRepository;
+    private static final Logger log = LoggerFactory.getLogger(DestinationController.class);
 
     @Autowired
     public DestinationController(
@@ -56,31 +55,30 @@ public class DestinationController {
         return new ResponseEntity<>(topDestinations, HttpStatus.OK);
     }
 
-
-        @GetMapping("/all")
-        public ResponseEntity<List<Destination>> getAllDestinations() {
-            List<Destination> allDestinations = destinationService.getAllDestinations();
-            return new ResponseEntity<>(allDestinations, HttpStatus.OK);
-        }
-        @GetMapping("/random")
-        public ResponseEntity<List<Destination>> getRandomDestinations() {
-            List<Destination> randomDestinations = destinationService.getAllDestinations();
-            Collections.shuffle(randomDestinations);
-        return new ResponseEntity<>(randomDestinations, HttpStatus.OK);
-        }
-
-        @GetMapping("/{id}")
-        public ResponseEntity<Destination> getDestinationById(@PathVariable Long id) {
-            Optional<Destination> destinationOptional = destinationRepository.findById(id);
-            return destinationOptional.map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+    @GetMapping("/all")
+    public ResponseEntity<List<Destination>> getAllDestinations() {
+        List<Destination> allDestinations = destinationService.getAllDestinations();
+        return new ResponseEntity<>(allDestinations, HttpStatus.OK);
     }
-        @GetMapping("/first3familydestinations")
-        public List<Destination> getFirstThreeFamilyDestinations() {
+
+    @GetMapping("/random")
+    public ResponseEntity<List<Destination>> getRandomDestinations() {
+        List<Destination> randomDestinations = destinationService.getAllDestinations();
+        Collections.shuffle(randomDestinations);
+        return new ResponseEntity<>(randomDestinations, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Destination> getDestinationById(@PathVariable Long id) {
+        Optional<Destination> destinationOptional = destinationRepository.findById(id);
+        return destinationOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/first3familydestinations")
+    public List<Destination> getFirstThreeFamilyDestinations() {
         return activityService.getFirstThreeFamilyDestinations();
     }
-
-    
+  
     @GetMapping("/first3springdestinations")
     public List<Destination> getFirstThreeSpringDestinations() {
         return seasonService.getFirstThreeSpringDestinations();

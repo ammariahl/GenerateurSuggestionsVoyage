@@ -37,9 +37,9 @@ export class SearchDestinationComponent {
     private formBuilder: FormBuilder,
     private router: Router,
     private travelService: TravelService,
-
     private cdr: ChangeDetectorRef
   ) {}
+
   // J'initialise le compteur
   currentStep = 0;
 
@@ -52,8 +52,30 @@ export class SearchDestinationComponent {
     activity: [],
     documents: [],
   };
-  stepCompleted: { [key: number]: boolean } = { 0: true };
+  //stepCompleted: { [key: number]: boolean } = { 0: true };
   stepValues: { [key: number]: string } = {};
+  valueNames: { [key: string]: string } = {
+    spring: 'Printemps',
+    summer: 'Été',
+    autumn: 'Automne',
+    winter: 'Hiver',
+    chaud: 'Chaud',
+    froid: 'Froid',
+    doux: 'Doux',
+    peu_importe: 'Peu importe',
+    littleBudget: 'Petit budget',
+    mediumBudget: 'Budget moyen',
+    bigBudget: 'Gros budget',
+    unlimited: 'Illimité',
+    relaxing: 'Relaxant',
+    adventure: 'Aventure',
+    groupactivity: 'Activité de groupe',
+    family: 'Famille',
+    cniUe: "Carte d'identité",
+    passportUE: 'Passeport UE',
+    visaUE: 'Visa UE',
+    passportMde: 'Passeport Monde',
+  };
 
   // Je crée le formulaire
   preferencesForm = this.formBuilder.group({
@@ -63,6 +85,14 @@ export class SearchDestinationComponent {
     activity: ['', Validators.required],
     documents: this.formBuilder.array([], Validators.required),
   });
+
+  //Je crée un objet pour stocker les documents sélectionnés
+  selectedDocuments: { [key: string]: boolean } = {
+    cniUe: false,
+    passportUe: false,
+    visaUe: false,
+    passportMde: false,
+  };
 
   // Je met à jour le compteur pour savoir où je suis dans le formulaire
   onButtonClick(step: number): void {
@@ -79,22 +109,17 @@ export class SearchDestinationComponent {
   //Je récupère les infos des boutons cliqués
   setPreference(field: string, value: string, step: number): void {
     this.preferencesForm.get(field)?.setValue(value);
-    this.stepValues[step] = value;
-    this.stepCompleted[step + 1] = true;
+
+    const valueName = this.valueNames[value];
+
+    this.stepValues[step] = valueName;
     this.onButtonClick(step);
     this.cdr.detectChanges();
     console.log('Field:', field, 'Value:', value, 'Step:', step);
   }
-  //Je crée un objet pour stocker les documents sélectionnés
-  selectedDocuments: { [key: string]: boolean } = {
-    cniUe: false,
-    passportUe: false,
-    visaUe: false,
-    passportMde: false,
-  };
 
   //Je fais en sorte qu'on puisse sélectionner plusieurs documents
-  onDocumentSelect(document: any) {
+  onDocumentSelect(document: any): void {
     const documents = this.preferencesForm.get('documents') as FormArray;
     const documentObject = {
       cniUe: document === 'cniUe',
@@ -106,8 +131,12 @@ export class SearchDestinationComponent {
     this.selectedDocuments[document] = !this.selectedDocuments[document];
   }
 
+  atLeastOneDocumentSelected(): boolean {
+    return Object.values(this.selectedDocuments).some((value) => value);
+  }
+
   //Je navigue vers la page de suggestions de destinations
-  navigateToSuggestion() {
+  navigateToSuggestion(): void {
     this.travelService
       .sendTravelPreferences(this.userPreference)
       .pipe(
@@ -118,22 +147,27 @@ export class SearchDestinationComponent {
         })
       )
       .subscribe((response) => {
-        if (response !== null) {
+        if (response !== null && response.length > 0) {
           console.log('Response from bke:', response);
+          const urlDocument: string[] = Object.keys(
+            this.selectedDocuments
+          ).filter((key) => this.selectedDocuments[key]);
+
+          const url = `api/destinations/top/${this.userPreference.season}/${
+            this.userPreference.climat
+          }/${this.userPreference.budget}/${
+            this.userPreference.activity
+          }/${urlDocument.join('**')}`;
+
+          this.router.navigate([url]);
+        } else {
+          this.router.navigate(['/destNotFound']);
         }
       });
-
-    const url = `api/destinations/top/${this.userPreference.season}/${
-      this.userPreference.climat
-    }/${this.userPreference.budget}/${
-      this.userPreference.activity
-    }/${this.userPreference.documents.join('**')}`;
-
-    this.router.navigate([url]);
   }
 
   //Quand le formulaire est soumis, je récupère les infos et je les envoie à la page de suggestions de destinations
-  onSubmit() {
+  onSubmit(): void {
     this.userPreference.season.push(this.preferencesForm.value.season);
     this.userPreference.climat.push(this.preferencesForm.value.climat);
     this.userPreference.budget.push(this.preferencesForm.value.budget);
@@ -151,11 +185,11 @@ export class SearchDestinationComponent {
   }
 
   // Animations
-
-  ngAfterViewChecked() {
+  ngAfterViewChecked(): void {
     this.scrollToCurrentStep();
   }
-  scrollToCurrentStep() {
+
+  scrollToCurrentStep(): void {
     const stepElements = Array.from(document.querySelectorAll('.step'));
     const visibleStepElements = stepElements.filter(
       (step) => (step as HTMLElement).offsetParent !== null

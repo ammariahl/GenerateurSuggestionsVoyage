@@ -1,8 +1,5 @@
 package com.whereto.destination.entity;
 
-
-
-
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -40,36 +37,29 @@ public class Destination {
 
     @Column(columnDefinition = "TEXT")
     private String descriptionLong;
-
     
     @OneToMany(mappedBy = "destination" , fetch = FetchType.LAZY)
     @BatchSize(size = 10)
     @Fetch(FetchMode.SUBSELECT)
     private List<Season> seasons ;
-
     
     @OneToMany(mappedBy = "destination", fetch = FetchType.LAZY )
     @BatchSize(size = 10)
     @Fetch(FetchMode.SUBSELECT)
     private List<Budget> budgets ;
-
    
     @OneToMany(mappedBy = "destination", fetch = FetchType.LAZY )
     @BatchSize(size = 10)
     @Fetch(FetchMode.SUBSELECT)
     private List<Activity> activities ;
-
     
     @OneToMany(mappedBy = "destination", fetch = FetchType.LAZY  )
     @BatchSize(size = 10)
     @Fetch(FetchMode.SUBSELECT)
     private List<Document> documents ;
-
    
-    public Destination() {
-     
+    public Destination() {     
     }
-
 
     public Long getId() {
         return id;
@@ -124,9 +114,8 @@ public class Destination {
     }
 
     public void setBudgets(List<Budget> budgets) {
-        this.budgets = budgets;    }
-
-
+        this.budgets = budgets;
+    }
 
     public List<Activity> getActivities() {
         return activities;
@@ -143,5 +132,4 @@ public class Destination {
     public void setDocuments(List<Document> documents) {
         this.documents = documents;
     }
-
 }
