@@ -157,7 +157,6 @@ export class TravelService {
             console.error('User Preferences Documents is null or undefined.');
           }
 
-          console.log('User Preferences Activities :', userPreferenceObject.activity)
           if (userPreferenceObject.activity && userPreferenceObject.activity[0]) {
             console.log(
               'User Preferences activities:',
@@ -186,7 +185,6 @@ export class TravelService {
             console.error('User Preferences Activities is null or undefined.');
           }
 
-          console.log('User Preferences Budget :', userPreferenceObject.budget)
           if (userPreferenceObject.budget && userPreferenceObject.budget[0]) {
             console.log('User Preferences Budget:', userPreferenceObject.budget[0]);
 
@@ -215,7 +213,6 @@ export class TravelService {
                  }
 
 
-            console.log('User Preferences Season :', userPreferences.season)
           if (userPreferenceObject.season && userPreferenceObject.season[0]) {
                 console.log('User Preferences Seasons:', userPreferenceObject.season[0]);
 
@@ -229,8 +226,6 @@ export class TravelService {
          ? destination.seasons
         : [destination.seasons];
 
-        console.log('destinationSeasons.some :', destinationSeasons)
-        console.log('season value 2 :', seasonValue)
        if (
          destinationSeasons.some(
          (season: any) => season[seasonKey] === seasonValue
