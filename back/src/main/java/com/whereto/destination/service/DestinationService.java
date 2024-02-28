@@ -1,5 +1,6 @@
 package com.whereto.destination.service;
 
+
 import com.whereto.destination.entity.Budget;
 import com.whereto.destination.entity.Destination;
 import com.whereto.destination.entity.Season;
@@ -12,7 +13,6 @@ import java.util.LinkedHashSet;
 import org.hibernate.mapping.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-//import org.springframework.data.domain.Pageable;
 import com.whereto.destination.exception.CustomNotFoundException;
 import java.util.Collections;
 import java.util.stream.Collectors;
@@ -47,53 +47,43 @@ public class DestinationService {
                               SeasonService seasonService,
                               ActivityService activityService,
                               BudgetService budgetService,
-                              DocumentService documentService
-    ) {
+                              DocumentService documentService) 
+    {
         this.destinationRepository = destinationRepository;
         this.seasonService = seasonService;
         this.activityService = activityService;
         this.budgetService = budgetService;
         this.documentService = documentService;
-
     }
 
     public List<Destination> getAllDestinations() {
         return destinationRepository.findAll();
     }
 
-
-public List<Destination> getTopDestinations(UserSelections userSelections) {
+    public List<Destination> getTopDestinations(UserSelections userSelections) {
         List<Season> seasons = userSelections.getSeasons();
         List<Budget> budgets = userSelections.getBudgets();
         List<Activity> activities = userSelections.getActivities();
         List<Document> documents = userSelections.getDocuments();
-
 
         List<Season> managedSeasons = seasonService.getManagedSeasons(seasons);
         List<Activity> managedActivities = activityService.getManagedActivities(activities);
         List<Budget> managedBudgets = budgetService.getManagedBudgets(budgets);
         List<Document> managedDocuments = documentService.getManagedDocuments(documents);
  
- List<Destination> combinedDestinations = destinationRepository.findTopDestinationsWithAssociations(
-        managedSeasons,
-        managedBudgets,
-        managedActivities,
-        managedDocuments
-    );
-     System.out.println("Managed managedBudgets: " + managedBudgets);
+        List<Destination> combinedDestinations = destinationRepository.findTopDestinationsWithAssociations(
+            managedSeasons,
+            managedBudgets,
+            managedActivities,
+            managedDocuments
+        );
 
-    // Logging for debugging
-    System.out.println("Received UserSelections: " + userSelections);
-    System.out.println("Result size: " + combinedDestinations.size());
+        System.out.println("Managed managedBudgets: " + managedBudgets);
+        // Logging for debugging
+        System.out.println("Received UserSelections: " + userSelections);
+        System.out.println("Result size: " + combinedDestinations.size());
 
-    return combinedDestinations;
-
-        } 
-    }
-
-
-
-
-    
-   
+        return combinedDestinations;
+    } 
+}
 

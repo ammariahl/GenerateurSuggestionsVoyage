@@ -1,9 +1,4 @@
-import {
-  Component,
-  OnInit,
-  AfterViewInit,
-  ChangeDetectorRef,
-} from '@angular/core';
+import { Component, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { DestinationCard } from '../models/destination-card.model';
 import { TravelService } from '../TravalService/travalService';
 import { SharedDestinationService } from '../TravalService/Shared-destination.service';
@@ -21,9 +16,7 @@ export class SuggestionComponent implements AfterViewInit {
   constructor(
     private cdr: ChangeDetectorRef,
     private sharedDestinationService: SharedDestinationService,
-
     private router: Router,
-
     public travelService: TravelService
   ) {}
 
@@ -95,6 +88,7 @@ export class SuggestionComponent implements AfterViewInit {
   viewAll(): void {
     this.isViewAll = !this.isViewAll;
   }
+
   getSelectedSeason(destination: DestinationCard): string {
     const seasons = destination.seasons;
 

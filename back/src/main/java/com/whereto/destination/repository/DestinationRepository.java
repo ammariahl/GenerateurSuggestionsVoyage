@@ -17,23 +17,18 @@ import org.springframework.data.domain.Pageable;
 @Repository
 public interface DestinationRepository extends JpaRepository<Destination , Long>{
 
-    List<Destination> findAll(); 
-   
+    List<Destination> findAll();   
     List<Destination> findTopDestinationsBySeasonsIn(List<Season> seasons);
-
     List<Destination> findTopDestinationsByBudgetsIn(List<Budget> budgets);
-
     List<Destination> findTopDestinationsByActivitiesIn(List<Activity> activities);
-
     List<Destination> findTopDestinationsByDocumentsIn(List<Document> documents);
-
-      List<Destination> findTopDestinationsBySeasonsInAndBudgetsInAndActivitiesInAndDocumentsIn(
+    List<Destination> findTopDestinationsBySeasonsInAndBudgetsInAndActivitiesInAndDocumentsIn(
         List<Season> seasons,
         List<Budget> budgets,
         List<Activity> activities,
         List<Document> documents);
 
-     @Query("SELECT DISTINCT d FROM Destination d " +
+    @Query("SELECT DISTINCT d FROM Destination d " +
             "JOIN d.seasons s " +
             "JOIN d.budgets b " +
             "JOIN d.activities a " +
@@ -44,8 +39,4 @@ public interface DestinationRepository extends JpaRepository<Destination , Long>
         @Param("budgets") List<Budget> budgets,
         @Param("activities") List<Activity> activities,
         @Param("documents") List<Document> documents);
-
-    
-
-
 }

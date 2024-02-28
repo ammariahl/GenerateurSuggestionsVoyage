@@ -11,22 +11,16 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ResponseEntity<String> handleException(Exception e) {
-        
-        e.printStackTrace();
-
-       
+    public ResponseEntity<String> handleException(Exception e) {        
+        e.printStackTrace();       
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
             .body("An unexpected error occurred.");
     }
 
     @ExceptionHandler(CustomNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ResponseEntity<String> handleNotFoundException(CustomNotFoundException e) {
-       
-        e.printStackTrace();
-
-        
+    public ResponseEntity<String> handleNotFoundException(CustomNotFoundException e) {       
+        e.printStackTrace();        
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
             .body(e.getMessage());
     }

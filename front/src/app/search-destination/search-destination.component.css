@@ -1,6 +1,7 @@
 .container {
   padding: 2rem;
 }
+
 .step {
   position: relative;
   display: flex;
@@ -67,6 +68,7 @@ button:hover {
 .progress-bar {
   justify-content: space-between;
   align-items: center;
+  padding-bottom: 8%;
 }
 
 .pace {
@@ -86,6 +88,7 @@ button:hover {
   width: min-content;
 
   color: var(--black);
+  text-align: center;
 }
 
 .circle {

@@ -1,5 +1,6 @@
 package com.whereto.destination.service;
 
+
 import com.whereto.destination.entity.Budget;
 import com.whereto.destination.entity.Destination;
 import com.whereto.destination.repository.BudgetRepository;
@@ -19,27 +20,21 @@ public class BudgetService {
     public BudgetService(BudgetRepository budgetRepository) {
         this.budgetRepository = budgetRepository;
     }
-
-    //  public List<Budget> getAllBudgetsWithDestinations() {
-    //     return budgetRepository.findAllWithDestinations();
     
-    //  }
     public List<Budget> getManagedBudgets(List<Budget> budgets) {
-          List<Budget> managedBudgets = new ArrayList<>();
-          for (Budget budget : budgets) {
-            List<Budget> matchingBudgets = getBudgetsByField(budget);
-            
+        List<Budget> managedBudgets = new ArrayList<>();
+        for (Budget budget : budgets) {
+            List<Budget> matchingBudgets = getBudgetsByField(budget);        
             if (!matchingBudgets.isEmpty()) {
-                managedBudgets.add(matchingBudgets.get(0));
+               managedBudgets.add(matchingBudgets.get(0));
             } else {
-                throw new CustomNotFoundException("Budget is not found in the database");
+              throw new CustomNotFoundException("Budget is not found in the database");
             }
         }
-
         return managedBudgets;
-
     }
-  private List<Budget> getBudgetsByField(Budget budget) {
+
+    private List<Budget> getBudgetsByField(Budget budget) {
         boolean littleBudget = budget.isLittleBudget();
         boolean mediumBudget = budget.isMediumBudget();
         boolean bigBudget = budget.isBigBudget();
@@ -49,19 +44,17 @@ public class BudgetService {
             littleBudget, mediumBudget, bigBudget, unlimited);
     }
 
-       public List<Destination> getFirstThreeBudgetDestinations() {
+    public List<Destination> getFirstThreeBudgetDestinations() {
         List<Long> destinationIds = budgetRepository.findDestinationIdsByBudget();
         if (destinationIds == null || destinationIds.isEmpty()) {
-        return Collections.emptyList();
-    }
+            return Collections.emptyList();
+        }
         List<Destination> allBudgetDestinations = budgetRepository.findDestinationsByIds(destinationIds);
-
         if (allBudgetDestinations.size() >= 3) {
-        return allBudgetDestinations.subList(0, 3); 
-    } else {
-        return allBudgetDestinations;
+            return allBudgetDestinations.subList(0, 3); 
+        } else {
+            return allBudgetDestinations;
+        }
     }
-    }
-
 }
 

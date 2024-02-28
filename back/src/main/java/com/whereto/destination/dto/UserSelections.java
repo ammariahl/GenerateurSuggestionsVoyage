@@ -14,19 +14,14 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
-
 public class UserSelections {
     
     private List<Season> seasons = new ArrayList<>();
-
     private List<Budget> budgets = new ArrayList<>();
-
     private List<Activity> activities = new ArrayList<>();
-
     private List<Document> documents = new ArrayList<>();
 
-
-       public List<Season> getSeasons() {
+    public List<Season> getSeasons() {
         return seasons;
     }
 
