@@ -113,7 +113,6 @@ export class SearchDestinationComponent {
     const valueName = this.valueNames[value];
 
     this.stepValues[step] = valueName;
-    //this.stepCompleted[step + 1] = true;
     this.onButtonClick(step);
     this.cdr.detectChanges();
     console.log('Field:', field, 'Value:', value, 'Step:', step);
