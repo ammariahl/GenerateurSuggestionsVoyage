@@ -70,20 +70,28 @@ public class DestinationService {
         List<Activity> managedActivities = activityService.getManagedActivities(activities);
         List<Budget> managedBudgets = budgetService.getManagedBudgets(budgets);
         List<Document> managedDocuments = documentService.getManagedDocuments(documents);
- 
+        
+        //   Sort sort = createSortFromUserSelections(userSelections);
         List<Destination> combinedDestinations = destinationRepository.findTopDestinationsWithAssociations(
             managedSeasons,
             managedBudgets,
             managedActivities,
-            managedDocuments
+            managedDocuments      
         );
-
         System.out.println("Managed managedBudgets: " + managedBudgets);
+
         // Logging for debugging
         System.out.println("Received UserSelections: " + userSelections);
         System.out.println("Result size: " + combinedDestinations.size());
 
         return combinedDestinations;
+
     } 
 }
+
+
+
+
+    
+   
 

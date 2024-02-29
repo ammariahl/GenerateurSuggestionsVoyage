@@ -21,9 +21,7 @@
 }
 
 p {
-  text-align: center;
-  margin: 3%;
-  font-size: 1.2rem;
+  padding-bottom: 2rem;
 }
 
 .cardContainerByCategory {
@@ -37,14 +35,14 @@ p {
   flex-wrap: wrap;
   justify-content: center;
 }
+.card {
+  position: relative;
+}
 
 img {
   width: 17rem;
   height: 12rem;
   border-radius: 20px;
-}
-
-img {
   cursor: pointer;
 }
 
