@@ -48,9 +48,9 @@ public class DestinationController {
         this.destinationRepository = destinationRepository;
     }
 
-    @PostMapping(value = "/top", consumes = "application/json")
-    public ResponseEntity<List<Destination>> getTopDestinations(@RequestBody UserSelections userSelections) {
-        List<Destination> topDestinations = destinationService.getTopDestinations(userSelections);
+         @PostMapping(value = "/top", consumes = "application/json")
+        public ResponseEntity<List<Destination>> getTopDestinations() {
+        List<Destination> topDestinations = destinationService.getAllDestinations();
         return new ResponseEntity<>(topDestinations, HttpStatus.OK);
     }
 
@@ -77,7 +77,7 @@ public class DestinationController {
     public List<Destination> getFirstThreeFamilyDestinations() {
         return activityService.getFirstThreeFamilyDestinations();
     }
-
+  
     @GetMapping("/first3springdestinations")
     public List<Destination> getFirstThreeSpringDestinations() {
         return seasonService.getFirstThreeSpringDestinations();

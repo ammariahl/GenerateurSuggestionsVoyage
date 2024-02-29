@@ -6,7 +6,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { SharedDestinationService } from './Shared-destination.service';
 import { DestinationCard } from '../models/destination-card.model';
-//import { UserPreference } from '../models/userPreferences.model';
+
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +18,7 @@ export class TravelService {
 
   constructor(
     private http: HttpClient,
-    private sharedDestinationService: SharedDestinationService
+    private sharedDestinationService: SharedDestinationService,
   ) {}
 
   getRandomDestinations(): Observable<DestinationCard[]> {
@@ -30,16 +30,10 @@ export class TravelService {
       catchError((error: HttpErrorResponse) => {
         if (error.error instanceof ErrorEvent) {
           // Client-side error
-          console.error(
-            'An error occurred on the client:',
-            error.error.message
-          );
+          console.error('An error occurred on the client:', error.error.message);
         } else {
           // Server-side error
-          console.error(
-            `Backend returned code ${error.status}, body was:`,
-            error.error
-          );
+          console.error(`Backend returned code ${error.status}, body was:`, error.error);
         }
         return throwError('Something went wrong with the request.');
       })
@@ -84,23 +78,33 @@ export class TravelService {
       );
   }
 
+
   //sorting destinations
-  private sortDestinationsByRelevance(
-    destinations: DestinationCard[],
-    userPreferences: any
-  ): DestinationCard[] {
-    const sortedDestinations = destinations.sort((a, b) => {
-      const totalRelevanceScoreA = this.calculateRelevanceScoreForDestination(
-        a,
-        userPreferences
-      );
-      const totalRelevanceScoreB = this.calculateRelevanceScoreForDestination(
-        b,
-        userPreferences
-      );
+
+ private sortDestinationsByRelevance(
+   destinations: DestinationCard[],
+   userPreferences: any
+ ): DestinationCard[] {
+   console.log('Destinations before sorting:', destinations);
+  const sortedDestinations = destinations.sort((a, b) => {
+    const totalRelevanceScoreA = this.calculateRelevanceScoreForDestination(
+      a,
+       userPreferences
+     );
+     const totalRelevanceScoreB = this.calculateRelevanceScoreForDestination(
+       b,
+       userPreferences
+    );
+     console.log(
+       `Total Relevance Score for ${a.name}: ${totalRelevanceScoreA}`
+     );
+     console.log(
+       `Total Relevance Score for ${b.name}: ${totalRelevanceScoreB}`
+     );
 
       if (totalRelevanceScoreA !== totalRelevanceScoreB) {
         // Sort in descending order (highest relevance score first)
+        console.log('Sorting:', a.name, b.name);
         return totalRelevanceScoreB - totalRelevanceScoreA;
       } else {
         // If relevance scores are equal, use destination names for tiebreaker
@@ -110,6 +114,7 @@ export class TravelService {
 
     return sortedDestinations;
   }
+
 
   private calculateRelevanceScoreForDestination(
     destination: DestinationCard,
@@ -203,4 +208,5 @@ export class TravelService {
       return totalRelevanceScore;
     }
   }
+
 }
