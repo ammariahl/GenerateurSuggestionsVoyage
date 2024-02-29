@@ -1,0 +1,239 @@
+<div class="container">
+  <div class="progress-bar flex">
+    <div class="pace flex" [class.active]="currentStep >= 0">
+      <div class="circle flex" (click)="currentStep = 0">1</div>
+      <div class="step-value">{{ stepValues[1] }}</div>
+    </div>
+    <div class="line"></div>
+    <div class="pace flex" [class.active]="currentStep >= 1">
+      <div class="circle flex" (click)="currentStep = 1">2</div>
+      <div class="step-value">{{ stepValues[2] }}</div>
+    </div>
+    <div class="line"></div>
+    <div class="pace flex" [class.active]="currentStep >= 2">
+      <div class="circle flex" (click)="currentStep = 2">3</div>
+      <div class="step-value">{{ stepValues[3] }}</div>
+    </div>
+    <div class="line"></div>
+    <div class="pace flex" [class.active]="currentStep >= 3">
+      <div class="circle flex" (click)="currentStep = 3">4</div>
+      <div class="step-value">{{ stepValues[4] }}</div>
+    </div>
+    <div class="line"></div>
+    <div class="pace flex" [class.active]="currentStep >= 4">
+      <div class="circle flex" (click)="currentStep = 4">5</div>
+    </div>
+  </div>
+
+  <form [formGroup]="preferencesForm" (ngSubmit)="onSubmit()">
+    <div class="step">
+      <label>Je souhaite voyager en...</label>
+      <div class="buttons">
+        <button
+          [class.selected]="preferencesForm.get('season')?.value === 'spring'"
+          type="button"
+          class="button green"
+          (click)="setPreference('season', 'spring', 1)"
+        >
+          Printemps
+        </button>
+        <button
+          [class.selected]="preferencesForm.get('season')?.value === 'summer'"
+          type="button"
+          class="button red"
+          (click)="setPreference('season', 'summer', 1)"
+        >
+          Été
+        </button>
+        <button
+          [class.selected]="preferencesForm.get('season')?.value === 'autumn'"
+          type="button"
+          class="button yellow"
+          (click)="setPreference('season', 'autumn', 1)"
+        >
+          Automne
+        </button>
+        <button
+          [class.selected]="preferencesForm.get('season')?.value === 'winter'"
+          type="button"
+          class="button teal"
+          (click)="setPreference('season', 'winter', 1)"
+        >
+          Hiver
+        </button>
+      </div>
+    </div>
+
+    <div class="step" *ngIf="currentStep >= 1" [@slideInOut]>
+      <label>Plutôt...</label>
+      <div class="buttons">
+        <button
+          [class.selected]="preferencesForm.get('climat')?.value === 'chaud'"
+          type="button"
+          class="button green"
+          (click)="setPreference('climat', 'chaud', 2)"
+        >
+          Chaud
+        </button>
+        <button
+          [class.selected]="preferencesForm.get('climat')?.value === 'froid'"
+          type="button"
+          class="button red"
+          (click)="setPreference('climat', 'froid', 2)"
+        >
+          Froid
+        </button>
+        <button
+          [class.selected]="preferencesForm.get('climat')?.value === 'doux'"
+          type="button"
+          class="button yellow"
+          (click)="setPreference('climat', 'doux', 2)"
+        >
+          Doux
+        </button>
+        <button
+          [class.selected]="
+            preferencesForm.get('climat')?.value === 'peu_importe'
+          "
+          type="button"
+          class="button teal"
+          (click)="setPreference('climat', 'peu_importe', 2)"
+        >
+          Peu importe
+        </button>
+      </div>
+    </div>
+
+    <div class="step" *ngIf="currentStep >= 2" [@slideInOut]>
+      <label>Mon budget...</label>
+      <div class="buttons">
+        <button
+          [class.selected]="
+            preferencesForm.get('budget')?.value === 'littleBudget'
+          "
+          type="button"
+          class="button green"
+          (click)="setPreference('budget', 'littleBudget', 3)"
+        >
+          Petit
+        </button>
+        <button
+          [class.selected]="
+            preferencesForm.get('budget')?.value === 'mediumBudget'
+          "
+          type="button"
+          class="button red"
+          (click)="setPreference('budget', 'mediumBudget', 3)"
+        >
+          Moyen
+        </button>
+        <button
+          [class.selected]="
+            preferencesForm.get('budget')?.value === 'bigBudget'
+          "
+          type="button"
+          class="button yellow"
+          (click)="setPreference('budget', 'bigBudget', 3)"
+        >
+          Gros
+        </button>
+        <button
+          [class.selected]="
+            preferencesForm.get('budget')?.value === 'unlimited'
+          "
+          type="button"
+          class="button teal"
+          (click)="setPreference('budget', 'unlimited', 3)"
+        >
+          Illimité
+        </button>
+      </div>
+    </div>
+
+    <div class="step" *ngIf="currentStep >= 3" [@slideInOut]>
+      <label>Je voyage...</label>
+      <div class="buttons">
+        <button
+          [class.selected]="
+            preferencesForm.get('activity')?.value === 'relaxing'
+          "
+          type="button"
+          class="button green"
+          (click)="setPreference('activity', 'relaxing', 4)"
+        >
+          Relaxant
+        </button>
+        <button
+          [class.selected]="
+            preferencesForm.get('activity')?.value === 'adventure'
+          "
+          type="button"
+          class="button red"
+          (click)="setPreference('activity', 'adventure', 4)"
+        >
+          Aventure
+        </button>
+        <button
+          [class.selected]="
+            preferencesForm.get('activity')?.value === 'groupactivity'
+          "
+          type="button"
+          class="button yellow"
+          (click)="setPreference('activity', 'groupactivity', 4)"
+        >
+          En groupe
+        </button>
+        <button
+          [class.selected]="preferencesForm.get('activity')?.value === 'family'"
+          type="button"
+          class="button teal"
+          (click)="setPreference('activity', 'family', 4)"
+        >
+          En famille
+        </button>
+      </div>
+    </div>
+
+    <div class="step" *ngIf="currentStep >= 4" [@slideInOut]>
+      <label>Je possède...</label>
+      <div class="buttons">
+        <button
+          type="button"
+          class="button green"
+          [class.selected]="selectedDocuments['cniUe']"
+          (click)="onDocumentSelect('cniUe')"
+        >
+          CNI UE
+        </button>
+        <button
+          type="button"
+          class="button red"
+          [class.selected]="selectedDocuments['passportUe']"
+          (click)="onDocumentSelect('passportUe')"
+        >
+          Passeport UE
+        </button>
+        <button
+          type="button"
+          class="button yellow"
+          [class.selected]="selectedDocuments['visaUe']"
+          (click)="onDocumentSelect('visaUe')"
+        >
+          Visa UE
+        </button>
+        <button
+          type="button"
+          class="button teal"
+          [class.selected]="selectedDocuments['passportMde']"
+          (click)="onDocumentSelect('passportMde')"
+        >
+          Passeport MDE
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="atLeastOneDocumentSelected()">
+      <button class="button blue" type="submit">Valider</button>
+    </div>
+  </form>
+</div>

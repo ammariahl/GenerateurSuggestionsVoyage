@@ -1,0 +1,38 @@
+<nav id="myFirst" class="flex">
+  <div class="logoContainer">
+    <a routerLink="/home"> <img src="../../assets/img/Logo.svg" alt="" /></a>
+  </div>
+  <div class="burger" (click)="toggleMenu()">
+    <i class="material-icons">{{ isMenuOpen ? "close" : "menu" }}</i>
+  </div>
+  <div class="linksContainer menu flex" [class.is-open]="isMenuOpen">
+    <a
+      routerLink="/home"
+      class="menu-item flex"
+      (click)="sendSearchDestinationForm()"
+      (click)="toggleIsRandomFalse()"
+      >Accueil</a
+    >
+    <a
+      [routerLink]="['/random']"
+      (click)="toggleIsRandomTrue()"
+      class="menu-item flex"
+      >Aléatoire</a
+    >
+    <a
+      [routerLink]="['/about']"
+      (click)="toggleIsRandomFalse()"
+      class="menu-item flex"
+      >À propos</a
+    >
+    <div class="menu-item">
+      <button
+        (click)="toggleIsRandomFalse()"
+        class="button red"
+        [routerLink]="['/search']"
+      >
+        Trouver ma destination
+      </button>
+    </div>
+  </div>
+</nav>

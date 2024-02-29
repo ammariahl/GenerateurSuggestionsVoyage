@@ -1,0 +1,45 @@
+<div class="destination-cards">
+  <h1 class="suggestion-title">Choisissez votre destination idéale :</h1>
+
+  <div
+    class="destination-card"
+    *ngFor="
+      let destination of destinationCard
+        | slice : 0 : (isViewAll ? destinationCard.length : 3)
+    "
+    (click)="showDestinationCard(destination)"
+  >
+    <div class="destination-left">
+      <img [src]="destination.image" />
+    </div>
+    <div class="destination-right">
+      <div class="destination-content">
+        <h2 class="destination-name">{{ destination.name }}</h2>
+        <h4 class="destination-criteria">
+          {{ getSelectedSeason(destination) }} -
+          {{ getSelectedBudget(destination) }} -
+          <ul>
+            <li *ngFor="let document of getSelectedDocument(destination)">
+              {{ document }}
+            </li>
+          </ul>
+        </h4>
+        <p class="destination-brief-description">
+          {{ destination.descriptionShort }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!travelService.isRandom" class="view-all" [style.visibility]="!isViewAll ? 'visible' : 'hidden'">
+  <button class="view-all-button teal" (click)="viewAll()">
+    Voir d'autres destinations
+  </button>
+</div>
+
+<div *ngIf="travelService.isRandom" class="view-all">
+  <button class="view-all-button teal" (click)="getRandomDestinations()">
+    Voir d'autres destinations
+  </button>
+</div>

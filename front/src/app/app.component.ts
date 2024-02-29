@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DestinationCard } from './models/destination-card.model';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  title = 'front';
+  design_image: string = '/assets/img/maquette_image_gauche.PNG';
+  logo_image: string = '/assets/img/maquette_logo.PNG';
 }
