@@ -48,9 +48,9 @@ public class DestinationController {
         this.destinationRepository = destinationRepository;
     }
 
-         @PostMapping(value = "/top", consumes = "application/json")
-        public ResponseEntity<List<Destination>> getTopDestinations() {
-        List<Destination> topDestinations = destinationService.getAllDestinations();
+    @PostMapping(value = "/top", consumes = "application/json")
+    public ResponseEntity<List<Destination>> getTopDestinations(@RequestBody UserSelections userSelections) {
+        List<Destination> topDestinations = destinationService.getTopDestinations(userSelections);
         return new ResponseEntity<>(topDestinations, HttpStatus.OK);
     }
 
