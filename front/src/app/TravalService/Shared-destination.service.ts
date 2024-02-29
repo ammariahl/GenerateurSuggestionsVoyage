@@ -14,7 +14,6 @@ export class SharedDestinationService {
   setDestinations(destinations: DestinationCard[]): void {
     this.destinationsSubject.next(destinations);
     localStorage.setItem('destinations', JSON.stringify(destinations));
-    console.log('Destinations in shared service:', destinations);
   }
 
   private getDestinationsFromLocalStorage(): DestinationCard[] {

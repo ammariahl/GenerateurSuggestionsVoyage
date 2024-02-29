@@ -27,47 +27,6 @@ export class SuggestionComponent implements AfterViewInit {
       // Subscribe to the destinations$ observable when the component initializes
       this.sharedDestinationService.destinations$.subscribe(
         (destinations) => {
-          console.log(
-            'Received destinations from shared service:',
-            destinations
-          );
-          destinations.forEach((destination) => {
-            const selectedSeasons = destination.seasons;
-            const selectedBudgets = destination.budgets;
-            const selectedActivities = destination.activities;
-            const selectedDocuments = destination.documents;
-            // Accessing seasons
-            console.log(
-              'Seasons for destination',
-              destination.name,
-              ':',
-              selectedSeasons
-            );
-
-            // Accessing budgets
-            console.log(
-              'Budgets for destination',
-              destination.name,
-              ':',
-              selectedBudgets
-            );
-
-            // Accessing activities
-            console.log(
-              'Activities for destination',
-              destination.name,
-              ':',
-              selectedActivities
-            );
-
-            // Accessing documents
-            console.log(
-              'Documents for destination',
-              destination.name,
-              ':',
-              selectedDocuments
-            );
-          });
           this.destinationCard = destinations;
           this.cdr.detectChanges();
         },

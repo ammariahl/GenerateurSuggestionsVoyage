@@ -31,12 +31,10 @@ export class MenuComponent {
 
   toggleIsRandomTrue(): void {
     this.travelService.isRandom = true;
-    console.log('Random = True');
   }
 
   toggleIsRandomFalse(): void {
     this.travelService.isRandom = false;
-    console.log('Random = false');
   }
 
   sendSearchDestinationForm(): void {
@@ -63,7 +61,6 @@ export class MenuComponent {
     };
 
     const userPreference = JSON.stringify(preferences);
-    console.log('User Preference:', userPreference);
     this.travelService
       .sendTravelPreferences(userPreference)
       .pipe(
@@ -76,7 +73,6 @@ export class MenuComponent {
       .subscribe((response) => {
         if (response !== null) {
           console.log('Response from backend:', response);
-          console.log('Data from response:', response);
         }
       });
   }
