@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AllDestinationsService } from '../all-destinations.service';
+import { AllDestinationsService } from '../TravalService/all-destinations.service';
 import { DestinationCard } from '../models/destination-card.model';
 import { Router } from '@angular/router';
 

@@ -23,13 +23,16 @@ public interface DestinationRepository extends JpaRepository<Destination , Long>
     List<Destination> findTopDestinationsByActivitiesIn(List<Activity> activities);
     List<Destination> findTopDestinationsByDocumentsIn(List<Document> documents);
       
+
       List<Destination> findTopDestinationsBySeasonsInAndBudgetsInAndActivitiesInAndDocumentsIn(
+
         List<Season> seasons,
         List<Budget> budgets,
         List<Activity> activities,
         List<Document> documents
-         
-        );
+
+    );
+
 
 @Query("SELECT DISTINCT d FROM Destination d " +
             "JOIN d.seasons s " +
@@ -41,12 +44,8 @@ public interface DestinationRepository extends JpaRepository<Destination , Long>
         @Param("seasons") List<Season> seasons,
         @Param("budgets") List<Budget> budgets,
         @Param("activities") List<Activity> activities,
-        @Param("documents") List<Document> documents
-        
-        
-        );
 
-    
-
+        @Param("documents") List<Document> documents        
+    );
 
 }

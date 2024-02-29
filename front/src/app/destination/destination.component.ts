@@ -15,9 +15,7 @@ export class DestinationComponent implements OnInit {
   ngOnInit() {
     if (history.state.data) {
       this.destination = history.state.data;
-      console.log('Destination:', this.destination);
       this.trueDocumentKeys = this.getTrueDocuments();
-      console.log('True documents:', this.trueDocumentKeys);
     }
   }
 

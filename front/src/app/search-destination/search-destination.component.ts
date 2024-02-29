@@ -103,7 +103,6 @@ export class SearchDestinationComponent {
       this.currentStep = step - 1;
       this.cdr.detectChanges();
     }
-    console.log('Current step:', this.currentStep);
   }
 
   //Je récupère les infos des boutons cliqués
@@ -115,7 +114,6 @@ export class SearchDestinationComponent {
     this.stepValues[step] = valueName;
     this.onButtonClick(step);
     this.cdr.detectChanges();
-    console.log('Field:', field, 'Value:', value, 'Step:', step);
   }
 
   //Je fais en sorte qu'on puisse sélectionner plusieurs documents
@@ -148,7 +146,6 @@ export class SearchDestinationComponent {
       )
       .subscribe((response) => {
         if (response !== null && response.length > 0) {
-          console.log('Response from bke:', response);
           const urlDocument: string[] = Object.keys(
             this.selectedDocuments
           ).filter((key) => this.selectedDocuments[key]);
@@ -179,8 +176,6 @@ export class SearchDestinationComponent {
         this.userPreference.documents.push(document);
       }
     }
-
-    console.log('User Preference:', this.userPreference);
     this.navigateToSuggestion();
   }
 

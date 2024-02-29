@@ -34,10 +34,6 @@ export class HomeComponent implements OnInit {
       (response: DestinationCard[]) => {
         this.zone.run(() => {
           this.familydestinations = response;
-          console.log(
-            'First three family destinations:',
-            this.familydestinations
-          );
         });
       },
       (error) => {
@@ -51,10 +47,6 @@ export class HomeComponent implements OnInit {
       (response: DestinationCard[]) => {
         this.zone.run(() => {
           this.springdestinations = response;
-          console.log(
-            'First three family destinations:',
-            this.springdestinations
-          );
         });
       },
       (error) => {
@@ -68,10 +60,6 @@ export class HomeComponent implements OnInit {
       (response: DestinationCard[]) => {
         this.zone.run(() => {
           this.budgetdestinations = response;
-          console.log(
-            'First three budget destinations:',
-            this.budgetdestinations
-          );
         });
       },
       (error) => {

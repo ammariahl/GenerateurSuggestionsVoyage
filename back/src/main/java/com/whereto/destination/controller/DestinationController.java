@@ -41,7 +41,6 @@ public class DestinationController {
     SeasonService seasonService,
     BudgetService budgetService,
     DestinationRepository destinationRepository) {
-
         this.destinationService = destinationService;
         this.activityService = activityService;
         this.seasonService = seasonService;
